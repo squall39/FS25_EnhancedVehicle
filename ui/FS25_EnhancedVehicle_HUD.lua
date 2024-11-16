@@ -3,7 +3,7 @@
 --
 -- Author: Majo76
 -- email: ls (at) majo76 (dot) de
--- @Date: 15.11.2024
+-- @Date: 16.11.2024
 -- @Version: 1.0.0.0
 
 local myName = "FS25_EnhancedVehicle_HUD"
@@ -100,6 +100,7 @@ function FS25_EnhancedVehicle_HUD:new(speedMeter, gameInfoDisplay, modDirectory)
   self.modDirectory      = modDirectory
   self.vehicle           = nil
   self.uiFilename        = Utils.getFilename("resources/HUD.dds", modDirectory)
+  self.isCalculated      = false
 
   -- for icons
   self.icons = {}
@@ -392,7 +393,7 @@ end
 
 -- #############################################################################
 
-function FS25_EnhancedVehicle_HUD:storeScaledValues(_move)
+function FS25_EnhancedVehicle_HUD:storeScaledValues()
   if debug > 1 then print("-> " .. myName .. ": storeScaledValues ") end
 
   -- overwrite from config file
@@ -411,18 +412,22 @@ function FS25_EnhancedVehicle_HUD:storeScaledValues(_move)
     local boxWidth, boxHeight = self.trackBox:getWidth(), self.trackBox:getHeight()
     local boxPosX = self.speedMeter.speedBg.x -- left border of gauge
     local boxPosY = self.speedMeter.speedBg.y + self.speedMeter.speedBg.height + self.speedMeter:scalePixelToScreenHeight(FS25_EnhancedVehicle_HUD.MISC.MARGINELEMENT) -- move above gauge and some spacing
+    local boxPosY2 = boxPosY
 
     -- global move of box
     local offX, offY = self.speedMeter:scalePixelToScreenVector({ FS25_EnhancedVehicle.hud.track.offsetX, FS25_EnhancedVehicle.hud.track.offsetY })
     boxPosX = boxPosX + offX
     boxPosY = boxPosY + offY
 
-    -- should it be moved?
     self.trackBox:setPosition(boxPosX, boxPosY)
 
     -- move FS25 fill levels display above our display element
     g_currentMission.hud.fillLevelsDisplay.offsetY = 0
-    g_currentMission.hud.fillLevelsDisplay.y = boxPosY + self.trackBox:getHeight() + self.speedMeter:scalePixelToScreenHeight(FS25_EnhancedVehicle_HUD.MISC.MARGINELEMENT)
+    if FS25_EnhancedVehicle.functionSnapIsEnabled and FS25_EnhancedVehicle.hud.track.enabled and FS25_EnhancedVehicle.hud.track.offsetX == 0 and FS25_EnhancedVehicle.hud.track.offsetY == 0 then
+      g_currentMission.hud.fillLevelsDisplay.y = boxPosY + self.trackBox:getHeight() + self.speedMeter:scalePixelToScreenHeight(FS25_EnhancedVehicle_HUD.MISC.MARGINELEMENT)
+    else
+      g_currentMission.hud.fillLevelsDisplay.y = boxPosY2 + self.speedMeter:scalePixelToScreenHeight(FS25_EnhancedVehicle_HUD.MISC.MARGINELEMENT) / 2
+    end
 
     -- snap text
     local textX, textY = self.speedMeter:scalePixelToScreenVector(FS25_EnhancedVehicle_HUD.POSITION.SNAP1)
@@ -585,8 +590,14 @@ function FS25_EnhancedVehicle_HUD:drawHUD()
   -- jump out if we're not ready
   if self.vehicle == nil or not self.speedMeter.isVehicleDrawSafe or g_dedicatedServerInfo ~= nil then return end
 
-  if (self.trackBox.overlay.x == 0) then
-    self:storeScaledValues(true)
+  -- as soon as the game gauge appeared -> update our positions only once
+  if (self.isCalculated == false) then
+    if (self.speedMeter.speedBg.x == 0) then
+      return
+    else
+      self:storeScaledValues()
+      self.isCalculated = true
+    end
   end
 
   if not FS25_EnhancedVehicle.functionSnapIsEnabled then

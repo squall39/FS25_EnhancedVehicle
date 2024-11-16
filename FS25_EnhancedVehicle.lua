@@ -3,7 +3,7 @@
 --
 -- Author: Majo76
 -- email: ls (at) majo76 (dot) de
--- @Date: 15.11.2024
+-- @Date: 16.11.2024
 -- @Version: 1.0.0.0
 
 --[[
@@ -11,6 +11,7 @@ CHANGELOG
 
 2024-11-12 - V1.0.0.0
 + initial release for FS25
+- removed support for different fuel/dmg positions
 
 license: https://creativecommons.org/licenses/by-nc-sa/4.0/
 ]]--
@@ -300,7 +301,6 @@ function FS25_EnhancedVehicle:activateConfig()
     FS25_EnhancedVehicle.hud[section].offsetY  = lC:getConfigValue("hud."..section, "offsetY")
   end
   FS25_EnhancedVehicle.hud.dmg.showAmountLeft = lC:getConfigValue("hud.dmg", "showAmountLeft")
-  FS25_EnhancedVehicle.hud.dmgfuelPosition = lC:getConfigValue("hud", "dmgfuelPosition")
   FS25_EnhancedVehicle.hud.colorActive   = { lC:getConfigValue("hud.colorActive",   "red"), lC:getConfigValue("hud.colorActive",   "green"), lC:getConfigValue("hud.colorActive",   "blue"), 1 }
   FS25_EnhancedVehicle.hud.colorInactive = { lC:getConfigValue("hud.colorInactive", "red"), lC:getConfigValue("hud.colorInactive", "green"), lC:getConfigValue("hud.colorInactive", "blue"), 1 }
   FS25_EnhancedVehicle.hud.colorStandby  = { lC:getConfigValue("hud.colorStandby",  "red"), lC:getConfigValue("hud.colorStandby",  "green"), lC:getConfigValue("hud.colorStandby",  "blue"), 1 }
@@ -397,9 +397,6 @@ function FS25_EnhancedVehicle:resetConfig(disable)
   lC:addConfigValue("hud.park", "enabled", "bool", true)
   lC:addConfigValue("hud.park", "offsetX", "int",  0)
   lC:addConfigValue("hud.park", "offsetY", "int",  0)
-
-  -- HUD position for dmg/fuel
-  lC:addConfigValue("hud", "dmgfuelPosition", "int", 2)
 
   -- HUD more colors
   lC:addConfigValue("hud.colorActive",   "red",   "float",  60/255)
@@ -1318,11 +1315,14 @@ function FS25_EnhancedVehicle:onActionCall(actionName, keyStatus, arg4, arg5, ar
       g_currentMission:showBlinkingWarning(g_i18n:getText("global_FS25_EnhancedVehicle_brakeBlocks"), 1500)
     end
   elseif actionName == "FS25_EnhancedVehicle_MENU" then
-  
+    lC:readConfig()
+    FS25_EnhancedVehicle:activateConfig()
+    FS25_EnhancedVehicle.ui_hud:storeScaledValues()
+
 ------------------
 --  print(DebugUtil.printTableRecursively(g_currentMission.hud.sideNotifications, 0, 0, 4))
 ------------------  
-  
+
     -- configuration dialog
     if not self.isClient then
       return

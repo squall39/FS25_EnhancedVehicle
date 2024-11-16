@@ -91,11 +91,6 @@
     <text name="ui_FS25_EnhancedVehicle_HUDdmgAmountLeftO1"    text="% unbeschädigt"/>
     <text name="ui_FS25_EnhancedVehicle_HUDdmgAmountLeftO2"    text="% beschädigt"/>
 
-    <text name="ui_FS25_EnhancedVehicle_HUDdmgfuelTitle"   text="HUD: Position der Schadens- und Kraftstoffwerteanzeige"/>
-    <text name="ui_FS25_EnhancedVehicle_HUDdmgfuelTT"      text="LS19: klassisch über dem Tacho; LS22: oben-rechts unter der Spielinfoanzeige"/>
-    <text name="ui_FS25_EnhancedVehicle_HUDdmgfuelOption1" text="klassisch (LS19)"/>
-    <text name="ui_FS25_EnhancedVehicle_HUDdmgfuelOption2" text="oben-rechts (LS22)"/>
-
     <text name="ui_FS25_EnhancedVehicle_snapSettingsAngleTitle" text="Einrastwinkel"/>
     <text name="ui_FS25_EnhancedVehicle_snapSettingsAngleTT"    text="Legt fest, in welchen Gradschritten die Fahrtrichtung eingerastet wird (1°-90°)"/>
 

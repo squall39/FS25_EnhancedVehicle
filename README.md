@@ -8,7 +8,7 @@ Dies ist eine Modifikation für den Landwirtschafts-Simulator 25. Sie fügt dem 
 
 **Hinweis: Die einzigen validen Downloadquellen sind meine Homepage (https://www.majo76.de) und dieses Github Repository (https://github.com/ZhooL/FS25_EnhancedVehicle). Alle anderen Downloadadressen sind nicht von mir validiert - also mit Vorsicht zu genießen.**
 
-*(c) 2018-2024 Majo76 (vormals ZhooL). Sei so nett und erwähne mich, wenn du dieses Mod oder den Quellcode (oder Teile davon) irgendwo verwendest.*
+*(c) 2018-2024 Majo76 (vormals ZhooL). Sei so nett und erwähne mich, wenn du diesen Mod oder den Quellcode (oder Teile davon) irgendwo verwendest.*
 Lizenz: https://creativecommons.org/licenses/by-nc-sa/4.0/
 
 ## Bekannte Probleme

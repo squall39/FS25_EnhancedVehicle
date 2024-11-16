@@ -91,11 +91,6 @@
     <text name="ui_FS25_EnhancedVehicle_HUDdmgAmountLeftO1"    text="% left"/>
     <text name="ui_FS25_EnhancedVehicle_HUDdmgAmountLeftO2"    text="% damaged"/>
 
-    <text name="ui_FS25_EnhancedVehicle_HUDdmgfuelTitle"   text="HUD: Position of damage and fuel display"/>
-    <text name="ui_FS25_EnhancedVehicle_HUDdmgfuelTT"      text="FS19: classic above speedmeter; FS25: top-right below gameinfo panel"/>
-    <text name="ui_FS25_EnhancedVehicle_HUDdmgfuelOption1" text="classic (FS19)"/>
-    <text name="ui_FS25_EnhancedVehicle_HUDdmgfuelOption2" text="top-right (FS25)"/>
-
     <text name="ui_FS25_EnhancedVehicle_snapSettingsAngleTitle" text="Snap To Angle"/>
     <text name="ui_FS25_EnhancedVehicle_snapSettingsAngleTT"    text="Determines in which degree steps the driving direction is engaged (1°-90°)"/>
 

@@ -280,9 +280,6 @@ function FS25_EnhancedVehicle_UI:updateValues()
   -- hide lines after
   self.hideLinesAfterSetting:setState(lC:getConfigValue("track", "hideLinesAfter"))
 
-  -- dmgfuel position
-  self.HUDdmgfuelSetting:setState(lC:getConfigValue("hud", "dmgfuelPosition"))
-
   -- headland mode
   self.headlandModeSetting:setState(self.vehicle.vData.track.headlandMode)
 
@@ -334,10 +331,6 @@ function FS25_EnhancedVehicle_UI:onClickOk()
   -- HUD dmg display
   state = self.HUDdmgAmountLeftSetting:getState() == 1
   lC:setConfigValue("hud.dmg", "showAmountLeft", state)
-
-  -- HUD dmgfuel Position
-  state = self.HUDdmgfuelSetting:getState()
-  lC:setConfigValue("hud", "dmgfuelPosition", state)
 
   -- snapto angle
   local n = tonumber(self.snapSettingsAngleValue:getText())

@@ -135,15 +135,6 @@
         <GuiElement type="bitmap" profile="multiTextOptionSettingsBg"/>
         <GuiElement type="text"   profile="multiTextOptionSettingsTooltip" id="HUDparkTT"/>
       </GuiElement>
-      <!-- HUD: dmgfuelposition -->
-      <GuiElement type="multiTextOption" profile="multiTextOptionSettings" id="HUDdmgfuelSetting">
-        <GuiElement type="button" profile="multiTextOptionSettingsLeft"/>
-        <GuiElement type="button" profile="multiTextOptionSettingsRight"/>
-        <GuiElement type="text"   profile="multiTextOptionSettingsText"/>
-        <GuiElement type="text"   profile="multiTextOptionSettingsTitle" id="HUDdmgfuelTitle"/>
-        <GuiElement type="bitmap" profile="multiTextOptionSettingsBg"/>
-        <GuiElement type="text"   profile="multiTextOptionSettingsTooltip" id="HUDdmgfuelTT"/>
-      </GuiElement>
       <!-- HUD: dmg -->
       <GuiElement type="multiTextOption" profile="multiTextOptionSettings" id="HUDdmgSetting">
         <GuiElement type="button" profile="multiTextOptionSettingsLeft"/>
