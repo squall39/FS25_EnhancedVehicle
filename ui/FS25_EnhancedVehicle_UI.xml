@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="utf-8" standalone="no" ?>
+<GUI onOpen="onOpen" onClose="onClose" onCreate="onCreate">
+  <GuiElement type="empty" profile="newLayer" />
+  <GuiElement type="bitmap" profile="dialogFullscreenBg"/>
+  <GuiElement type="bitmap" profile="bgVignette"/>
+  <GuiElement type="bitmap" profile="bgGlowDialog" id="dialogElement" size="1600px 900px"/>
+
+  <GuiElement type="empty" profile="ingameMenuCenterBox" id="settingsContainer">
+    <GuiElement type="bitmap" profile="topScrollClipper" name="topClipper" />
+    <GuiElement type="bitmap" profile="bottomScrollClipper" name="bottomClipper" />
+
+    <!-- header -->
+    <GuiElement type="bitmap" profile="dialogHeaderDocked">
+      <GuiElement type="text" profile="dialogHeaderText" textAutoSize="true" id="guiTitle"/>
+    </GuiElement>
+
+    <GuiElement type="scrollingLayout" profile="ingameMenuSettingsLayout">
+
+      <!-- headland settings -->
+      <GuiElement type="text" profile="dialogHeaderText"/>
+      <GuiElement type="text" profile="dialogHeaderText" id="sectionHeadlandSettings"/>
+      <GuiElement type="text" profile="dialogHeaderText"/>
+
+      <!-- headland mode -->
+      <GuiElement type="multiTextOption" profile="multiTextOptionSettings" id="headlandModeSetting">
+        <GuiElement type="button" profile="multiTextOptionSettingsLeft"/>
+        <GuiElement type="button" profile="multiTextOptionSettingsRight"/>
+        <GuiElement type="text"   profile="multiTextOptionSettingsText"/>
+        <GuiElement type="text"   profile="multiTextOptionSettingsTitle" id="headlandModeTitle"/>
+        <GuiElement type="bitmap" profile="multiTextOptionSettingsBg"/>
+        <GuiElement type="text"   profile="multiTextOptionSettingsTooltip" id="headlandModeTT"/>
+      </GuiElement>
+
+      <!-- headland distance -->
+      <GuiElement type="multiTextOption" profile="multiTextOptionSettings" id="headlandDistanceSetting">
+        <GuiElement type="button" profile="multiTextOptionSettingsLeft"/>
+        <GuiElement type="button" profile="multiTextOptionSettingsRight"/>
+        <GuiElement type="text"   profile="multiTextOptionSettingsText"/>
+        <GuiElement type="text"   profile="multiTextOptionSettingsTitle" id="headlandDistanceTitle"/>
+        <GuiElement type="bitmap" profile="multiTextOptionSettingsBg"/>
+        <GuiElement type="text"   profile="multiTextOptionSettingsTooltip" id="headlandDistanceTT"/>
+      </GuiElement>
+
+      <!-- headland sound trigger distance -->
+      <GuiElement type="multiTextOption" profile="multiTextOptionSettings" id="headlandSoundTriggerDistanceSetting">
+        <GuiElement type="button" profile="multiTextOptionSettingsLeft"/>
+        <GuiElement type="button" profile="multiTextOptionSettingsRight"/>
+        <GuiElement type="text"   profile="multiTextOptionSettingsText"/>
+        <GuiElement type="text"   profile="multiTextOptionSettingsTitle" id="headlandSoundTriggerDistanceTitle"/>
+        <GuiElement type="bitmap" profile="multiTextOptionSettingsBg"/>
+        <GuiElement type="text"   profile="multiTextOptionSettingsTooltip" id="headlandSoundTriggerDistanceTT"/>
+      </GuiElement>
+
+      <!-- snap settings -->
+      <GuiElement type="text" profile="dialogHeaderText"/>
+      <GuiElement type="text" profile="dialogHeaderText" id="sectionSnapSettings"/>
+      <GuiElement type="text" profile="dialogHeaderText"/>
+
+      <!-- show lines -->
+      <GuiElement type="multiTextOption" profile="multiTextOptionSettings" id="showLinesSetting">
+        <GuiElement type="button" profile="multiTextOptionSettingsLeft"/>
+        <GuiElement type="button" profile="multiTextOptionSettingsRight"/>
+        <GuiElement type="text"   profile="multiTextOptionSettingsText"/>
+        <GuiElement type="text"   profile="multiTextOptionSettingsTitle" id="showLinesTitle"/>
+        <GuiElement type="bitmap" profile="multiTextOptionSettingsBg"/>
+        <GuiElement type="text"   profile="multiTextOptionSettingsTooltip" id="showLinesTT"/>
+      </GuiElement>
+
+      <!-- auto-hide lines -->
+      <GuiElement type="multiTextOption" profile="multiTextOptionSettings" id="hideLinesSetting">
+        <GuiElement type="button" profile="multiTextOptionSettingsLeft"/>
+        <GuiElement type="button" profile="multiTextOptionSettingsRight"/>
+        <GuiElement type="text"   profile="multiTextOptionSettingsText"/>
+        <GuiElement type="text"   profile="multiTextOptionSettingsTitle" id="hideLinesTitle"/>
+        <GuiElement type="bitmap" profile="multiTextOptionSettingsBg"/>
+        <GuiElement type="text"   profile="multiTextOptionSettingsTooltip" id="hideLinesTT"/>
+      </GuiElement>
+
+      <!-- auto-hide lines seconds -->
+      <GuiElement type="multiTextOption" profile="multiTextOptionSettings" id="hideLinesAfterSetting">
+        <GuiElement type="button" profile="multiTextOptionSettingsLeft"/>
+        <GuiElement type="button" profile="multiTextOptionSettingsRight"/>
+        <GuiElement type="text"   profile="multiTextOptionSettingsText"/>
+        <GuiElement type="text"   profile="multiTextOptionSettingsTitle" id="hideLinesAfterTitle"/>
+        <GuiElement type="bitmap" profile="multiTextOptionSettingsBg"/>
+        <GuiElement type="text"   profile="multiTextOptionSettingsTooltip" id="hideLinesAfterTT"/>
+      </GuiElement>
+
+      <!-- angle -->
+      <GuiElement type="empty" profile="ingameMenuGameSettingsTextInputWrapper">
+        <GuiElement type="textInput" profile="ingameMenuGameSettingsTextInput" id="snapSettingsAngleValue" imeKeyboardType="normal" maxCharacters="5" onTextChanged="onTextChanged_SnapAngle" />
+        <GuiElement type="text"      profile="multiTextOptionSettingsTitle"    id="snapSettingsAngleTitle"/>
+        <GuiElement type="text"      profile="multiTextOptionSettingsTooltip"  id="snapSettingsAngleTT"/>
+      </GuiElement>
+
+      <!-- number of visible tracks -->
+      <GuiElement type="multiTextOption" profile="multiTextOptionSettings" id="visibleTracksSetting">
+        <GuiElement type="button" profile="multiTextOptionSettingsLeft"/>
+        <GuiElement type="button" profile="multiTextOptionSettingsRight"/>
+        <GuiElement type="text"   profile="multiTextOptionSettingsText"/>
+        <GuiElement type="text"   profile="multiTextOptionSettingsTitle" id="visibleTracksTitle"/>
+        <GuiElement type="bitmap" profile="multiTextOptionSettingsBg"/>
+        <GuiElement type="text"   profile="multiTextOptionSettingsTooltip" id="visibleTracksTT"/>
+      </GuiElement>
+
+      <!-- hud -->
+      <GuiElement type="text" profile="dialogHeaderText"/>
+      <GuiElement type="text" profile="dialogHeaderText" id="sectionHUD"/>
+      <GuiElement type="text" profile="dialogHeaderText"/>
+
+      <!-- HUD: track -->
+      <GuiElement type="multiTextOption" profile="multiTextOptionSettings" id="HUDtrackSetting">
+        <GuiElement type="button" profile="multiTextOptionSettingsLeft"/>
+        <GuiElement type="button" profile="multiTextOptionSettingsRight"/>
+        <GuiElement type="text"   profile="multiTextOptionSettingsText"/>
+        <GuiElement type="text"   profile="multiTextOptionSettingsTitle" id="HUDtrackTitle"/>
+        <GuiElement type="bitmap" profile="multiTextOptionSettingsBg"/>
+        <GuiElement type="text"   profile="multiTextOptionSettingsTooltip" id="HUDtrackTT"/>
+      </GuiElement>
+      <!-- HUD: diff -->
+      <GuiElement type="multiTextOption" profile="multiTextOptionSettings" id="HUDdiffSetting">
+        <GuiElement type="button" profile="multiTextOptionSettingsLeft"/>
+        <GuiElement type="button" profile="multiTextOptionSettingsRight"/>
+        <GuiElement type="text"   profile="multiTextOptionSettingsText"/>
+        <GuiElement type="text"   profile="multiTextOptionSettingsTitle" id="HUDdiffTitle"/>
+        <GuiElement type="bitmap" profile="multiTextOptionSettingsBg"/>
+        <GuiElement type="text"   profile="multiTextOptionSettingsTooltip" id="HUDdiffTT"/>
+      </GuiElement>
+      <!-- HUD: park -->
+      <GuiElement type="multiTextOption" profile="multiTextOptionSettings" id="HUDparkSetting">
+        <GuiElement type="button" profile="multiTextOptionSettingsLeft"/>
+        <GuiElement type="button" profile="multiTextOptionSettingsRight"/>
+        <GuiElement type="text"   profile="multiTextOptionSettingsText"/>
+        <GuiElement type="text"   profile="multiTextOptionSettingsTitle" id="HUDparkTitle"/>
+        <GuiElement type="bitmap" profile="multiTextOptionSettingsBg"/>
+        <GuiElement type="text"   profile="multiTextOptionSettingsTooltip" id="HUDparkTT"/>
+      </GuiElement>
+      <!-- HUD: dmgfuelposition -->
+      <GuiElement type="multiTextOption" profile="multiTextOptionSettings" id="HUDdmgfuelSetting">
+        <GuiElement type="button" profile="multiTextOptionSettingsLeft"/>
+        <GuiElement type="button" profile="multiTextOptionSettingsRight"/>
+        <GuiElement type="text"   profile="multiTextOptionSettingsText"/>
+        <GuiElement type="text"   profile="multiTextOptionSettingsTitle" id="HUDdmgfuelTitle"/>
+        <GuiElement type="bitmap" profile="multiTextOptionSettingsBg"/>
+        <GuiElement type="text"   profile="multiTextOptionSettingsTooltip" id="HUDdmgfuelTT"/>
+      </GuiElement>
+      <!-- HUD: dmg -->
+      <GuiElement type="multiTextOption" profile="multiTextOptionSettings" id="HUDdmgSetting">
+        <GuiElement type="button" profile="multiTextOptionSettingsLeft"/>
+        <GuiElement type="button" profile="multiTextOptionSettingsRight"/>
+        <GuiElement type="text"   profile="multiTextOptionSettingsText"/>
+        <GuiElement type="text"   profile="multiTextOptionSettingsTitle" id="HUDdmgTitle"/>
+        <GuiElement type="bitmap" profile="multiTextOptionSettingsBg"/>
+        <GuiElement type="text"   profile="multiTextOptionSettingsTooltip" id="HUDdmgTT"/>
+      </GuiElement>
+      <GuiElement type="multiTextOption" profile="multiTextOptionSettings" id="HUDdmgAmountLeftSetting">
+        <GuiElement type="button" profile="multiTextOptionSettingsLeft"/>
+        <GuiElement type="button" profile="multiTextOptionSettingsRight"/>
+        <GuiElement type="text"   profile="multiTextOptionSettingsText"/>
+        <GuiElement type="text"   profile="multiTextOptionSettingsTitle" id="HUDdmgAmountLeftTitle"/>
+        <GuiElement type="bitmap" profile="multiTextOptionSettingsBg"/>
+        <GuiElement type="text"   profile="multiTextOptionSettingsTooltip" id="HUDdmgAmountLeftTT"/>
+      </GuiElement>
+      <!-- HUD: fuel -->
+      <GuiElement type="multiTextOption" profile="multiTextOptionSettings" id="HUDfuelSetting">
+        <GuiElement type="button" profile="multiTextOptionSettingsLeft"/>
+        <GuiElement type="button" profile="multiTextOptionSettingsRight"/>
+        <GuiElement type="text"   profile="multiTextOptionSettingsText"/>
+        <GuiElement type="text"   profile="multiTextOptionSettingsTitle" id="HUDfuelTitle"/>
+        <GuiElement type="bitmap" profile="multiTextOptionSettingsBg"/>
+        <GuiElement type="text"   profile="multiTextOptionSettingsTooltip" id="HUDfuelTT"/>
+      </GuiElement>
+      <!-- HUD: rpm -->
+      <GuiElement type="multiTextOption" profile="multiTextOptionSettings" id="HUDrpmSetting">
+        <GuiElement type="button" profile="multiTextOptionSettingsLeft"/>
+        <GuiElement type="button" profile="multiTextOptionSettingsRight"/>
+        <GuiElement type="text"   profile="multiTextOptionSettingsText"/>
+        <GuiElement type="text"   profile="multiTextOptionSettingsTitle" id="HUDrpmTitle"/>
+        <GuiElement type="bitmap" profile="multiTextOptionSettingsBg"/>
+        <GuiElement type="text"   profile="multiTextOptionSettingsTooltip" id="HUDrpmTT"/>
+      </GuiElement>
+      <!-- HUD: temp -->
+      <GuiElement type="multiTextOption" profile="multiTextOptionSettings" id="HUDtempSetting">
+        <GuiElement type="button" profile="multiTextOptionSettingsLeft"/>
+        <GuiElement type="button" profile="multiTextOptionSettingsRight"/>
+        <GuiElement type="text"   profile="multiTextOptionSettingsText"/>
+        <GuiElement type="text"   profile="multiTextOptionSettingsTitle" id="HUDtempTitle"/>
+        <GuiElement type="bitmap" profile="multiTextOptionSettingsBg"/>
+        <GuiElement type="text"   profile="multiTextOptionSettingsTooltip" id="HUDtempTT"/>
+      </GuiElement>
+      <!-- HUD: misc -->
+      <GuiElement type="multiTextOption" profile="multiTextOptionSettings" id="HUDmiscSetting">
+        <GuiElement type="button" profile="multiTextOptionSettingsLeft"/>
+        <GuiElement type="button" profile="multiTextOptionSettingsRight"/>
+        <GuiElement type="text"   profile="multiTextOptionSettingsText"/>
+        <GuiElement type="text"   profile="multiTextOptionSettingsTitle" id="HUDmiscTitle"/>
+        <GuiElement type="bitmap" profile="multiTextOptionSettingsBg"/>
+        <GuiElement type="text"   profile="multiTextOptionSettingsTooltip" id="HUDmiscTT"/>
+      </GuiElement>
+
+      <!-- global functions -->
+      <GuiElement type="text" profile="dialogHeaderText"/>
+      <GuiElement type="text" profile="dialogHeaderText" id="sectionGlobalFunctions"/>
+      <GuiElement type="text" profile="dialogHeaderText"/>
+
+      <!-- snap -->
+      <GuiElement type="multiTextOption" profile="multiTextOptionSettings" id="snapSetting">
+        <GuiElement type="button" profile="multiTextOptionSettingsLeft"/>
+        <GuiElement type="button" profile="multiTextOptionSettingsRight"/>
+        <GuiElement type="text"   profile="multiTextOptionSettingsText"/>
+        <GuiElement type="text"   profile="multiTextOptionSettingsTitle" id="snapTitle"/>
+        <GuiElement type="bitmap" profile="multiTextOptionSettingsBg"/>
+        <GuiElement type="text"   profile="multiTextOptionSettingsTooltip" id="snapTT"/>
+      </GuiElement>
+      <!-- differential -->
+      <GuiElement type="multiTextOption" profile="multiTextOptionSettings" id="diffSetting">
+        <GuiElement type="button" profile="multiTextOptionSettingsLeft"/>
+        <GuiElement type="button" profile="multiTextOptionSettingsRight"/>
+        <GuiElement type="text"   profile="multiTextOptionSettingsText"/>
+        <GuiElement type="text"   profile="multiTextOptionSettingsTitle" id="diffTitle"/>
+        <GuiElement type="bitmap" profile="multiTextOptionSettingsBg"/>
+        <GuiElement type="text"   profile="multiTextOptionSettingsTooltip" id="diffTT"/>
+      </GuiElement>
+      <!-- hydraulic -->
+      <GuiElement type="multiTextOption" profile="multiTextOptionSettings" id="hydraulicSetting">
+        <GuiElement type="button" profile="multiTextOptionSettingsLeft"/>
+        <GuiElement type="button" profile="multiTextOptionSettingsRight"/>
+        <GuiElement type="text"   profile="multiTextOptionSettingsText"/>
+        <GuiElement type="text"   profile="multiTextOptionSettingsTitle" id="hydraulicTitle"/>
+        <GuiElement type="bitmap" profile="multiTextOptionSettingsBg"/>
+        <GuiElement type="text"   profile="multiTextOptionSettingsTooltip" id="hydraulicTT"/>
+      </GuiElement>
+      <!-- parking brake -->
+      <GuiElement type="multiTextOption" profile="multiTextOptionSettings" id="parkingBrakeSetting">
+        <GuiElement type="button" profile="multiTextOptionSettingsLeft"/>
+        <GuiElement type="button" profile="multiTextOptionSettingsRight"/>
+        <GuiElement type="text"   profile="multiTextOptionSettingsText"/>
+        <GuiElement type="text"   profile="multiTextOptionSettingsTitle" id="parkingBrakeTitle"/>
+        <GuiElement type="bitmap" profile="multiTextOptionSettingsBg"/>
+        <GuiElement type="text"   profile="multiTextOptionSettingsTooltip" id="parkingBrakeTT"/>
+      </GuiElement>
+
+      <!-- reset/reload config -->
+      <GuiElement type="empty" profile="ingameMenuGameSettingsTextInputWrapper">
+        <GuiElement type="button" profile="ingameMenuSettingsPauseButton" onClick="onClickResetConfig" id="resetConfigButton" iconSize="0px 0px" margin="10px 5px 10px 5px" />
+        <GuiElement type="text"   profile="multiTextOptionSettingsTitle" id="resetConfigTitle"/>
+        <GuiElement type="text"   profile="EV_ToolTipTextRed"            id="resetConfigTT"/>
+      </GuiElement>
+      <GuiElement type="empty" profile="ingameMenuGameSettingsTextInputWrapper">
+        <GuiElement type="button" profile="ingameMenuSettingsPauseButton" onClick="onClickReloadConfig" id="reloadConfigButton" iconSize="0px 0px" margin="10px 5px 10px 5px" />
+        <GuiElement type="text"   profile="multiTextOptionSettingsTitle" id="reloadConfigTitle"/>
+        <GuiElement type="text"   profile="EV_ToolTipTextRed"            id="reloadConfigTT"/>
+      </GuiElement>
+
+    </GuiElement>
+
+    <!-- footer -->
+    <GuiElement type="flowLayout" profile="buttonBoxDialog" size="1400px 50px">
+      <GuiElement type="button" profile="buttonOK" id="yesButton" text="$l10n_button_ok" onClick="onClickOk"/>
+      <GuiElement type="button" profile="buttonBack" id="noButton" text="$l10n_button_back" onClick="onClickBack"/>
+<!--
+      <GuiElement type="button" profile="buttonCancel" id="resetConfigButton" onClick="onClickResetConfig"/>
+      <GuiElement type="button" profile="buttonActivate" id="reloadConfigButton" onClick="onClickReloadConfig"/>
+-->
+    </GuiElement>
+  </GuiElement>
+</GUI>

@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8" standalone="no" ?>
+<modDesc descVersion="92">
+  <author>Majo76</author>
+
+  <version>1.0.0.0</version>
+
+  <title>
+    <de>EnhancedVehicle</de>
+    <en>EnhancedVehicle</en>
+  </title>
+
+  <description>
+    <de><![CDATA[Fahrspurassistent ("GPS light"). Feststellbremse. Differentialsperren und Antriebsmodi für dein Fahrzeug. Mehr Fahrzeugsdetails im HUD.]]></de>
+    <en><![CDATA[Track assistant ("GPS light"). Parking brake. Differential locks and wheel drive modes for your vehicle. Shows more vehicle details on HUD.]]></en>
+  </description>
+
+  <iconFilename>FS25_EnhancedVehicle.dds</iconFilename>
+
+  <multiplayer supported="true"/>
+
+  <l10n filenamePrefix="translations/translation"/>
+
+  <actions>
+    <action name="FS25_EnhancedVehicle_MENU"            />
+    <action name="FS25_EnhancedVehicle_PARK"            />
+    <action name="FS25_EnhancedVehicle_SNAP_ONOFF"      />
+    <action name="FS25_EnhancedVehicle_SNAP_REVERSE"    />
+    <action name="FS25_EnhancedVehicle_SNAP_OPMODE"     />
+    <action name="FS25_EnhancedVehicle_SNAP_CALC_WW"    />
+    <action name="FS25_EnhancedVehicle_SNAP_GRID_RESET" />
+    <action name="FS25_EnhancedVehicle_SNAP_LINES_MODE" />
+    <action name="FS25_EnhancedVehicle_SNAP_TRACK"      axisType="FULL"/>
+    <action name="FS25_EnhancedVehicle_SNAP_TRACKP"     axisType="FULL"/>
+    <action name="FS25_EnhancedVehicle_SNAP_TRACKW"     axisType="FULL"/>
+    <action name="FS25_EnhancedVehicle_SNAP_TRACKO"     axisType="FULL"/>
+    <action name="FS25_EnhancedVehicle_SNAP_TRACKJ"     axisType="FULL"/>
+    <action name="FS25_EnhancedVehicle_SNAP_HL_MODE"    />
+    <action name="FS25_EnhancedVehicle_SNAP_HL_DIST"    axisType="FULL"/>
+    <action name="FS25_EnhancedVehicle_SNAP_ANGLE1"     axisType="FULL"/>
+    <action name="FS25_EnhancedVehicle_SNAP_ANGLE2"     axisType="FULL"/>
+    <action name="FS25_EnhancedVehicle_SNAP_ANGLE3"     axisType="FULL"/>
+    <action name="FS25_EnhancedVehicle_FD"              />
+    <action name="FS25_EnhancedVehicle_RD"              />
+    <action name="FS25_EnhancedVehicle_BD"              />
+    <action name="FS25_EnhancedVehicle_DM"              />
+    <action name="FS25_EnhancedVehicle_AJ_REAR_UPDOWN"  />
+    <action name="FS25_EnhancedVehicle_AJ_REAR_ONOFF"   />
+    <action name="FS25_EnhancedVehicle_AJ_FRONT_UPDOWN" />
+    <action name="FS25_EnhancedVehicle_AJ_FRONT_ONOFF"  />
+  </actions>
+
+  <inputBinding>
+    <actionBinding action="FS25_EnhancedVehicle_MENU">
+      <binding device="KB_MOUSE_DEFAULT" input="KEY_rctrl KEY_KP_divide" axisComponent="+" inputComponent="+" index="1"/>
+      <binding device="KB_MOUSE_DEFAULT" input="KEY_lctrl KEY_KP_divide" axisComponent="+" inputComponent="+" index="1"/>
+    </actionBinding>
+    <actionBinding action="FS25_EnhancedVehicle_PARK">
+      <binding device="KB_MOUSE_DEFAULT" input="KEY_KP_enter" axisComponent="+" inputComponent="+" index="1"/>
+    </actionBinding>
+    <actionBinding action="FS25_EnhancedVehicle_SNAP_ONOFF">
+      <binding device="KB_MOUSE_DEFAULT" input="KEY_rctrl KEY_end" axisComponent="+" inputComponent="+" index="1"/>
+    </actionBinding>
+    <actionBinding action="FS25_EnhancedVehicle_SNAP_REVERSE">
+      <binding device="KB_MOUSE_DEFAULT" input="KEY_rctrl KEY_home" axisComponent="+" inputComponent="+" index="1"/>
+    </actionBinding>
+    <actionBinding action="FS25_EnhancedVehicle_SNAP_OPMODE">
+      <binding device="KB_MOUSE_DEFAULT" input="KEY_rshift KEY_home" axisComponent="+" inputComponent="+" index="1"/>
+    </actionBinding>
+    <actionBinding action="FS25_EnhancedVehicle_SNAP_CALC_WW">
+      <binding device="KB_MOUSE_DEFAULT" input="KEY_rctrl KEY_KP_1" axisComponent="+" inputComponent="+" index="1"/>
+    </actionBinding>
+    <actionBinding action="FS25_EnhancedVehicle_SNAP_GRID_RESET">
+      <binding device="KB_MOUSE_DEFAULT" input="KEY_rctrl KEY_KP_2" axisComponent="+" inputComponent="+" index="1"/>
+    </actionBinding>
+    <actionBinding action="FS25_EnhancedVehicle_SNAP_LINES_MODE">
+      <binding device="KB_MOUSE_DEFAULT" input="KEY_rctrl KEY_KP_3" axisComponent="+" inputComponent="+" index="1"/>
+    </actionBinding>
+    <actionBinding action="FS25_EnhancedVehicle_SNAP_TRACK">
+      <binding device="KB_MOUSE_DEFAULT" input="KEY_rctrl KEY_KP_4" axisComponent="-"/>
+      <binding device="KB_MOUSE_DEFAULT" input="KEY_rctrl KEY_KP_6" axisComponent="+"/>
+    </actionBinding>
+    <actionBinding action="FS25_EnhancedVehicle_SNAP_TRACKP">
+      <binding device="KB_MOUSE_DEFAULT" input="KEY_rctrl KEY_KP_minus" axisComponent="-"/>
+      <binding device="KB_MOUSE_DEFAULT" input="KEY_rctrl KEY_KP_plus"  axisComponent="+"/>
+    </actionBinding>
+    <actionBinding action="FS25_EnhancedVehicle_SNAP_TRACKW">
+      <binding device="KB_MOUSE_DEFAULT" input="KEY_rshift KEY_KP_minus" axisComponent="-"/>
+      <binding device="KB_MOUSE_DEFAULT" input="KEY_rshift KEY_KP_plus"  axisComponent="+"/>
+    </actionBinding>
+    <actionBinding action="FS25_EnhancedVehicle_SNAP_TRACKO">
+      <binding device="KB_MOUSE_DEFAULT" input="KEY_rshift KEY_rctrl KEY_KP_minus" axisComponent="-"/>
+      <binding device="KB_MOUSE_DEFAULT" input="KEY_rshift KEY_rctrl KEY_KP_plus"  axisComponent="+"/>
+    </actionBinding>
+    <actionBinding action="FS25_EnhancedVehicle_SNAP_TRACKJ">
+      <binding device="KB_MOUSE_DEFAULT" input="KEY_rctrl KEY_delete" axisComponent="-"/>
+      <binding device="KB_MOUSE_DEFAULT" input="KEY_rctrl KEY_insert" axisComponent="+"/>
+    </actionBinding>
+    <actionBinding action="FS25_EnhancedVehicle_SNAP_HL_MODE">
+      <binding device="KB_MOUSE_DEFAULT" input="KEY_rctrl KEY_KP_multiply" axisComponent="+" inputComponent="+" index="1"/>
+    </actionBinding>
+    <actionBinding action="FS25_EnhancedVehicle_SNAP_HL_DIST">
+      <binding device="KB_MOUSE_DEFAULT" input="KEY_rshift KEY_KP_divide"   axisComponent="-"/>
+      <binding device="KB_MOUSE_DEFAULT" input="KEY_rshift KEY_KP_multiply" axisComponent="+"/>
+    </actionBinding>
+    <actionBinding action="FS25_EnhancedVehicle_SNAP_ANGLE1">
+      <binding device="KB_MOUSE_DEFAULT" input="KEY_rctrl KEY_pagedown" axisComponent="-"/>
+      <binding device="KB_MOUSE_DEFAULT" input="KEY_rctrl KEY_pageup"   axisComponent="+"/>
+    </actionBinding>
+    <actionBinding action="FS25_EnhancedVehicle_SNAP_ANGLE3">
+      <binding device="KB_MOUSE_DEFAULT" input="KEY_rshift KEY_pagedown" axisComponent="-"/>
+      <binding device="KB_MOUSE_DEFAULT" input="KEY_rshift KEY_pageup"   axisComponent="+"/>
+    </actionBinding>
+    <actionBinding action="FS25_EnhancedVehicle_SNAP_ANGLE2">
+      <binding device="KB_MOUSE_DEFAULT" input="KEY_rshift KEY_rctrl KEY_pagedown" axisComponent="-"/>
+      <binding device="KB_MOUSE_DEFAULT" input="KEY_rshift KEY_rctrl KEY_pageup"   axisComponent="+"/>
+    </actionBinding>
+    <actionBinding action="FS25_EnhancedVehicle_FD">
+      <binding device="KB_MOUSE_DEFAULT" input="KEY_rctrl KEY_KP_7" axisComponent="+" inputComponent="+" index="1"/>
+    </actionBinding>
+    <actionBinding action="FS25_EnhancedVehicle_RD">
+      <binding device="KB_MOUSE_DEFAULT" input="KEY_rctrl KEY_KP_8" axisComponent="+" inputComponent="+" index="1"/>
+    </actionBinding>
+    <actionBinding action="FS25_EnhancedVehicle_BD">
+      <binding device="KB_MOUSE_DEFAULT" input="" axisComponent="+" inputComponent="+" index="1"/>
+    </actionBinding>
+    <actionBinding action="FS25_EnhancedVehicle_DM">
+      <binding device="KB_MOUSE_DEFAULT" input="KEY_rctrl KEY_KP_9" axisComponent="+" inputComponent="+" index="1"/>
+    </actionBinding>
+    <actionBinding action="FS25_EnhancedVehicle_AJ_REAR_UPDOWN">
+      <binding device="KB_MOUSE_DEFAULT" input="KEY_lalt KEY_1" axisComponent="+" inputComponent="+" index="1"/>
+    </actionBinding>
+    <actionBinding action="FS25_EnhancedVehicle_AJ_REAR_ONOFF">
+      <binding device="KB_MOUSE_DEFAULT" input="KEY_lalt KEY_2" axisComponent="+" inputComponent="+" index="1"/>
+    </actionBinding>
+    <actionBinding action="FS25_EnhancedVehicle_AJ_FRONT_UPDOWN">
+      <binding device="KB_MOUSE_DEFAULT" input="KEY_lalt KEY_3" axisComponent="+" inputComponent="+" index="1"/>
+    </actionBinding>
+    <actionBinding action="FS25_EnhancedVehicle_AJ_FRONT_ONOFF">
+      <binding device="KB_MOUSE_DEFAULT" input="KEY_lalt KEY_4" axisComponent="+" inputComponent="+" index="1"/>
+    </actionBinding>
+  </inputBinding>
+
+  <extraSourceFiles>
+    <sourceFile filename="FS25_EnhancedVehicle_Loader.lua" />
+  </extraSourceFiles>
+
+</modDesc>
