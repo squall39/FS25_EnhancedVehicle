@@ -3,7 +3,7 @@
 --
 -- Author: Majo76
 -- email: ls (at) majo76 (dot) de
--- @Date: 16.11.2024
+-- @Date: 17.11.2024
 -- @Version: 1.0.0.0
 
 --[[
@@ -1320,7 +1320,7 @@ function FS25_EnhancedVehicle:onActionCall(actionName, keyStatus, arg4, arg5, ar
     FS25_EnhancedVehicle.ui_hud:storeScaledValues()
 
 ------------------
---  print(DebugUtil.printTableRecursively(g_currentMission.hud.sideNotifications, 0, 0, 4))
+--    print(DebugUtil.printTableRecursively(g_currentMission.hud, 0, 0, 3))
 ------------------  
 
     -- configuration dialog

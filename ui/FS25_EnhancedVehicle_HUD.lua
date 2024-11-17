@@ -3,7 +3,7 @@
 --
 -- Author: Majo76
 -- email: ls (at) majo76 (dot) de
--- @Date: 16.11.2024
+-- @Date: 17.11.2024
 -- @Version: 1.0.0.0
 
 local myName = "FS25_EnhancedVehicle_HUD"
@@ -57,7 +57,7 @@ FS25_EnhancedVehicle_HUD.POSITION = {
   ICON_HLMODE = { 265-24-18, 29 },
   ICON_HLDIR  = { 265+18, 29 },
   ICON_DIFF   = {   0, 0 },
-  ICON_PARK   = {  -1,-2 },
+  ICON_PARK   = {  -2,-2 },
   DMG         = { -15, 5 },
   FUEL        = {  15, 5 },
   MISC        = { 116, 5 },
@@ -130,9 +130,11 @@ function FS25_EnhancedVehicle_HUD:new(speedMeter, gameInfoDisplay, modDirectory)
   FS25_EnhancedVehicle_HUD.COLOR.ACTIVE   = { unpack(FS25_EnhancedVehicle.hud.colorActive) }
   FS25_EnhancedVehicle_HUD.COLOR.STANDBY  = { unpack(FS25_EnhancedVehicle.hud.colorStandby) }
 
+  -- for tracking how many progress bars are visible
+  FS25_EnhancedVehicle_HUD.numberProgessBars = 0
+
   -- hook into some original HUD functions
---  speedMeter.storeScaledValues = Utils.appendedFunction(speedMeter.storeScaledValues, FS25_EnhancedVehicle_HUD.speedMeter_storeScaledValues)
---  speedMeter.draw              = Utils.appendedFunction(speedMeter.draw, FS25_EnhancedVehicle_HUD.speedMeter_draw)
+  g_currentMission.hud.sideNotifications.markProgressBarForDrawing = Utils.appendedFunction(g_currentMission.hud.sideNotifications.markProgressBarForDrawing, FS25_EnhancedVehicle_HUD.markProgressBarForDrawing)
 
   return self
 end
@@ -838,17 +840,12 @@ function FS25_EnhancedVehicle_HUD:drawHUD()
       deltaY = deltaY + g_currentMission.hud.sideNotifications.notificationOffsetY
     end
     -- move our elements down if game displays progress bars
-    if #g_currentMission.hud.sideNotifications.progressBars > 0 then
-      local count = 0
-      for _, progressBar in pairs(g_currentMission.hud.sideNotifications.progressBars) do
-        if (progressBar.title ~= '') then count = count + 1 end
-      end
-      if (count > 0) then
-        deltaY = deltaY + (g_currentMission.hud.sideNotifications.progressBarBgTop.height + 
-                           g_currentMission.hud.sideNotifications.progressBarBgScale.height + 
-                           g_currentMission.hud.sideNotifications.progressBarBgBottom.height + 
-                           g_currentMission.hud.sideNotifications.progressBarSectionOffsetY) * count
-      end
+    if FS25_EnhancedVehicle_HUD.numberProgessBars > 0 then
+      deltaY = deltaY + (g_currentMission.hud.sideNotifications.progressBarBgTop.height +
+                         g_currentMission.hud.sideNotifications.progressBarBgScale.height +
+                         g_currentMission.hud.sideNotifications.progressBarBgBottom.height +
+                         g_currentMission.hud.sideNotifications.progressBarSectionOffsetY) * FS25_EnhancedVehicle_HUD.numberProgessBars
+      FS25_EnhancedVehicle_HUD.numberProgessBars = 0
     end
   end
 
@@ -1085,16 +1082,6 @@ end
 
 -- #############################################################################
 
-function FS25_EnhancedVehicle_HUD.speedMeter_storeScaledValues(speedMeter)
-  FS25_EnhancedVehicle.ui_hud:storeScaledValues()
-end
-
-function FS25_EnhancedVehicle_HUD.speedMeter_draw(speedMeter)
-  FS25_EnhancedVehicle.ui_hud:drawHUD()
-end
-
--- #############################################################################
-
 function getDmg(start)
   if start.spec_attacherJoints.attachedImplements ~= nil then
     for _, implement in pairs(start.spec_attacherJoints.attachedImplements) do
@@ -1116,4 +1103,10 @@ function getDmg(start)
       end
     end
   end
+end
+
+-- #############################################################################
+
+function FS25_EnhancedVehicle_HUD:markProgressBarForDrawing(v1)
+  FS25_EnhancedVehicle_HUD.numberProgessBars = FS25_EnhancedVehicle_HUD.numberProgessBars + 1
 end
