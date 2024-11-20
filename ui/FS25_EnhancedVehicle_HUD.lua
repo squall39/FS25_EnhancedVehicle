@@ -3,7 +3,7 @@
 --
 -- Author: Majo76
 -- email: ls (at) majo76 (dot) de
--- @Date: 17.11.2024
+-- @Date: 20.11.2024
 -- @Version: 1.0.0.0
 
 local myName = "FS25_EnhancedVehicle_HUD"
@@ -12,37 +12,45 @@ FS25_EnhancedVehicle_HUD = {}
 local FS25_EnhancedVehicle_HUD_mt = Class(FS25_EnhancedVehicle_HUD)
 
 FS25_EnhancedVehicle_HUD.SIZE = {
-  TRACKBOX   = { 328, 50 },
-  DIFFBOX    = {  24, 40 },
-  PARKBOX    = {  20, 20 },
-  MISCBOX    = { 232, 20 },
-  DMGBOX     = { 200, 40 },
-  ICONTRACK  = {  18, 18 },
-  ICONDIFF   = {  24, 40 },
-  ICONPARK   = {  24, 24 },
-  MARGIN     = {   8,  8 },
-  MARGINDMG  = {  15,  5 },
-  MARGINFUEL = {  15,  5 },
+  TRACKBOX      = { 328, 50 },
+  DIFFBOX       = {  24, 40 },
+  PARKBOX       = {  20, 20 },
+  MISCBOX       = { 232, 20 },
+  DMGBOX        = { 200, 40 },
+  ICONTRACK     = {  18, 18 },
+  ICONDIFF      = {  24, 40 },
+  ICONPARK      = {  24, 24 },
+  MARGIN        = {   8,  8 },
+  MARGINDMG     = {   5,  5 },
+  MARGINFUEL    = {   5,  5 },
+  MARGINELEMENT = {   5,  5 },
 }
 
 FS25_EnhancedVehicle_HUD.UV = {
-  BGTRACK     = {   0,  0, 300, 50 },
-  BGDIFF      = { 384,  0,  32, 64 },
-  BGMISC      = { 544,  0, 200, 20 },
-  BGDMG       = { 544, 20, 200, 44 },
-  BGPARK      = { 353,  0,  30, 32 },
-  ICON_SNAP   = {   0, 64,  64, 64 },
-  ICON_TRACK  = {  64, 64,  64, 64 },
-  ICON_HL1    = { 128, 64,  64, 64 },
-  ICON_HL2    = { 192, 64,  64, 64 },
-  ICON_HL3    = { 256, 64,  64, 64 },
-  ICON_HLUP   = { 320, 64,  64, 64 },
-  ICON_HLDOWN = { 384, 64,  64, 64 },
-  ICON_DBG    = { 416,  0,  32, 64 },
-  ICON_DDM    = { 448,  0,  32, 64 },
-  ICON_DFRONT = { 480,  0,  32, 64 },
-  ICON_DBACK  = { 512,  0,  32, 64 },
-  ICON_PARK   = { 352, 32,  32, 32 },
+  BGTRACK     =       {   0,  0, 300, 50 },
+  BGDIFF      =       { 384,  0,  32, 64 },
+  BGMISC      =       { 544,  0, 200, 20 },
+  BGDMG       =       { 544, 20, 200, 44 },
+  BGPARK      =       { 353,  0,  30, 32 },
+  ICON_SNAP   =       {   0, 64,  64, 64 },
+  ICON_TRACK  =       {  64, 64,  64, 64 },
+  ICON_HL1    =       { 128, 64,  64, 64 },
+  ICON_HL2    =       { 192, 64,  64, 64 },
+  ICON_HL3    =       { 256, 64,  64, 64 },
+  ICON_HLUP   =       { 320, 64,  64, 64 },
+  ICON_HLDOWN =       { 384, 64,  64, 64 },
+  ICON_DBG    =       { 416,  0,  32, 64 },
+  ICON_DDM    =       { 448,  0,  32, 64 },
+  ICON_DFRONT =       { 480,  0,  32, 64 },
+  ICON_DBACK  =       { 512,  0,  32, 64 },
+  ICON_PARK   =       { 352, 32,  32, 32 },
+  BGBOX_TOPLEFT     = { 544, 64,   8,  8 },
+  BGBOX_TOPRIGHT    = { 736, 64,   8,  8 },
+  BGBOX_BOTTOMLEFT  = { 544, 86,   8,  8 },
+  BGBOX_BOTTOMRIGHT = { 736, 86,   8,  8 },
+  BGBOX_SCALE       = { 552, 64, 184, 30 },
+  BGBOX_LEFT        = { 544, 64+8, 8, 10 },
+  BGBOX_RIGHT       = { 736, 64+8, 8, 10 },
 }
 
 FS25_EnhancedVehicle_HUD.POSITION = {
@@ -66,13 +74,9 @@ FS25_EnhancedVehicle_HUD.POSITION = {
 }
 
 FS25_EnhancedVehicle_HUD.COLOR = {
-  INACTIVE = {     0.7,     0.7,     0.7,    1 },
+  INACTIVE = {    0.7,     0.7,     0.7,    1 },
   ACTIVE   = { 60/255, 118/255,   0/255,    1 },
-  BG       = { 0, 0, 0, 0.55 },
-}
-
-FS25_EnhancedVehicle_HUD.MISC = {
-  MARGINELEMENT = 5,
+  BG       = {      0,       0,       0, 0.55 },
 }
 
 FS25_EnhancedVehicle_HUD.TEXT_SIZE = {
@@ -130,6 +134,8 @@ function FS25_EnhancedVehicle_HUD:new(speedMeter, gameInfoDisplay, modDirectory)
   FS25_EnhancedVehicle_HUD.COLOR.ACTIVE   = { unpack(FS25_EnhancedVehicle.hud.colorActive) }
   FS25_EnhancedVehicle_HUD.COLOR.STANDBY  = { unpack(FS25_EnhancedVehicle.hud.colorStandby) }
 
+  self.bgBoxElements = { "topleft", "topright", "bottomleft", "bottomright", "scale", "left", "right" }
+
   -- for tracking how many progress bars are visible
   FS25_EnhancedVehicle_HUD.numberProgessBars = 0
 
@@ -156,12 +162,13 @@ function FS25_EnhancedVehicle_HUD:delete()
     self.miscBox:delete()
   end
 
-  if self.dmgBox ~= nil then
-    self.dmgBox:delete()
-  end
-
-  if self.fuelBox ~= nil then
-    self.fuelBox:delete()
+  for _, element in pairs(self.bgBoxElements) do
+    if self.dmgBox[element] ~= nil then
+      self.dmgBox[element]:delete()
+    end
+    if self.fuelBox[element] ~= nil then
+      self.fuelBox[element]:delete()
+    end
   end
 
   if self.parkBox ~= nil then
@@ -203,7 +210,8 @@ function FS25_EnhancedVehicle_HUD:createElements()
   -- create our fuel box
   self:createFuelBox()
 
-  self.marginWidth, self.marginHeight = self.gameInfoDisplay:scalePixelToScreenVector(FS25_EnhancedVehicle_HUD.SIZE.MARGIN)
+  self.marginWidth, self.marginHeight = self.speedMeter:scalePixelToScreenVector(FS25_EnhancedVehicle_HUD.SIZE.MARGIN)
+  _, self.marginElement               = self.speedMeter:scalePixelToScreenVector(FS25_EnhancedVehicle_HUD.SIZE.MARGINELEMENT)
 end
 
 -- #############################################################################
@@ -331,11 +339,9 @@ function FS25_EnhancedVehicle_HUD:createMiscBox()
 
   -- prepare
   local boxWidth, boxHeight = self.speedMeter:scalePixelToScreenVector(FS25_EnhancedVehicle_HUD.SIZE.MISCBOX)
-  local x = 0
-  local y = 0
 
   -- add background overlay box
-  local boxOverlay = Overlay.new(self.uiFilename, x, y, boxWidth, boxHeight)
+  local boxOverlay = Overlay.new(self.uiFilename, 0, 0, boxWidth, boxHeight)
   local boxElement = HUDElement.new(boxOverlay)
   self.miscBox = boxElement
   self.miscBox:setUVs(GuiUtils.getUVs(FS25_EnhancedVehicle_HUD.UV.BGMISC))
@@ -348,17 +354,17 @@ end
 function FS25_EnhancedVehicle_HUD:createDamageBox()
   if debug > 1 then print("-> " .. myName .. ": createDamageBox ") end
 
-  -- prepare
-  local x = 0
-  local y = 0
+  -- create single elements of box
+  self.dmgBox = {}
+  for _, element in pairs(self.bgBoxElements) do
+    local boxOverlay = Overlay.new(self.uiFilename, 0, 0, 1, 1)
+    local boxElement = HUDElement.new(boxOverlay)
+    self.dmgBox[element] = boxElement
+    self.dmgBox[element]:setUVs(GuiUtils.getUVs(FS25_EnhancedVehicle_HUD.UV["BGBOX_"..string.upper(element)]))
+    self.dmgBox[element]:setColor(unpack(FS25_EnhancedVehicle_HUD.COLOR.BG))
+    self.dmgBox[element]:setVisible(false)
+  end
 
-  -- add background overlay box
-  local boxOverlay = Overlay.new(self.uiFilename, x, y, 1, 1)
-  local boxElement = HUDElement.new(boxOverlay)
-  self.dmgBox = boxElement
-  self.dmgBox:setUVs(GuiUtils.getUVs(FS25_EnhancedVehicle_HUD.UV.BGDMG))
-  self.dmgBox:setColor(unpack(FS25_EnhancedVehicle_HUD.COLOR.BG))
-  self.dmgBox:setVisible(false)
 end
 
 -- #############################################################################
@@ -366,17 +372,16 @@ end
 function FS25_EnhancedVehicle_HUD:createFuelBox()
   if debug > 1 then print("-> " .. myName .. ": createFuelBox ") end
 
-  -- prepare
-  local x = 0
-  local y = 0
-
-  -- add background overlay box
-  local boxOverlay = Overlay.new(self.uiFilename, x, y, 1, 1)
-  local boxElement = HUDElement.new(boxOverlay)
-  self.fuelBox = boxElement
-  self.fuelBox:setUVs(GuiUtils.getUVs(FS25_EnhancedVehicle_HUD.UV.BGDMG))
-  self.fuelBox:setColor(unpack(FS25_EnhancedVehicle_HUD.COLOR.BG))
-  self.fuelBox:setVisible(false)
+  -- create single elements of box
+  self.fuelBox = {}
+  for _, element in pairs(self.bgBoxElements) do
+    local boxOverlay = Overlay.new(self.uiFilename, 0, 0, 1, 1)
+    local boxElement = HUDElement.new(boxOverlay)
+    self.fuelBox[element] = boxElement
+    self.fuelBox[element]:setUVs(GuiUtils.getUVs(FS25_EnhancedVehicle_HUD.UV["BGBOX_"..string.upper(element)]))
+    self.fuelBox[element]:setColor(unpack(FS25_EnhancedVehicle_HUD.COLOR.BG))
+    self.fuelBox[element]:setVisible(false)
+  end
 end
 
 -- #############################################################################
@@ -413,7 +418,7 @@ function FS25_EnhancedVehicle_HUD:storeScaledValues()
     -- some globals
     local boxWidth, boxHeight = self.trackBox:getWidth(), self.trackBox:getHeight()
     local boxPosX = self.speedMeter.speedBg.x -- left border of gauge
-    local boxPosY = self.speedMeter.speedBg.y + self.speedMeter.speedBg.height + self.speedMeter:scalePixelToScreenHeight(FS25_EnhancedVehicle_HUD.MISC.MARGINELEMENT) -- move above gauge and some spacing
+    local boxPosY = self.speedMeter.speedBg.y + self.speedMeter.speedBg.height + self.marginElement -- move above gauge and some spacing
     local boxPosY2 = boxPosY
 
     -- global move of box
@@ -426,9 +431,9 @@ function FS25_EnhancedVehicle_HUD:storeScaledValues()
     -- move FS25 fill levels display above our display element
     g_currentMission.hud.fillLevelsDisplay.offsetY = 0
     if FS25_EnhancedVehicle.functionSnapIsEnabled and FS25_EnhancedVehicle.hud.track.enabled and FS25_EnhancedVehicle.hud.track.offsetX == 0 and FS25_EnhancedVehicle.hud.track.offsetY == 0 then
-      g_currentMission.hud.fillLevelsDisplay.y = boxPosY + self.trackBox:getHeight() + self.speedMeter:scalePixelToScreenHeight(FS25_EnhancedVehicle_HUD.MISC.MARGINELEMENT)
+      g_currentMission.hud.fillLevelsDisplay.y = boxPosY + self.trackBox:getHeight() + self.marginElement
     else
-      g_currentMission.hud.fillLevelsDisplay.y = boxPosY2 + self.speedMeter:scalePixelToScreenHeight(FS25_EnhancedVehicle_HUD.MISC.MARGINELEMENT) / 2
+      g_currentMission.hud.fillLevelsDisplay.y = boxPosY2 + self.marginElement / 2
     end
 
     -- snap text
@@ -480,27 +485,39 @@ function FS25_EnhancedVehicle_HUD:storeScaledValues()
     self.diffBox:setPosition(x, y)
   end
 
-  self.dmgText.marginWidth, self.dmgText.marginHeight = self.gameInfoDisplay:scalePixelToScreenVector(FS25_EnhancedVehicle_HUD.SIZE.MARGINDMG)
+  self.dmgText.textMarginWidth, self.dmgText.textMarginHeight = self.gameInfoDisplay:scalePixelToScreenVector(FS25_EnhancedVehicle_HUD.SIZE.MARGINDMG)
+  self.dmgText.boxMarginWidth, self.dmgText.boxMarginHeight = self.gameInfoDisplay:scalePixelToScreenVector(FS25_EnhancedVehicle_HUD.SIZE.MARGIN)
   if self.dmgBox ~= nil then
     local baseX, baseY = self.gameInfoDisplay:getPosition()
-    self.dmgText.posX = 1
-    self.dmgText.posY = baseY - self.gameInfoDisplay.infoBgScale.height - self.dmgText.marginHeight  -- move just below bottom of gameinfodisplay
+    self.dmgText.posX = baseX
+    self.dmgText.posY = baseY - self.gameInfoDisplay.infoBgScale.height - self.marginElement  -- move just below bottom of gameinfodisplay
     self.dmgText.size = self.speedMeter:scalePixelToScreenHeight(FS25_EnhancedVehicle_HUD.TEXT_SIZE.DMG)
+    -- set fixed dimensions
+    self.dmgBox.topleft:setDimension(    self.dmgText.boxMarginWidth, self.dmgText.boxMarginHeight)
+    self.dmgBox.topright:setDimension(   self.dmgText.boxMarginWidth, self.dmgText.boxMarginHeight)
+    self.dmgBox.bottomleft:setDimension( self.dmgText.boxMarginWidth, self.dmgText.boxMarginHeight)
+    self.dmgBox.bottomright:setDimension(self.dmgText.boxMarginWidth, self.dmgText.boxMarginHeight)
   end
 
-  self.fuelText.marginWidth, self.fuelText.marginHeight = self.gameInfoDisplay:scalePixelToScreenVector(FS25_EnhancedVehicle_HUD.SIZE.MARGINFUEL)
+  self.fuelText.textMarginWidth, self.fuelText.textMarginHeight = self.gameInfoDisplay:scalePixelToScreenVector(FS25_EnhancedVehicle_HUD.SIZE.MARGINFUEL)
+  self.fuelText.boxMarginWidth, self.fuelText.boxMarginHeight = self.gameInfoDisplay:scalePixelToScreenVector(FS25_EnhancedVehicle_HUD.SIZE.MARGIN)
   if self.fuelBox ~= nil then
     local baseX, baseY = self.gameInfoDisplay:getPosition()
-    self.fuelText.posX = 1
-    self.fuelText.posY = baseY - self.gameInfoDisplay.infoBgScale.height - self.fuelText.marginHeight  -- move just below bottom of gameinfodisplay
+    self.fuelText.posX = baseX
+    self.fuelText.posY = baseY - self.gameInfoDisplay.infoBgScale.height - self.marginElement  -- move just below bottom of gameinfodisplay
     self.fuelText.size = self.speedMeter:scalePixelToScreenHeight(FS25_EnhancedVehicle_HUD.TEXT_SIZE.FUEL)
+    -- set fixed dimensions
+    self.fuelBox.topleft:setDimension(    self.fuelText.boxMarginWidth, self.fuelText.boxMarginHeight)
+    self.fuelBox.topright:setDimension(   self.fuelText.boxMarginWidth, self.fuelText.boxMarginHeight)
+    self.fuelBox.bottomleft:setDimension( self.fuelText.boxMarginWidth, self.fuelText.boxMarginHeight)
+    self.fuelBox.bottomright:setDimension(self.fuelText.boxMarginWidth, self.fuelText.boxMarginHeight)
   end
 
   if self.miscBox ~= nil then
     -- some globals
     local boxWidth, boxHeight = self.miscBox:getWidth(), self.miscBox:getHeight()
     local boxPosX = self.speedMeter.speedBg.x
-    local boxPosY = self.speedMeter.speedBg.y - boxHeight - self.speedMeter:scalePixelToScreenHeight(FS25_EnhancedVehicle_HUD.MISC.MARGINELEMENT)
+    local boxPosY = self.speedMeter.speedBg.y - boxHeight - self.marginElement
 
     -- global move
     local offX, offY = self.speedMeter:scalePixelToScreenVector({ FS25_EnhancedVehicle.hud.misc.offsetX, FS25_EnhancedVehicle.hud.misc.offsetY })
@@ -519,7 +536,7 @@ function FS25_EnhancedVehicle_HUD:storeScaledValues()
   -- park box
   if self.parkBox ~= nil then
     -- some globals
-    local boxPosX = self.speedMeter.speedBg.x + self.diffBox:getWidth() + self.speedMeter:scalePixelToScreenHeight(FS25_EnhancedVehicle_HUD.MISC.MARGINELEMENT) / 2
+    local boxPosX = self.speedMeter.speedBg.x + self.diffBox:getWidth() + self.marginElement / 2
     local boxPosY = self.speedMeter.speedBg.y + self.speedMeter.speedBg.height - self.parkBox:getHeight()
 
     -- global move
@@ -559,10 +576,14 @@ function FS25_EnhancedVehicle_HUD:setVehicle(vehicle)
     self.miscBox:setVisible(vehicle ~= nil)
   end
   if self.dmgBox ~= nil then
-    self.dmgBox:setVisible(vehicle ~= nil)
+    for _, element in pairs(self.bgBoxElements) do
+      self.dmgBox[element]:setVisible(vehicle ~= nil)
+    end
   end
   if self.fuelBox ~= nil then
-    self.fuelBox:setVisible(vehicle ~= nil)
+    for _, element in pairs(self.bgBoxElements) do
+      self.fuelBox[element]:setVisible(vehicle ~= nil)
+    end
   end
   if self.parkBox ~= nil then
     self.parkBox:setVisible(vehicle ~= nil)
@@ -578,8 +599,10 @@ function FS25_EnhancedVehicle_HUD:hideSomething(vehicle)
     self.trackBox:setVisible(false)
     self.diffBox:setVisible(false)
     self.miscBox:setVisible(false)
-    self.dmgBox:setVisible(false)
-    self.fuelBox:setVisible(false)
+    for _, element in pairs(self.bgBoxElements) do
+      self.dmgBox[element]:setVisible(false)
+      self.fuelBox[element]:setVisible(false)
+    end
     self.parkBox:setVisible(false)
   end
 end
@@ -602,6 +625,7 @@ function FS25_EnhancedVehicle_HUD:drawHUD()
     end
   end
 
+  -- should an element be visible at all?
   if not FS25_EnhancedVehicle.functionSnapIsEnabled then
     self.trackBox:setVisible(false)
   else
@@ -623,10 +647,13 @@ function FS25_EnhancedVehicle_HUD:drawHUD()
     self.parkBox.overlay:render()
   end
 
-  self.dmgBox:setVisible(FS25_EnhancedVehicle.hud.dmg.enabled == true)
-  self.dmgBox.overlay:render()
-  self.fuelBox:setVisible(FS25_EnhancedVehicle.hud.fuel.enabled == true)
-  self.fuelBox.overlay:render()
+  for _, element in pairs(self.bgBoxElements) do
+    self.dmgBox[element]:setVisible(FS25_EnhancedVehicle.hud.dmg.enabled == true)
+    self.dmgBox[element].overlay:render()
+    self.fuelBox[element]:setVisible(FS25_EnhancedVehicle.hud.fuel.enabled == true)
+    self.fuelBox[element].overlay:render()
+  end
+
   self.miscBox:setVisible(FS25_EnhancedVehicle.hud.misc.enabled == true)
   self.miscBox.overlay:render()
 
@@ -832,7 +859,7 @@ function FS25_EnhancedVehicle_HUD:drawHUD()
     self.icons.park.overlay:render()
   end
 
-  local deltaY = self.marginHeight
+  local deltaY = 0
   if g_currentMission.hud.sideNotifications ~= nil then
     -- move our elements down if game displays side notifications
     if #g_currentMission.hud.sideNotifications.notificationQueue > 0 then
@@ -845,6 +872,7 @@ function FS25_EnhancedVehicle_HUD:drawHUD()
                          g_currentMission.hud.sideNotifications.progressBarBgScale.height +
                          g_currentMission.hud.sideNotifications.progressBarBgBottom.height +
                          g_currentMission.hud.sideNotifications.progressBarSectionOffsetY) * FS25_EnhancedVehicle_HUD.numberProgessBars
+      deltaY = deltaY + self.marginElement
       FS25_EnhancedVehicle_HUD.numberProgessBars = 0
     end
   end
@@ -873,12 +901,12 @@ function FS25_EnhancedVehicle_HUD:drawHUD()
     setTextBold(false)
 
     -- calculate width & height of text
-    local _w, _h = 0, self.dmgText.marginHeight * 2
+    local _w, _h = 0, 0
     table.insert(dmg_txt, 1, { self.default_dmg_txt, 0 })
     for _, txt in pairs(dmg_txt) do
       setTextBold(false)
       if txt[2] == 0 then
-        _h = _h + self.dmgText.marginHeight
+        _h = _h + self.dmgText.textMarginHeight
         setTextBold(true)
       end
       _h = _h + self.dmgText.size
@@ -887,14 +915,23 @@ function FS25_EnhancedVehicle_HUD:drawHUD()
     end
 
     -- calculate position of text
-    local x, y = 0, 0
-    x = self.dmgText.posX - self.dmgText.marginHeight
-    y = self.dmgText.posY - deltaY
+    local x = self.dmgText.posX
+    local y = self.dmgText.posY - deltaY
 
-    deltaY = deltaY + _h + self.marginHeight
+    -- move further down for more elements
+    deltaY = deltaY + _h + self.dmgText.textMarginHeight * 2 + self.marginElement
 
-    self.dmgBox:setPosition(x - _w - self.dmgText.marginWidth, y - _h + self.dmgText.marginHeight)
-    self.dmgBox:setDimension(_w + self.dmgText.marginWidth + self.dmgText.marginHeight, _h)
+    self.dmgBox.topleft:setPosition(     x - _w - self.dmgText.textMarginWidth * 2, y - self.dmgText.boxMarginHeight)
+    self.dmgBox.topright:setPosition(    x - self.dmgText.boxMarginWidth,           y - self.dmgText.boxMarginHeight)
+    self.dmgBox.bottomleft:setPosition(  x - _w - self.dmgText.textMarginWidth * 2, y - _h - self.dmgText.textMarginHeight * 2)
+    self.dmgBox.bottomright:setPosition( x - self.dmgText.boxMarginWidth,           y - _h - self.dmgText.textMarginHeight * 2)
+    self.dmgBox.left:setPosition(        x - _w - self.dmgText.textMarginWidth * 2, y - _h - self.dmgText.textMarginHeight * 2 + self.dmgText.boxMarginHeight)
+    self.dmgBox.right:setPosition(       x - self.dmgText.boxMarginWidth,           y - _h - self.dmgText.textMarginHeight * 2 + self.dmgText.boxMarginHeight)
+    self.dmgBox.scale:setPosition(       x - _w - self.dmgText.textMarginWidth * 2 + self.dmgText.boxMarginWidth, y - _h - self.dmgText.textMarginHeight * 2)
+
+    self.dmgBox.left:setDimension(  self.dmgText.boxMarginWidth, _h + self.dmgText.textMarginHeight * 2 - self.dmgText.boxMarginHeight * 2)
+    self.dmgBox.right:setDimension( self.dmgText.boxMarginWidth, _h + self.dmgText.textMarginHeight * 2 - self.dmgText.boxMarginHeight * 2)
+    self.dmgBox.scale:setDimension( _w - (self.dmgText.boxMarginWidth - self.dmgText.textMarginWidth) * 2, _h + self.dmgText.textMarginHeight * 2)
 
     for _, txt in pairs(dmg_txt) do
       if txt[2] == 0 then
@@ -905,10 +942,10 @@ function FS25_EnhancedVehicle_HUD:drawHUD()
       else
         setTextColor(unpack(FS25_EnhancedVehicle.color.dmg))
       end
-      renderText(x, y, self.dmgText.size, txt[1])
+      renderText(x - self.dmgText.textMarginWidth, y - self.dmgText.textMarginHeight / 2, self.dmgText.size, txt[1])
       if txt[2] == 0 then
         setTextBold(false)
-        y = y - self.dmgText.marginHeight
+        y = y - self.dmgText.textMarginHeight
       end
       y = y - self.dmgText.size
     end
@@ -964,17 +1001,18 @@ function FS25_EnhancedVehicle_HUD:drawHUD()
     end
 
     -- prepare rendering
+    setTextAlignment(RenderText.ALIGN_RIGHT)
     setTextVerticalAlignment(RenderText.VERTICAL_ALIGN_TOP)
     setTextBold(false)
 
     -- calculate width & height of text
-    local _w, _h = 0, self.fuelText.marginHeight * 2
+    local _w, _h = 0, 0
     table.insert(fuel_txt, 1, { self.default_fuel_txt, 0 })
     for _, txt in pairs(fuel_txt) do
       setTextBold(false)
       if txt[2] == 0 then
         setTextBold(true)
-        _h = _h + self.fuelText.marginHeight
+        _h = _h + self.fuelText.textMarginHeight
       end
       _h = _h + self.fuelText.size
       local tmp = getTextWidth(self.fuelText.size, txt[1])
@@ -982,14 +1020,20 @@ function FS25_EnhancedVehicle_HUD:drawHUD()
     end
 
     -- calculate position of text
-    local x, y = 0, 0
-    setTextAlignment(RenderText.ALIGN_RIGHT)
-    x = self.fuelText.posX - self.fuelText.marginHeight
-    y = self.fuelText.posY - deltaY
-    deltaY = deltaY + _h + self.marginHeight
+    local x = self.fuelText.posX
+    local y = self.fuelText.posY - deltaY
 
-    self.fuelBox:setPosition(x - _w - self.fuelText.marginWidth, y - _h + self.fuelText.marginHeight)
-    self.fuelBox:setDimension(_w + self.fuelText.marginWidth + self.fuelText.marginHeight, _h)
+    self.fuelBox.topleft:setPosition(     x - _w - self.fuelText.textMarginWidth * 2, y - self.fuelText.boxMarginHeight)
+    self.fuelBox.topright:setPosition(    x - self.fuelText.boxMarginWidth,           y - self.fuelText.boxMarginHeight)
+    self.fuelBox.bottomleft:setPosition(  x - _w - self.fuelText.textMarginWidth * 2, y - _h - self.fuelText.textMarginHeight * 2)
+    self.fuelBox.bottomright:setPosition( x - self.fuelText.boxMarginWidth,           y - _h - self.fuelText.textMarginHeight * 2)
+    self.fuelBox.left:setPosition(        x - _w - self.fuelText.textMarginWidth * 2, y - _h - self.fuelText.textMarginHeight * 2 + self.fuelText.boxMarginHeight)
+    self.fuelBox.right:setPosition(       x - self.fuelText.boxMarginWidth,           y - _h - self.fuelText.textMarginHeight * 2 + self.fuelText.boxMarginHeight)
+    self.fuelBox.scale:setPosition(       x - _w - self.fuelText.textMarginWidth * 2 + self.fuelText.boxMarginWidth, y - _h - self.fuelText.textMarginHeight * 2)
+
+    self.fuelBox.left:setDimension(  self.fuelText.boxMarginWidth, _h + self.fuelText.textMarginHeight * 2 - self.fuelText.boxMarginHeight * 2)
+    self.fuelBox.right:setDimension( self.fuelText.boxMarginWidth, _h + self.fuelText.textMarginHeight * 2 - self.fuelText.boxMarginHeight * 2)
+    self.fuelBox.scale:setDimension( _w - (self.fuelText.boxMarginWidth - self.fuelText.textMarginWidth) * 2, _h + self.fuelText.textMarginHeight * 2)
 
     for _, txt in pairs(fuel_txt) do
       if txt[2] == 0 then
@@ -1006,10 +1050,10 @@ function FS25_EnhancedVehicle_HUD:drawHUD()
       else
         setTextColor(1,1,1,1)
       end
-      renderText(x, y, self.fuelText.size, txt[1])
+      renderText(x - self.fuelText.textMarginWidth, y - self.fuelText.textMarginHeight / 2, self.fuelText.size, txt[1])
       if txt[2] == 0 then
         setTextBold(false)
-        y = y - self.fuelText.marginHeight
+        y = y - self.fuelText.textMarginHeight
       end
       y = y - self.fuelText.size
     end
