@@ -2,7 +2,7 @@
 <modDesc descVersion="92">
   <author>Majo76</author>
 
-  <version>1.0.0.1-ff</version>
+  <version>1.0.1.0-ff</version>
 
   <title>
     <de>EnhancedVehicle</de>
@@ -47,6 +47,7 @@
     <action name="FS25_EnhancedVehicle_AJ_REAR_ONOFF"   />
     <action name="FS25_EnhancedVehicle_AJ_FRONT_UPDOWN" />
     <action name="FS25_EnhancedVehicle_AJ_FRONT_ONOFF"  />
+    <action name="FS25_EnhancedVehicle_ODO_MODE"        />
   </actions>
 
   <inputBinding>
@@ -137,6 +138,9 @@
     </actionBinding>
     <actionBinding action="FS25_EnhancedVehicle_AJ_FRONT_ONOFF">
       <binding device="KB_MOUSE_DEFAULT" input="KEY_lalt KEY_4" axisComponent="+" inputComponent="+" index="1"/>
+    </actionBinding>
+    <actionBinding action="FS25_EnhancedVehicle_ODO_MODE">
+      <binding device="KB_MOUSE_DEFAULT" input="KEY_rctrl KEY_KP_5" axisComponent="+" inputComponent="+" index="1"/>
     </actionBinding>
   </inputBinding>
 

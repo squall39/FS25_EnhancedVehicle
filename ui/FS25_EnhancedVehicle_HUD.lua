@@ -3,8 +3,8 @@
 --
 -- Author: Majo76
 -- email: ls (at) majo76 (dot) de
--- @Date: 20.11.2024
--- @Version: 1.0.0.0
+-- @Date: 24.11.2024
+-- @Version: 1.0.1.0
 
 local myName = "FS25_EnhancedVehicle_HUD"
 
@@ -71,6 +71,7 @@ FS25_EnhancedVehicle_HUD.POSITION = {
   MISC        = { 116, 5 },
   RPM         = { -55, -60 },
   TEMP        = {  58, -60 },
+  ODO         = {   0, -40 },
 }
 
 FS25_EnhancedVehicle_HUD.COLOR = {
@@ -90,6 +91,7 @@ FS25_EnhancedVehicle_HUD.TEXT_SIZE = {
   MISC       = 13,
   RPM        = 10,
   TEMP       = 10,
+  ODO        = 9,
 }
 
 -- #############################################################################
@@ -98,6 +100,8 @@ function FS25_EnhancedVehicle_HUD:new(speedMeter, gameInfoDisplay, modDirectory)
   if debug > 1 then print("-> " .. myName .. ": new ") end
 
   local self = setmetatable({}, FS25_EnhancedVehicle_HUD_mt)
+
+--  local self = FS25_EnhancedVehicle_HUD:superClass().new(backgroundOverlay, nil, FS25_EnhancedVehicle_HUD_mt)
 
   self.speedMeter        = speedMeter
   self.gameInfoDisplay   = gameInfoDisplay
@@ -123,6 +127,7 @@ function FS25_EnhancedVehicle_HUD:new(speedMeter, gameInfoDisplay, modDirectory)
   self.miscText             = {}
   self.rpmText              = {}
   self.tempText             = {}
+  self.odoText              = {}
 
   self.default_track_txt     = g_i18n:getText("hud_FS25_EnhancedVehicle_notrack")
   self.default_headland_txt  = g_i18n:getText("hud_FS25_EnhancedVehicle_noheadland")
@@ -547,7 +552,7 @@ function FS25_EnhancedVehicle_HUD:storeScaledValues()
     self.parkBox:setPosition(boxPosX, boxPosY)
   end
 
-  -- rpm & temp
+  -- rpm & temp & odo
   local textX, textY = self.speedMeter:scalePixelToScreenVector(FS25_EnhancedVehicle_HUD.POSITION.RPM)
   self.rpmText.posX = baseX + textX
   self.rpmText.posY = baseY + textY
@@ -557,6 +562,12 @@ function FS25_EnhancedVehicle_HUD:storeScaledValues()
   self.tempText.posX = baseX + textX
   self.tempText.posY = baseY + textY
   self.tempText.size = self.speedMeter:scalePixelToScreenHeight(FS25_EnhancedVehicle_HUD.TEXT_SIZE.TEMP)
+
+  local textX, textY = self.speedMeter:scalePixelToScreenVector(FS25_EnhancedVehicle_HUD.POSITION.ODO)
+  self.odoText.posX = baseX + textX
+  self.odoText.posY = baseY + textY
+  self.odoText.size = self.speedMeter:scalePixelToScreenHeight(FS25_EnhancedVehicle_HUD.TEXT_SIZE.ODO)
+  self.odoText.size2 = self.speedMeter:scalePixelToScreenHeight(FS25_EnhancedVehicle_HUD.TEXT_SIZE.ODO - 1)
 end
 
 -- #############################################################################
@@ -1115,6 +1126,34 @@ function FS25_EnhancedVehicle_HUD:drawHUD()
     renderText(self.tempText.posX, self.tempText.posY, self.tempText.size, temp_txt1)
     setTextColor(unpack(FS25_EnhancedVehicle.color.fs25green))
     renderText(self.tempText.posX, self.tempText.posY, self.tempText.size, temp_txt2)
+  end
+
+  -- odoMeter display
+  if self.vehicle.spec_motorized ~= nil and FS25_EnhancedVehicle.hud.odo.enabled then
+    -- render text
+    setTextAlignment(RenderText.ALIGN_CENTER)
+    setTextVerticalAlignment(RenderText.VERTICAL_ALIGN_BASELINE)
+    setTextBold(true)
+    local color = FS25_EnhancedVehicle_HUD.COLOR.ACTIVE
+    setTextColor(unpack(color))
+
+    local odoDistanceInKM = (self.vehicle.vData.is[14] / 1000) % 999999.99
+    local odoDistance = g_i18n:getDistance(odoDistanceInKM)
+    local tripDistanceInKM = (self.vehicle.vData.is[15] / 1000) % 999999.99
+    local tripDistance = g_i18n:getDistance(tripDistanceInKM)
+
+    local _mode = "ODO"
+    local _txt = string.format("  %09.02f", odoDistance)
+    if self.vehicle.vData.is[16] > 0 then
+      _mode = "Trip"
+      _txt = string.format("  %09.02f", tripDistance)
+    end
+    local unit = g_i18n:getMeasuringUnit()
+
+    local _txt2 = string.format("%s                            %s", _mode, unit)
+    renderText(self.odoText.posX, self.odoText.posY, self.odoText.size2, _txt2)
+    setTextColor(1,1,1,1)
+    renderText(self.odoText.posX, self.odoText.posY, self.odoText.size, _txt)
   end
 
   -- reset text stuff to "defaults"

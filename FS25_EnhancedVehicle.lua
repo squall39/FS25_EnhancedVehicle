@@ -3,11 +3,14 @@
 --
 -- Author: Majo76
 -- email: ls (at) majo76 (dot) de
--- @Date: 17.11.2024
--- @Version: 1.0.0.0
+-- @Date: 24.11.2024
+-- @Version: 1.0.1.0
 
 --[[
 CHANGELOG
+
+2024-11-24 - V1.0.1.0
++ added odometer / tripmeter (driven kilometer display) based on Giants modding tutorial
 
 2024-11-12 - V1.0.0.0
 + initial release for FS25
@@ -44,10 +47,11 @@ function FS25_EnhancedVehicle:new(mission, modDirectory, modName, i18n, gui, inp
   -- some global stuff - DONT touch
   FS25_EnhancedVehicle.hud = {}
   FS25_EnhancedVehicle.fS = g_currentMission.hud.speedMeter:scalePixelToScreenHeight(12)
-  FS25_EnhancedVehicle.sections = { 'fuel', 'dmg', 'misc', 'rpm', 'temp', 'diff', 'track', 'park' }
+  FS25_EnhancedVehicle.sections = { 'fuel', 'dmg', 'misc', 'rpm', 'temp', 'diff', 'track', 'park', 'odo' }
   FS25_EnhancedVehicle.actions = {}
   FS25_EnhancedVehicle.actions.global =    { 'FS25_EnhancedVehicle_MENU' }
   FS25_EnhancedVehicle.actions.park =      { 'FS25_EnhancedVehicle_PARK' }
+  FS25_EnhancedVehicle.actions.odo =       { 'FS25_EnhancedVehicle_ODO_MODE' }
   FS25_EnhancedVehicle.actions.snap =      { 'FS25_EnhancedVehicle_SNAP_ONOFF',
                                              'FS25_EnhancedVehicle_SNAP_REVERSE',
                                              'FS25_EnhancedVehicle_SNAP_OPMODE',
@@ -202,14 +206,14 @@ end
 function FS25_EnhancedVehicle.registerEventListeners(vehicleType)
   if debug > 1 then print("-> " .. myName .. ": registerEventListeners ") end
 
-  for _,n in pairs( { "onLoad", "onPostLoad", "saveToXMLFile", "onUpdate", "onDraw", "onReadStream", "onWriteStream", "onRegisterActionEvents", "onEnterVehicle", "onLeaveVehicle", "onPostAttachImplement", "onPostDetachImplement" } ) do
+  for _,n in pairs( { "onLoad", "onPostLoad", "saveToXMLFile", "onUpdate", "onDraw", "onReadStream", "onWriteStream", "onReadUpdateStream", "onWriteUpdateStream", "onRegisterActionEvents", "onEnterVehicle", "onLeaveVehicle", "onPostAttachImplement", "onPostDetachImplement" } ) do
     SpecializationUtil.registerEventListener(vehicleType, n, FS25_EnhancedVehicle)
   end
 end
 
 -- #############################################################################
 -- ### function for others mods to enable/disable EnhancedVehicle functions
--- ###   name: differential, hydraulic, snap
+-- ###   name: differential, hydraulic, snap, park, odometer
 -- ###  state: true or false
 
 function FS25_EnhancedVehicle:functionEnable(name, state)
@@ -229,11 +233,15 @@ function FS25_EnhancedVehicle:functionEnable(name, state)
     lC:setConfigValue("global.functions", "parkingBrakeIsEnabled", state)
     FS25_EnhancedVehicle.functionParkingBrakeIsEnabled = state
   end
+  if name == "odometer" then
+    lC:setConfigValue("global.functions", "odoMeterIsEnabled", state)
+    FS25_EnhancedVehicle.functionOdoMeterIsEnabled = state
+  end
 end
 
 -- #############################################################################
 -- ### function for others mods to get EnhancedVehicle functions status
--- ###   name: differential, hydraulic, snap
+-- ###   name: differential, hydraulic, snap, park, odometer
 -- ###  returns true or false
 
 function FS25_EnhancedVehicle:functionStatus(name)
@@ -249,6 +257,9 @@ function FS25_EnhancedVehicle:functionStatus(name)
   if name == "park" then
     return(lC:getConfigValue("global.functions", "parkingBrakeIsEnabled"))
   end
+  if name == "odomoter" then
+    return(lC:getConfigValue("global.functions", "odoMeterIsEnabled"))
+  end
 
   return(nil)
 end
@@ -263,6 +274,7 @@ function FS25_EnhancedVehicle:activateConfig()
   FS25_EnhancedVehicle.functionHydraulicIsEnabled    = lC:getConfigValue("global.functions", "hydraulicIsEnabled")
   FS25_EnhancedVehicle.functionSnapIsEnabled         = lC:getConfigValue("global.functions", "snapIsEnabled")
   FS25_EnhancedVehicle.functionParkingBrakeIsEnabled = lC:getConfigValue("global.functions", "parkingBrakeIsEnabled")
+  FS25_EnhancedVehicle.functionOdoMeterIsEnabled     = lC:getConfigValue("global.functions", "odoMeterIsEnabled")
 
   -- globals
   FS25_EnhancedVehicle.showKeysInHelpMenu  = lC:getConfigValue("global.misc", "showKeysInHelpMenu")
@@ -301,6 +313,7 @@ function FS25_EnhancedVehicle:activateConfig()
     FS25_EnhancedVehicle.hud[section].offsetY  = lC:getConfigValue("hud."..section, "offsetY")
   end
   FS25_EnhancedVehicle.hud.dmg.showAmountLeft = lC:getConfigValue("hud.dmg", "showAmountLeft")
+
   FS25_EnhancedVehicle.hud.colorActive   = { lC:getConfigValue("hud.colorActive",   "red"), lC:getConfigValue("hud.colorActive",   "green"), lC:getConfigValue("hud.colorActive",   "blue"), 1 }
   FS25_EnhancedVehicle.hud.colorInactive = { lC:getConfigValue("hud.colorInactive", "red"), lC:getConfigValue("hud.colorInactive", "green"), lC:getConfigValue("hud.colorInactive", "blue"), 1 }
   FS25_EnhancedVehicle.hud.colorStandby  = { lC:getConfigValue("hud.colorStandby",  "red"), lC:getConfigValue("hud.colorStandby",  "green"), lC:getConfigValue("hud.colorStandby",  "blue"), 1 }
@@ -326,6 +339,7 @@ function FS25_EnhancedVehicle:resetConfig(disable)
   lC:addConfigValue("global.functions", "hydraulicIsEnabled",    "bool", true)
   lC:addConfigValue("global.functions", "snapIsEnabled",         "bool", true)
   lC:addConfigValue("global.functions", "parkingBrakeIsEnabled", "bool", true)
+  lC:addConfigValue("global.functions", "odoMeterIsEnabled",     "bool", true)
 
   -- globals
   lC:addConfigValue("global.misc", "showKeysInHelpMenu", "bool",   true)
@@ -388,6 +402,9 @@ function FS25_EnhancedVehicle:resetConfig(disable)
   -- temp
   lC:addConfigValue("hud.temp", "enabled", "bool", true)
 
+  -- odoMeter
+  lC:addConfigValue("hud.odo", "enabled", "bool", true)
+
   -- diff
   lC:addConfigValue("hud.diff", "enabled", "bool", true)
   lC:addConfigValue("hud.diff", "offsetX", "int",  0)
@@ -445,11 +462,14 @@ function FS25_EnhancedVehicle:onPostLoad(savegame)
   --  11 - track snapx
   --  12 - track snapz
   --  13 - parking brake on
+  --  14 - odo meter
+  --  15 - trip meter
+  --  16 - odo mode
 
   -- initialize vehicle data with defaults
   self.vData = {}
-  self.vData.is   = {   nil,   nil, nil, nil,   nil,   nil, nil, nil, nil, nil, nil, nil, nil }
-  self.vData.want = { false, false,   1, 0.0, false, false,   0,   0,   0,   0,   0,   0, false }
+  self.vData.is   = {   nil,   nil, nil, nil,   nil,   nil, nil, nil, nil, nil, nil, nil, nil,   nil, nil, nil }
+  self.vData.want = { false, false,   1, 0.0, false, false,   0,   0,   0,   0,   0,   0, false, 0.0, 0.0, 0 }
   self.vData.torqueRatio   = { 0.5, 0.5, 0.5 }
   self.vData.maxSpeedRatio = { 1.0, 1.0, 1.0 }
   self.vData.rot = 0.0
@@ -458,6 +478,10 @@ function FS25_EnhancedVehicle:onPostLoad(savegame)
   self.vData.triggerCalculate = false
   self.vData.impl  = { isCalculated = false }
   self.vData.track = { isCalculated = false, deltaTrack = 1, headlandMode = 1, headlandDistance = 9999, isOnField = 0, eofDistance = -1, eofNext = 0 }
+  self.vData.dirtyFlag = self:getNextDirtyFlag()
+  self.vData.networkThreshold = 10 -- send odo/tripMeter updates every 10 meters
+  self.vData.odoDistanceSent  = 0  -- last odo value sent
+  self.vData.tripDistanceSent = 0  -- last trip value sent
 
   -- (server) set some defaults
   if self.isServer then
@@ -483,16 +507,18 @@ function FS25_EnhancedVehicle:onPostLoad(savegame)
     local key     = savegame.key ..".FS25_EnhancedVehicle.EnhancedVehicle"
 
     local _data
-    for _, _data in pairs( { {1, 'frontDiffIsOn'}, {2, 'backDiffIsOn'}, {3, 'driveMode'}, {13, 'parkingBrakeIsOn'} }) do
+    for _, _data in pairs( { {1, 'frontDiffIsOn'}, {2, 'backDiffIsOn'}, {3, 'driveMode'}, {13, 'parkingBrakeIsOn'}, {14, 'odoMeter'}, {15, 'tripMeter'}, {16, 'odoMode'} }) do
       local idx = _data[1]
       local _v
-      if idx == 3 then
+      if idx == 3 or idx == 16 then
         _v = getXMLInt(xmlFile.handle, key.."#".. _data[2])
+      elseif (idx == 14 or idx == 15) then
+        _v = getXMLFloat(xmlFile.handle, key.."#".. _data[2])
       else
         _v = getXMLBool(xmlFile.handle, key.."#".. _data[2])
       end
       if _v ~= nil then
-        if idx == 3 then
+        if (idx == 3 or idx == 14 or idx == 15 or idx == 16) then
           self.vData.want[idx] = _v
           if debug > 1 then print("--> found ".._data[2].."=".._v.." in savegame" .. mySelf(self)) end
         else
@@ -523,10 +549,13 @@ end
 function FS25_EnhancedVehicle:saveToXMLFile(xmlFile, key)
   if debug > 1 then print("-> " .. myName .. ": saveToXMLFile" .. mySelf(self)) end
 
-  if self.vData.is[1] ~= nil then  setXMLBool(xmlFile.handle, key.."#frontDiffIsOn",    self.vData.is[1])  else print("-> EV: saveToXMLFile warning [1]")  end
-  if self.vData.is[2] ~= nil then  setXMLBool(xmlFile.handle, key.."#backDiffIsOn",     self.vData.is[2])  else print("-> EV: saveToXMLFile warning [2]")  end
-  if self.vData.is[3] ~= nil then  setXMLInt(xmlFile.handle,  key.."#driveMode",        self.vData.is[3])  else print("-> EV: saveToXMLFile warning [3]")  end
-  if self.vData.is[13] ~= nil then setXMLBool(xmlFile.handle, key.."#parkingBrakeIsOn", self.vData.is[13]) else print("-> EV: saveToXMLFile warning [13]") end
+  if self.vData.is[1] ~= nil then  setXMLBool(xmlFile.handle,  key.."#frontDiffIsOn",    self.vData.is[1])  else print("-> EV: saveToXMLFile warning [1]")  end
+  if self.vData.is[2] ~= nil then  setXMLBool(xmlFile.handle,  key.."#backDiffIsOn",     self.vData.is[2])  else print("-> EV: saveToXMLFile warning [2]")  end
+  if self.vData.is[3] ~= nil then  setXMLInt(xmlFile.handle,   key.."#driveMode",        self.vData.is[3])  else print("-> EV: saveToXMLFile warning [3]")  end
+  if self.vData.is[13] ~= nil then setXMLBool(xmlFile.handle,  key.."#parkingBrakeIsOn", self.vData.is[13]) else print("-> EV: saveToXMLFile warning [13]") end
+  if self.vData.is[14] ~= nil then setXMLFloat(xmlFile.handle, key.."#odoMeter",         self.vData.is[14]) else print("-> EV: saveToXMLFile warning [14]") end
+  if self.vData.is[15] ~= nil then setXMLFloat(xmlFile.handle, key.."#tripMeter",        self.vData.is[15]) else print("-> EV: saveToXMLFile warning [15]") end
+  if self.vData.is[16] ~= nil then setXMLInt(xmlFile.handle,   key.."#odoMode",          self.vData.is[16]) else print("-> EV: saveToXMLFile warning [16]") end
 end
 
 -- #############################################################################
@@ -548,6 +577,9 @@ function FS25_EnhancedVehicle:onReadStream(streamId, connection)
   self.vData.is[11] = streamReadFloat32(streamId) -- snap track snap x
   self.vData.is[12] = streamReadFloat32(streamId) -- snap track snap z
   self.vData.is[13] = streamReadBool(streamId)    -- parking brake on
+  self.vData.is[14] = streamReadFloat32(streamId) -- odoMeter
+  self.vData.is[15] = streamReadFloat32(streamId) -- tripMeter
+  self.vData.is[16] = streamReadInt8(streamId)    -- odo mode
 
   if self.isClient then
     self.vData.want = { unpack(self.vData.is) }
@@ -575,6 +607,42 @@ function FS25_EnhancedVehicle:onWriteStream(streamId, connection)
   streamWriteFloat32(streamId, self.vData.is[11])
   streamWriteFloat32(streamId, self.vData.is[12])
   streamWriteBool(streamId,    self.vData.is[13])
+  streamWriteFloat32(streamId, self.vData.is[14])
+  streamWriteFloat32(streamId, self.vData.is[15])
+  streamWriteInt8(streamId,    self.vData.is[16])
+end
+
+-- #############################################################################
+
+function FS25_EnhancedVehicle:onReadUpdateStream(streamId, timestamp, connection)
+  if debug > 2 then print("-> " .. myName .. ": onReadUpdateStream - " .. streamId .. mySelf(self)) end
+
+  -- only receive our odo/tripMeter updates
+  if connection:getIsServer() then
+    if streamReadBool(streamId) then
+      self.vData.want[14] = streamReadFloat32(streamId)
+      self.vData.want[15] = streamReadFloat32(streamId)
+    end
+  end
+
+  if self.isClient then
+    self.vData.is[14] = self.vData.want[14]
+    self.vData.is[15] = self.vData.want[15]
+  end
+end
+
+-- #############################################################################
+
+function FS25_EnhancedVehicle:onWriteUpdateStream(streamId, connection, dirtyMask)
+  if debug > 2 then print("-> " .. myName .. ": onWriteUpdateStream - " .. streamId .. " / " .. dirtyMask .. mySelf(self)) end
+
+  if not connection:getIsServer() then
+    -- only sent our odo/tripMeter values
+    if streamWriteBool(streamId, bitAND(dirtyMask, self.vData.dirtyFlag) ~= 0) then
+      streamWriteFloat32(streamId, self.vData.want[14])
+      streamWriteFloat32(streamId, self.vData.want[15])
+    end
+  end
 end
 
 -- #############################################################################
@@ -685,8 +753,26 @@ function FS25_EnhancedVehicle:onUpdate(dt)
     end
   end
 
-  -- (server) process changes between "is" and "want"
+  -- server only ->
   if self.isServer and self.vData ~= nil then
+    -- process odo/tripMeter
+    if FS25_EnhancedVehicle.functionOdoMeterIsEnabled and self:getIsMotorStarted() then
+      if self.lastMovedDistance > 0.001 then
+        self.vData.want[14] = self.vData.want[14] + self.lastMovedDistance
+        self.vData.want[15] = self.vData.want[15] + self.lastMovedDistance
+        -- do we want to send an update of values?
+        if math.abs(self.vData.want[14] - self.vData.odoDistanceSent) > self.vData.networkThreshold then
+          self:raiseDirtyFlags(self.vData.dirtyFlag)
+          self.vData.odoDistanceSent = self.vData.want[14]
+        end
+        if math.abs(self.vData.want[15] - self.vData.tripDistanceSent) > self.vData.networkThreshold then
+          self:raiseDirtyFlags(self.vData.dirtyFlag)
+          self.vData.tripDistanceSent = self.vData.want[15]
+        end
+      end
+    end
+
+    -- (server) process changes between "is" and "want"
     FS25_EnhancedVehicle:updatevData(self)
   end
 end
@@ -831,6 +917,30 @@ function FS25_EnhancedVehicle:updatevData(self)
       end
     end
     self.vData.is[13] = self.vData.want[13]
+  end
+
+  -- odoMeter
+  if self.vData.is[14] ~= self.vData.want[14] then
+    if FS25_EnhancedVehicle.functionOdoMeterIsEnabled then
+      if debug > 2 then print("--> ("..self.rootNode..") changed odoMeter: "..self.vData.want[14]) end
+    end
+    self.vData.is[14] = self.vData.want[14]
+  end
+
+  -- tripMeter
+  if self.vData.is[15] ~= self.vData.want[15] then
+    if FS25_EnhancedVehicle.functionOdoMeterIsEnabled then
+      if debug > 2 then print("--> ("..self.rootNode..") changed tripMeter: "..self.vData.want[15]) end
+    end
+    self.vData.is[15] = self.vData.want[15]
+  end
+
+  -- odoMode
+  if self.vData.is[16] ~= self.vData.want[16] then
+    if FS25_EnhancedVehicle.functionOdoMeterIsEnabled then
+      if debug > 0 then print("--> ("..self.rootNode..") changed odo mode: "..self.vData.want[16]) end
+    end
+    self.vData.is[16] = self.vData.want[16]
   end
 end
 
@@ -1210,10 +1320,17 @@ function FS25_EnhancedVehicle:onRegisterActionEvents(isSelected, isOnActiveVehic
     for _, v in ipairs(FS25_EnhancedVehicle.actions.park) do
       table.insert(actionList, v)
     end
+    for _, v in ipairs(FS25_EnhancedVehicle.actions.odo) do
+      table.insert(actionList, v)
+    end
 
     -- attach our actions
     for _ ,actionName in pairs(actionList) do
-      if actionName == "FS25_EnhancedVehicle_SNAP_TRACKP" or actionName == "FS25_EnhancedVehicle_SNAP_TRACKW" or actionName == "FS25_EnhancedVehicle_SNAP_TRACKO" or actionName == "FS25_EnhancedVehicle_SNAP_OPMODE" then
+      if actionName == "FS25_EnhancedVehicle_SNAP_TRACKP" or
+         actionName == "FS25_EnhancedVehicle_SNAP_TRACKW" or
+         actionName == "FS25_EnhancedVehicle_SNAP_TRACKO" or
+         actionName == "FS25_EnhancedVehicle_SNAP_OPMODE" or
+         actionName == "FS25_EnhancedVehicle_ODO_MODE"then
         _, eventName = g_inputBinding:registerActionEvent(actionName, self, FS25_EnhancedVehicle.onActionCall, false, true, true, true)
         _, eventName = g_inputBinding:registerActionEvent(actionName, self, FS25_EnhancedVehicle.onActionCallUp, true, false, false, true)
       else
@@ -1283,6 +1400,23 @@ function FS25_EnhancedVehicle:onActionCallUp(actionName, keyStatus, arg4, arg5, 
     end
   end
 
+  -- switch odo mode
+  if FS25_EnhancedVehicle.functionOdoMeterIsEnabled then
+    if actionName == "FS25_EnhancedVehicle_ODO_MODE" then
+      if g_currentMission.time < FS25_EnhancedVehicle.nextActionTime + 1000 then
+        -- switch odo mode (odo <-> trip)
+        self.vData.want[16] = self.vData.want[16] + 1
+        if self.vData.want[16] > 1 then
+          self.vData.want[16] = 0
+        end
+        if self.isClient and not self.isServer then
+          self.vData.is[16] = self.vData.want[16]
+        end
+        FS25_EnhancedVehicle_Event.sendEvent(self, unpack(self.vData.want))
+      end
+    end
+  end
+
   -- reset key press delay
   FS25_EnhancedVehicle.nextActionTime  = 0
   FS25_EnhancedVehicle.deltaActionTime = 500
@@ -1320,20 +1454,20 @@ function FS25_EnhancedVehicle:onActionCall(actionName, keyStatus, arg4, arg5, ar
     FS25_EnhancedVehicle.ui_hud:storeScaledValues()
 
 ------------------
---    print(DebugUtil.printTableRecursively(g_currentMission.hud, 0, 0, 3))
+--    print(DebugUtil.printTableRecursively(g_gui, 0, 0, 2))
 ------------------  
 
     -- configuration dialog
-    if not self.isClient then
-      return
-    end
+--    if not self.isClient then
+--      return
+--    end
 
-    if self == g_currentMission.controlledVehicle and not g_currentMission.isSynchronizingWithPlayers then
-      if not g_gui:getIsGuiVisible() then
-        FS25_EnhancedVehicle.ui_menu:setVehicle(self)
-        g_gui:showDialog("FS25_EnhancedVehicle_UI")
-      end
-    end
+--    if self == g_currentMission.controlledVehicle and not g_currentMission.isSynchronizingWithPlayers then
+--      if not g_gui:getIsGuiVisible() then
+--        FS25_EnhancedVehicle.ui_menu:setVehicle(self)
+--        g_gui:showDialog("FS25_EnhancedVehicle_UI")
+--      end
+--    end
   elseif FS25_EnhancedVehicle.functionDiffIsEnabled and actionName == "FS25_EnhancedVehicle_FD" then
     -- front diff
     if FS25_EnhancedVehicle.sounds["diff_lock"] ~= nil and FS25_EnhancedVehicle.soundIsOn and g_dedicatedServerInfo == nil then
@@ -1735,6 +1869,25 @@ function FS25_EnhancedVehicle:onActionCall(actionName, keyStatus, arg4, arg5, ar
     end
     FS25_EnhancedVehicle_Event.sendEvent(self, unpack(self.vData.want))
   end
+
+  -- reset odo/trip
+  if FS25_EnhancedVehicle.functionOdoMeterIsEnabled then
+    if actionName == "FS25_EnhancedVehicle_ODO_MODE" then
+      if FS25_EnhancedVehicle.nextActionTime == 0 then
+        FS25_EnhancedVehicle.nextActionTime = g_currentMission.time
+      end
+      if g_currentMission.time > FS25_EnhancedVehicle.nextActionTime + 1000 then
+        if (self.vData.is[15] > 0) then
+          self.vData.want[15] = 0
+          if self.isClient and not self.isServer then
+            self.vData.is[15] = self.vData.want[15]
+          end
+          FS25_EnhancedVehicle_Event.sendEvent(self, unpack(self.vData.want))
+        end
+      end
+    end
+  end
+
 end
 
 -- #############################################################################

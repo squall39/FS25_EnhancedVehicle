@@ -38,6 +38,7 @@
     <text name="input_FS25_EnhancedVehicle_AJ_FRONT_ONOFF"  text="EV: Hydraulik vorne an/aus"/>
     <text name="input_FS25_EnhancedVehicle_MENU"            text="EV: Konfigurationsmenü öffnen"/>
     <text name="input_FS25_EnhancedVehicle_PARK"            text="EV: Feststellbremse betätigen/lösen"/>
+    <text name="input_FS25_EnhancedVehicle_ODO_MODE"        text="EV: Kilometeranzeige umschalten/zurücksetzen"/>
 
     <text name="hud_FS25_EnhancedVehicle_notrack"     text="keine Fahrspur"/>
     <text name="hud_FS25_EnhancedVehicle_nowidth"     text="keine Breite"/>

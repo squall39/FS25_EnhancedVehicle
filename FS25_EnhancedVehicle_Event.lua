@@ -3,8 +3,8 @@
 --
 -- Author: Majo76
 -- email: ls (at) majo76 (dot) de
--- @Date: 12.11.2024
--- @Version: 1.0.0.0
+-- @Date: 24.11.2024
+-- @Version: 1.0.1.0
 
 local myName = "FS25_EnhancedVehicle_Event"
 
@@ -27,8 +27,8 @@ end
 
 -- #############################################################################
 
-function FS25_EnhancedVehicle_Event.new(vehicle, b1, b2, i1, f1, b3, b4, f2, f3, f4, f5, f6, f7, b5 )
-  local args = { b1, b2, i1, f1, b3, b4, f2, f3, f4, f5, f6, f7, b5 }
+function FS25_EnhancedVehicle_Event.new(vehicle, b1, b2, i1, f1, b3, b4, f2, f3, f4, f5, f6, f7, b5, f8, f9, i2 )
+  local args = { b1, b2, i1, f1, b3, b4, f2, f3, f4, f5, f6, f7, b5, f8, f9, i2 }
   if debug > 2 then print("-> " .. myName .. ": new(): " .. lU:args_to_txt(unpack(args))) end
 
   local self = FS25_EnhancedVehicle_Event.emptyNew()
@@ -57,6 +57,9 @@ function FS25_EnhancedVehicle_Event:readStream(streamId, connection)
   self.vehicle.vData.want[11] = streamReadFloat32(streamId);
   self.vehicle.vData.want[12] = streamReadFloat32(streamId);
   self.vehicle.vData.want[13] = streamReadBool(streamId);
+  self.vehicle.vData.want[14] = streamReadFloat32(streamId);
+  self.vehicle.vData.want[15] = streamReadFloat32(streamId);
+  self.vehicle.vData.want[16] = streamReadInt8(streamId);
 
   self:run(connection)
 end
@@ -80,6 +83,9 @@ function FS25_EnhancedVehicle_Event:writeStream(streamId, connection)
   streamWriteFloat32(streamId, self.vehicle.vData.want[11])
   streamWriteFloat32(streamId, self.vehicle.vData.want[12])
   streamWriteBool(streamId,    self.vehicle.vData.want[13])
+  streamWriteFloat32(streamId, self.vehicle.vData.want[14])
+  streamWriteFloat32(streamId, self.vehicle.vData.want[15])
+  streamWriteInt8(streamId,    self.vehicle.vData.want[16])
 end
 
 -- #############################################################################
@@ -100,8 +106,8 @@ end
 
 -- #############################################################################
 
-function FS25_EnhancedVehicle_Event.sendEvent(vehicle, b1, b2, i1, f1, b3, b4, f2, f3, f4, f5, f6, f7, b5 )
-  local args = { b1, b2, i1, f1, b3, b4, f2, f3, f4, f5, f6, f7, b5 }
+function FS25_EnhancedVehicle_Event.sendEvent(vehicle, b1, b2, i1, f1, b3, b4, f2, f3, f4, f5, f6, f7, b5, f8, f9, i2 )
+  local args = { b1, b2, i1, f1, b3, b4, f2, f3, f4, f5, f6, f7, b5, f8, f9, i2 }
   if debug > 1 then print("-> " .. myName .. ": sendEvent(): " .. lU:args_to_txt(unpack(args))) end
   
   if g_server ~= nil then

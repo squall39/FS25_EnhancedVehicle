@@ -92,6 +92,11 @@ function FS25_EnhancedVehicle_UI.new(target, custom_mt)
 
   local self = DialogElement.new(target, custom_mt or FS25_EnhancedVehicle_UI_mt)
 
+--  for _, v in pairs( FS25_EnhancedVehicle_UI.CONTROLS ) do
+--    table.insert(self.controlIDs, v)
+--  end
+--  print(DebugUtil.printTableRecursively(self, 0, 0, 3))
+
 -- need to wait for engine documentation
 -- TODO  self:registerControls(FS25_EnhancedVehicle_UI.CONTROLS)
 
