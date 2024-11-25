@@ -3,7 +3,7 @@
 --
 -- Author: Majo76
 -- email: ls (at) majo76 (dot) de
--- @Date: 24.11.2024
+-- @Date: 25.11.2024
 -- @Version: 1.0.1.0
 
 local myName = "FS25_EnhancedVehicle_HUD"
@@ -1129,7 +1129,7 @@ function FS25_EnhancedVehicle_HUD:drawHUD()
   end
 
   -- odoMeter display
-  if self.vehicle.spec_motorized ~= nil and FS25_EnhancedVehicle.hud.odo.enabled then
+  if FS25_EnhancedVehicle.functionOdoMeterIsEnabled and FS25_EnhancedVehicle.hud.odo.enabled and self.vehicle.spec_motorized ~= nil then
     -- render text
     setTextAlignment(RenderText.ALIGN_CENTER)
     setTextVerticalAlignment(RenderText.VERTICAL_ALIGN_BASELINE)
