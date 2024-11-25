@@ -1,6 +1,6 @@
 # FS25_EnhancedVehicle
 
-> [!WARNING]
+> [!WARNUNG]
 > In dieser Version fehlt das Konfigurationsmenü.
 > Dafür fehlt mir leider die offizielle Skript-Dokumentation für die Spiel-Engine.
 > Bis dahin könnt ihr Konfigurationsänderungen nur direkt in der XML Datei vornehmen.
@@ -20,7 +20,7 @@ Dies ist eine Modifikation für den Landwirtschafts-Simulator 25. Sie fügt dem 
 
 **Hinweis: Die einzigen validen Downloadquellen sind meine Homepage (https://www.majo76.de) und dieses Github Repository (https://github.com/ZhooL/FS25_EnhancedVehicle). Alle anderen Downloadadressen sind nicht von mir validiert - also mit Vorsicht zu genießen.**
 
-*(c) 2018-2024 Majo76 (vormals ZhooL). Sei so nett und erwähne mich, wenn du diesen Mod oder den Quellcode (oder Teile davon) irgendwo verwendest.*
+*(c) 2018-2024 Majo76 (vormals ZhooL). Sei so nett und erwähne mich, wenn du diesen Mod oder den Quellcode (oder Teile davon) irgendwo verwendest. Es ist untersagt, dieses Mod zu monetarisieren.*
 Lizenz: https://creativecommons.org/licenses/by-nc-sa/4.0/
 
 ## Bekannte Probleme
@@ -97,11 +97,11 @@ Lizenz: https://creativecommons.org/licenses/by-nc-sa/4.0/
 
 # English
 
-This is a modification for Farming Simulator 25. It adds a "track assistant" ("GPS") and a "snap to driving direction" feature, a parking brake, differential locks, wheel drive modes and improved hydraulics controls to your vehicle. It also shows more vehicle details on the HUD.
+This is a modification for Farming Simulator 25. It adds a "track assistant" ("GPS") and a "snap to driving direction" feature, a parking brake, differential locks, wheel drive modes and improved hydraulics controls to your vehicle. It also shows more vehicle details on the HUD including a odo/tripmeter.
 
 **Note: The only valid download sources are my homepage (https://www.majo76.de) and this Github repository (https://github.com/ZhooL/FS25_EnhancedVehicle). All other download addresses are not validated by me - so please use with caution.
 
-*(c) 2018-2024 by Majo76 (formerly ZhooL). Be so kind to credit me when using this mod or the source code (or parts of it) somewhere.*  
+*(c) 2018-2024 by Majo76 (formerly ZhooL). Be so kind to credit me when using this mod or the source code (or parts of it) somewhere. Monetization of this mod is prohibited.*
 License: https://creativecommons.org/licenses/by-nc-sa/4.0/
 
 ## Known bugs
