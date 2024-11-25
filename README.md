@@ -1,6 +1,6 @@
 # FS25_EnhancedVehicle
 
-> [!WARNUNG]
+> [!WARNING]
 > In dieser Version fehlt das Konfigurationsmenü.
 > Dafür fehlt mir leider die offizielle Skript-Dokumentation für die Spiel-Engine.
 > Bis dahin könnt ihr Konfigurationsänderungen nur direkt in der XML Datei vornehmen.
@@ -177,9 +177,9 @@ License: https://creativecommons.org/licenses/by-nc-sa/4.0/
 * Work on consoles. Buy a PC for proper gaming.
 
 # Und sonst so / The rest
-* Twitch: https://www.twitch.tv/Majo76_
+* Twitch: https://www.twitch.tv/Majo76_ (Freue mich über ein Follow / A follow is much appreciated)
 * Instagram: https://www.instagram.com/Majo76__/
 * Discord: https://d.majo76.de
-* Twitter: https://www.twitter.com/Majo76_
+* Twitter: https://www.twitter.com/Majo76_ (Es heißt Twitter! / The name is Twitter!)
 * HomePage: https://www.majo76.de
 * GitHub: https://github.com/ZhooL/FS25_EnhancedVehicle
