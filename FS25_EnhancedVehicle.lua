@@ -3,7 +3,7 @@
 --
 -- Author: Majo76
 -- email: ls (at) majo76 (dot) de
--- @Date: 24.11.2024
+-- @Date: 25.11.2024
 -- @Version: 1.0.1.0
 
 --[[
@@ -11,6 +11,7 @@ CHANGELOG
 
 2024-11-24 - V1.0.1.0
 + added odometer / tripmeter (driven kilometer display) based on Giants modding tutorial
+- disabled configuration menu (for now)
 
 2024-11-12 - V1.0.0.0
 + initial release for FS25
@@ -127,7 +128,7 @@ function FS25_EnhancedVehicle:delete()
   if debug > 1 then print("-> " .. myName .. ": delete ") end
 
   -- delete our UI
-  FS25_EnhancedVehicle.ui_menu:delete()
+--  FS25_EnhancedVehicle.ui_menu:delete()
 
   -- delete our HUD
   FS25_EnhancedVehicle.ui_hud:delete()
@@ -138,10 +139,10 @@ end
 function FS25_EnhancedVehicle:onMissionLoaded(mission)
   if debug > 1 then print("-> " .. myName .. ": onMissionLoaded ") end
 
-  g_gui:loadProfiles(self.modDirectory.."ui/guiProfiles.xml")
-  FS25_EnhancedVehicle.ui_menu = FS25_EnhancedVehicle_UI.new()
-  g_gui:loadGui(self.modDirectory.."ui/FS25_EnhancedVehicle_UI.xml", "FS25_EnhancedVehicle_UI", FS25_EnhancedVehicle.ui_menu)
-  
+--  g_gui:loadProfiles(self.modDirectory.."ui/guiProfiles.xml")
+--  FS25_EnhancedVehicle.ui_menu = FS25_EnhancedVehicle_UI.new()
+--  g_gui:loadGui(self.modDirectory.."ui/FS25_EnhancedVehicle_UI.xml", "FS25_EnhancedVehicle_UI", FS25_EnhancedVehicle.ui_menu)
+
   FS25_EnhancedVehicle.ui_hud = FS25_EnhancedVehicle_HUD:new(mission.hud.speedMeter, mission.hud.gameInfoDisplay, self.modDirectory)
 
   FS25_EnhancedVehicle.ui_hud:load()
@@ -1458,9 +1459,9 @@ function FS25_EnhancedVehicle:onActionCall(actionName, keyStatus, arg4, arg5, ar
 ------------------  
 
     -- configuration dialog
---    if not self.isClient then
---      return
---    end
+    if not self.isClient then
+      return
+    end
 
 --    if self == g_currentMission.controlledVehicle and not g_currentMission.isSynchronizingWithPlayers then
 --      if not g_gui:getIsGuiVisible() then
