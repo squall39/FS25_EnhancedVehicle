@@ -15,7 +15,7 @@ Lizenz: https://creativecommons.org/licenses/by-nc-sa/4.0/
 * Möglicherweise einige... bitte via Github issues melden
 
 ## Das HUD erklärt
-![HUD overview](/misc/hud_overview.png)
+![HUD overview](/misc/hud_overview_de.png)
 
 ## Standard Tastenbelegung
 | Taste | Aktion |
@@ -96,7 +96,7 @@ License: https://creativecommons.org/licenses/by-nc-sa/4.0/
 * Probably a lot... please report them via Github issues
 
 ## The HUD explained
-![HUD overview](/misc/hud_overview.png)
+![HUD overview](/misc/hud_overview_en.png)
 
 ## Default Keybindings
 | Key | Action |
