@@ -3,11 +3,14 @@
 --
 -- Author: Majo76
 -- email: ls (at) majo76 (dot) de
--- @Date: 25.11.2024
--- @Version: 1.0.1.0
+-- @Date: 27.11.2024
+-- @Version: 1.1.0.0
 
 --[[
 CHANGELOG
+
+2024-11-26 - V1.1.0.0
++ the configuration menu is back. yay!
 
 2024-11-24 - V1.0.1.0
 + added odometer / tripmeter (driven kilometer display) based on Giants modding tutorial
@@ -128,7 +131,7 @@ function FS25_EnhancedVehicle:delete()
   if debug > 1 then print("-> " .. myName .. ": delete ") end
 
   -- delete our UI
---  FS25_EnhancedVehicle.ui_menu:delete()
+  FS25_EnhancedVehicle.ui_menu:delete()
 
   -- delete our HUD
   FS25_EnhancedVehicle.ui_hud:delete()
@@ -139,12 +142,12 @@ end
 function FS25_EnhancedVehicle:onMissionLoaded(mission)
   if debug > 1 then print("-> " .. myName .. ": onMissionLoaded ") end
 
---  g_gui:loadProfiles(self.modDirectory.."ui/guiProfiles.xml")
---  FS25_EnhancedVehicle.ui_menu = FS25_EnhancedVehicle_UI.new()
---  g_gui:loadGui(self.modDirectory.."ui/FS25_EnhancedVehicle_UI.xml", "FS25_EnhancedVehicle_UI", FS25_EnhancedVehicle.ui_menu)
+  -- create configuration dialog
+  FS25_EnhancedVehicle.ui_menu = FS25_EnhancedVehicle_UI.new()
+  g_gui:loadGui(self.modDirectory.."ui/FS25_EnhancedVehicle_UI.xml", "FS25_EnhancedVehicle_UI", FS25_EnhancedVehicle.ui_menu)
 
+  -- create HUD
   FS25_EnhancedVehicle.ui_hud = FS25_EnhancedVehicle_HUD:new(mission.hud.speedMeter, mission.hud.gameInfoDisplay, self.modDirectory)
-
   FS25_EnhancedVehicle.ui_hud:load()
 end
 
@@ -1450,25 +1453,21 @@ function FS25_EnhancedVehicle:onActionCall(actionName, keyStatus, arg4, arg5, ar
       g_currentMission:showBlinkingWarning(g_i18n:getText("global_FS25_EnhancedVehicle_brakeBlocks"), 1500)
     end
   elseif actionName == "FS25_EnhancedVehicle_MENU" then
-    lC:readConfig()
-    FS25_EnhancedVehicle:activateConfig()
-    FS25_EnhancedVehicle.ui_hud:storeScaledValues()
+------------
+--    print(DebugUtil.printTableRecursively(self, 0, 0, 2))
+------------
 
-------------------
---    print(DebugUtil.printTableRecursively(g_gui, 0, 0, 2))
-------------------  
-
-    -- configuration dialog
+    -- open configuration dialog
     if not self.isClient then
       return
     end
 
---    if self == g_currentMission.controlledVehicle and not g_currentMission.isSynchronizingWithPlayers then
---      if not g_gui:getIsGuiVisible() then
---        FS25_EnhancedVehicle.ui_menu:setVehicle(self)
---        g_gui:showDialog("FS25_EnhancedVehicle_UI")
---      end
---    end
+    if not g_currentMission.isSynchronizingWithPlayers then
+      if not g_gui:getIsGuiVisible() then
+        FS25_EnhancedVehicle.ui_menu:setVehicle(self)
+        g_gui:showDialog("FS25_EnhancedVehicle_UI")
+      end
+    end
   elseif FS25_EnhancedVehicle.functionDiffIsEnabled and actionName == "FS25_EnhancedVehicle_FD" then
     -- front diff
     if FS25_EnhancedVehicle.sounds["diff_lock"] ~= nil and FS25_EnhancedVehicle.soundIsOn and g_dedicatedServerInfo == nil then

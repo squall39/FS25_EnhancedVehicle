@@ -3,87 +3,16 @@
 --
 -- Author: Majo76
 -- email: ls (at) majo76 (dot) de
--- @Date: 12.11.2024
--- @Version: 1.0.0.0
+-- @Date: 27.11.2024
+-- @Version: 1.1.0.0
 
 local myName = "FS25_EnhancedVehicle_UI"
 
 FS25_EnhancedVehicle_UI = {}
 local FS25_EnhancedVehicle_UI_mt = Class(FS25_EnhancedVehicle_UI, ScreenElement)
 
--- these items are referenced in the XML
-FS25_EnhancedVehicle_UI.CONTROLS = {
-  "yesButton",
-  "noButton",
-
-  "guiTitle",
-
-  "sectionGlobalFunctions",
-  "sectionHUD",
-  "sectionSnapSettings",
-  "sectionHeadlandSettings",
-
-  "resetConfigButton",
-  "resetConfigTitle",
-  "resetConfigTT",
-
-  "reloadConfigButton",
-  "reloadConfigTitle",
-  "reloadConfigTT",
-
-  "snapSettingsAngle",
-  "snapSettingsAngleTitle",
-  "snapSettingsAngleTT",
-  "snapSettingsAngleValue",
-
-  "visibleTracksSetting",
-  "visibleTracksTitle",
-  "visibleTracksTT",
-
-  "showLinesSetting",
-  "showLinesTitle",
-  "showLinesTT",
-
-  "hideLinesSetting",
-  "hideLinesTitle",
-  "hideLinesTT",
-
-  "hideLinesAfterSetting",
-  "hideLinesAfterTitle",
-  "hideLinesAfterTT",
-
-  "HUDdmgAmountLeftSetting",
-  "HUDdmgAmountLeftTitle",
-  "HUDdmgAmountLeftTT",
-
-  "HUDdmgfuelSetting",
-  "HUDdmgfuelTitle",
-  "HUDdmgfuelTT",
-
-  "headlandModeSetting",
-  "headlandModeTitle",
-  "headlandModeTT",
-  "headlandDistanceSetting",
-  "headlandDistanceTitle",
-  "headlandDistanceTT",
-  "headlandSoundTriggerDistanceSetting",
-  "headlandSoundTriggerDistanceTitle",
-  "headlandSoundTriggerDistanceTT",
-}
-
-local EV_elements_global = { 'snap', 'diff', 'hydraulic', 'parkingBrake' }
-for _, v in pairs( EV_elements_global ) do
-  table.insert(FS25_EnhancedVehicle_UI.CONTROLS, v.."Setting")
-  table.insert(FS25_EnhancedVehicle_UI.CONTROLS, v.."Title")
-  table.insert(FS25_EnhancedVehicle_UI.CONTROLS, v.."TT")
-end
-
-local EV_elements_HUD = { 'fuel', 'dmg', 'misc', 'rpm', 'temp', 'diff', 'track', 'park' }
-  for _, v in pairs( EV_elements_HUD ) do
-  table.insert(FS25_EnhancedVehicle_UI.CONTROLS, "HUD"..v.."Setting")
-  table.insert(FS25_EnhancedVehicle_UI.CONTROLS, "HUD"..v.."Title")
-  table.insert(FS25_EnhancedVehicle_UI.CONTROLS, "HUD"..v.."TT")
-end
+local EV_elements_global = { 'snap', 'diff', 'hydraulic', 'parkingBrake', 'odoMeter' }
+local EV_elements_HUD = { 'fuel', 'dmg', 'misc', 'rpm', 'temp', 'diff', 'track', 'park', 'odo' }
 
 -- #############################################################################
 
@@ -91,14 +20,6 @@ function FS25_EnhancedVehicle_UI.new(target, custom_mt)
   if debug > 1 then print("-> " .. myName .. ": new ") end
 
   local self = DialogElement.new(target, custom_mt or FS25_EnhancedVehicle_UI_mt)
-
---  for _, v in pairs( FS25_EnhancedVehicle_UI.CONTROLS ) do
---    table.insert(self.controlIDs, v)
---  end
---  print(DebugUtil.printTableRecursively(self, 0, 0, 3))
-
--- need to wait for engine documentation
--- TODO  self:registerControls(FS25_EnhancedVehicle_UI.CONTROLS)
 
   self.vehicle = nil
 
@@ -128,16 +49,12 @@ function FS25_EnhancedVehicle_UI:onOpen()
 
   local modName = "FS25_EnhancedVehicle"
 
-  -- reset & reload config buttons
-  self.resetConfigButton:setText(g_i18n.modEnvironments[modName]:getText("ui_FS25_EnhancedVehicle_resetConfigButton"))
-  self.resetConfigTitle:setText(g_i18n.modEnvironments[modName]:getText("ui_FS25_EnhancedVehicle_resetConfigTitle"))
-  self.resetConfigTT:setText(g_i18n.modEnvironments[modName]:getText("ui_FS25_EnhancedVehicle_resetConfigTT"))
-  self.reloadConfigButton:setText(g_i18n.modEnvironments[modName]:getText("ui_FS25_EnhancedVehicle_reloadConfigButton"))
-  self.reloadConfigTitle:setText(g_i18n.modEnvironments[modName]:getText("ui_FS25_EnhancedVehicle_reloadConfigTitle"))
-  self.reloadConfigTT:setText(g_i18n.modEnvironments[modName]:getText("ui_FS25_EnhancedVehicle_reloadConfigTT"))
-
   -- title
   self.guiTitle:setText("Enhanced Vehicle ".. g_EnhancedVehicle.version .. " by Majo76")
+
+  -- reset & reload config buttons
+  self.resetConfigButton:setText(g_i18n.modEnvironments[modName]:getText("ui_FS25_EnhancedVehicle_resetConfigButton"))
+  self.reloadConfigButton:setText(g_i18n.modEnvironments[modName]:getText("ui_FS25_EnhancedVehicle_reloadConfigButton"))
 
   -- section headers
   self.sectionGlobalFunctions:setText(g_i18n.modEnvironments[modName]:getText("ui_FS25_EnhancedVehicle_sectionGlobalFunctions"))
@@ -198,7 +115,6 @@ function FS25_EnhancedVehicle_UI:onOpen()
       g_i18n.modEnvironments[modName]:getText("ui_FS25_EnhancedVehicle_headlandModeOption2"),
       g_i18n.modEnvironments[modName]:getText("ui_FS25_EnhancedVehicle_headlandModeOption3")
     })
-
   -- headland distance
   self.headlandDistanceTitle:setText(g_i18n.modEnvironments[modName]:getText("ui_FS25_EnhancedVehicle_headlandDistanceTitle"))
   self.headlandDistanceTT:setText(g_i18n.modEnvironments[modName]:getText("ui_FS25_EnhancedVehicle_headlandDistanceTT"))
@@ -234,14 +150,6 @@ function FS25_EnhancedVehicle_UI:onOpen()
       g_i18n.modEnvironments[modName]:getText("ui_FS25_EnhancedVehicle_off")
     })
   end
-
-  -- HUD dmgfuel position
-  self.HUDdmgfuelTitle:setText(g_i18n.modEnvironments[modName]:getText("ui_FS25_EnhancedVehicle_HUDdmgfuelTitle"))
-  self.HUDdmgfuelTT:setText(g_i18n.modEnvironments[modName]:getText("ui_FS25_EnhancedVehicle_HUDdmgfuelTT"))
-  self.HUDdmgfuelSetting:setTexts({
-      g_i18n.modEnvironments[modName]:getText("ui_FS25_EnhancedVehicle_HUDdmgfuelOption1"),
-      g_i18n.modEnvironments[modName]:getText("ui_FS25_EnhancedVehicle_HUDdmgfuelOption2"),
-    })
 
   -- HUD dmg display mode
   self.HUDdmgAmountLeftTitle:setText(g_i18n.modEnvironments[modName]:getText("ui_FS25_EnhancedVehicle_HUDdmgAmountLeftTitle"))

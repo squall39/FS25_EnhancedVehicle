@@ -1,258 +1,236 @@
 <?xml version="1.0" encoding="utf-8" standalone="no" ?>
 <GUI onOpen="onOpen" onClose="onClose" onCreate="onCreate">
-  <GuiElement type="empty" profile="newLayer" />
-  <GuiElement type="bitmap" profile="dialogFullscreenBg"/>
-  <GuiElement type="bitmap" profile="bgVignette"/>
-  <GuiElement type="bitmap" profile="bgGlowDialog" id="dialogElement" size="1600px 900px"/>
+  <GuiElement profile="newLayer" />
+  <Bitmap profile="dialogFullscreenBg"/>
+  <GuiElement profile="fs25_dialogBg" id="dialogElement" size="1600px 900px">
+    <ThreePartBitmap profile="fs25_dialogBgMiddleSmall"/>
+    <ThreePartBitmap profile="fs25_dialogBgTopSmall"/>
+    <ThreePartBitmap profile="fs25_dialogBgBottom"/>
 
-  <GuiElement type="empty" profile="ingameMenuCenterBox" id="settingsContainer">
-    <GuiElement type="bitmap" profile="topScrollClipper" name="topClipper" />
-    <GuiElement type="bitmap" profile="bottomScrollClipper" name="bottomClipper" />
+    <GuiElement profile="fs25_dialogContentContainer">
+      <Text profile="fs25_dialogTitle" id="guiTitle" position="0px -20px"/>
+      <ThreePartBitmap profile="fs25_lineSeparatorTop" absoluteSizeOffset="100px 0px" position="0px -80px"/>
 
-    <!-- header -->
-    <GuiElement type="bitmap" profile="dialogHeaderDocked">
-      <GuiElement type="text" profile="dialogHeaderText" textAutoSize="true" id="guiTitle"/>
+      <ScrollingLayout profile="fs25_settingsLayout" id="boxLayout" topClipperElementName="topClipper" bottomClipperElementName="bottomClipper" position="10px -110px" width="1560px" height="680px">
+        <!-- headland settings -->
+        <Text profile="fs25_settingsSectionHeader" id="sectionHeadlandSettings"/>
+        <!-- headland mode -->
+        <GuiElement profile="fs25_EVSettingsMultiTextOptionWrapper">
+          <MultiTextOption profile="fs25_EVSettingsMultiTextOption" id="headlandModeSetting">
+            <Text profile="fs25_EVSettingsMultiTextOptionTooltip" name="ignore" id="headlandModeTT"/>
+          </MultiTextOption>
+          <Text profile="fs25_EVMultiTextTitle" id="headlandModeTitle"/>
+        </GuiElement>
+        <!-- headland distance -->
+        <GuiElement profile="fs25_EVSettingsMultiTextOptionWrapper">
+          <MultiTextOption profile="fs25_EVSettingsMultiTextOption" id="headlandDistanceSetting">
+            <Text profile="fs25_EVSettingsMultiTextOptionTooltip" name="ignore" id="headlandDistanceTT"/>
+          </MultiTextOption>
+          <Text profile="fs25_EVMultiTextTitle" id="headlandDistanceTitle"/>
+        </GuiElement>
+        <!-- headland sound trigger distance -->
+        <GuiElement profile="fs25_EVSettingsMultiTextOptionWrapper">
+          <MultiTextOption profile="fs25_EVSettingsMultiTextOption" id="headlandSoundTriggerDistanceSetting">
+            <Text profile="fs25_EVSettingsMultiTextOptionTooltip" name="ignore" id="headlandSoundTriggerDistanceTT"/>
+          </MultiTextOption>
+          <Text profile="fs25_EVMultiTextTitle" id="headlandSoundTriggerDistanceTitle"/>
+        </GuiElement>
+
+        <!-- snap settings -->
+        <Text profile="fs25_settingsSectionHeader" id="sectionSnapSettings"/>
+        <!-- show lines -->
+        <GuiElement profile="fs25_EVSettingsMultiTextOptionWrapper">
+          <MultiTextOption profile="fs25_EVSettingsMultiTextOption" id="showLinesSetting">
+            <Text profile="fs25_EVSettingsMultiTextOptionTooltip" name="ignore" id="showLinesTT"/>
+          </MultiTextOption>
+          <Text profile="fs25_EVMultiTextTitle" id="showLinesTitle"/>
+        </GuiElement>
+        <!-- auto-hide lines -->
+        <GuiElement profile="fs25_EVSettingsMultiTextOptionWrapper">
+          <BinaryOption profile="fs25_EVSettingsBinaryOption" id="hideLinesSetting">
+            <Text profile="fs25_EVSettingsMultiTextOptionTooltip" name="ignore" id="hideLinesTT"/>
+          </BinaryOption>
+          <Text profile="fs25_EVMultiTextTitle" id="hideLinesTitle"/>
+        </GuiElement>
+        <!-- auto-hide lines seconds -->
+        <GuiElement profile="fs25_EVSettingsMultiTextOptionWrapper">
+          <MultiTextOption profile="fs25_EVSettingsMultiTextOption" id="hideLinesAfterSetting">
+            <Text profile="fs25_EVSettingsMultiTextOptionTooltip" name="ignore" id="hideLinesAfterTT"/>
+          </MultiTextOption>
+          <Text profile="fs25_EVMultiTextTitle" id="hideLinesAfterTitle"/>
+        </GuiElement>
+        <!-- angle -->
+        <GuiElement profile="fs25_EVSettingsMultiTextOptionWrapper">
+          <TextInput profile="fs25_EVSettingsTextInput" id="snapSettingsAngleValue" focusOnHighlight="true" onTextChanged="onTextChanged_SnapAngle" imeKeyboardType="normal">
+            <ThreePartBitmap profile="fs25_textInputBg"/>
+            <Bitmap profile="fs25_textInputIconBox">
+              <Bitmap profile="fs25_textInputIcon"/>
+            </Bitmap>
+            <Text profile="fs25_EVSettingsMultiTextOptionTooltip" name="ignore" id="snapSettingsAngleTT" position="680px 0px"/>
+          </TextInput>
+          <Text profile="fs25_EVMultiTextTitle" id="snapSettingsAngleTitle"/>
+        </GuiElement>
+        <!-- number of visible tracks -->
+        <GuiElement profile="fs25_EVSettingsMultiTextOptionWrapper">
+          <MultiTextOption profile="fs25_EVSettingsMultiTextOption" id="visibleTracksSetting">
+            <Text profile="fs25_EVSettingsMultiTextOptionTooltip" name="ignore" id="visibleTracksTT"/>
+          </MultiTextOption>
+          <Text profile="fs25_EVMultiTextTitle" id="visibleTracksTitle"/>
+        </GuiElement>
+
+        <!-- hud -->
+        <Text profile="fs25_settingsSectionHeader" id="sectionHUD"/>
+        <!-- HUD: track -->
+        <GuiElement profile="fs25_EVSettingsMultiTextOptionWrapper">
+          <BinaryOption profile="fs25_EVSettingsBinaryOption" id="HUDtrackSetting">
+            <Text profile="fs25_EVSettingsMultiTextOptionTooltip" name="ignore" id="HUDtrackTT"/>
+          </BinaryOption>
+          <Text profile="fs25_EVMultiTextTitle" id="HUDtrackTitle"/>
+        </GuiElement>
+        <!-- HUD: diff -->
+        <GuiElement profile="fs25_EVSettingsMultiTextOptionWrapper">
+          <BinaryOption profile="fs25_EVSettingsBinaryOption" id="HUDdiffSetting">
+            <Text profile="fs25_EVSettingsMultiTextOptionTooltip" name="ignore" id="HUDdiffTT"/>
+          </BinaryOption>
+          <Text profile="fs25_EVMultiTextTitle" id="HUDdiffTitle"/>
+        </GuiElement>
+        <!-- HUD: park -->
+        <GuiElement profile="fs25_EVSettingsMultiTextOptionWrapper">
+          <BinaryOption profile="fs25_EVSettingsBinaryOption" id="HUDparkSetting">
+            <Text profile="fs25_EVSettingsMultiTextOptionTooltip" name="ignore" id="HUDparkTT"/>
+          </BinaryOption>
+          <Text profile="fs25_EVMultiTextTitle" id="HUDparkTitle"/>
+        </GuiElement>
+        <!-- HUD: dmg -->
+        <GuiElement profile="fs25_EVSettingsMultiTextOptionWrapper">
+          <BinaryOption profile="fs25_EVSettingsBinaryOption" id="HUDdmgSetting">
+            <Text profile="fs25_EVSettingsMultiTextOptionTooltip" name="ignore" id="HUDdmgTT"/>
+          </BinaryOption>
+          <Text profile="fs25_EVMultiTextTitle" id="HUDdmgTitle"/>
+        </GuiElement>
+        <GuiElement profile="fs25_EVSettingsMultiTextOptionWrapper">
+          <BinaryOption profile="fs25_EVSettingsBinaryOption" id="HUDdmgAmountLeftSetting">
+            <Text profile="fs25_EVSettingsMultiTextOptionTooltip" name="ignore" id="HUDdmgAmountLeftTT"/>
+          </BinaryOption>
+          <Text profile="fs25_EVMultiTextTitle" id="HUDdmgAmountLeftTitle"/>
+        </GuiElement>
+        <!-- HUD: fuel -->
+        <GuiElement profile="fs25_EVSettingsMultiTextOptionWrapper">
+          <BinaryOption profile="fs25_EVSettingsBinaryOption" id="HUDfuelSetting">
+            <Text profile="fs25_EVSettingsMultiTextOptionTooltip" name="ignore" id="HUDfuelTT"/>
+          </BinaryOption>
+          <Text profile="fs25_EVMultiTextTitle" id="HUDfuelTitle"/>
+        </GuiElement>
+        <!-- HUD: rpm -->
+        <GuiElement profile="fs25_EVSettingsMultiTextOptionWrapper">
+          <BinaryOption profile="fs25_EVSettingsBinaryOption" id="HUDrpmSetting">
+            <Text profile="fs25_EVSettingsMultiTextOptionTooltip" name="ignore" id="HUDrpmTT"/>
+          </BinaryOption>
+          <Text profile="fs25_EVMultiTextTitle" id="HUDrpmTitle"/>
+        </GuiElement>
+        <!-- HUD: temp -->
+        <GuiElement profile="fs25_EVSettingsMultiTextOptionWrapper">
+          <BinaryOption profile="fs25_EVSettingsBinaryOption" id="HUDtempSetting">
+            <Text profile="fs25_EVSettingsMultiTextOptionTooltip" name="ignore" id="HUDtempTT"/>
+          </BinaryOption>
+          <Text profile="fs25_EVMultiTextTitle" id="HUDtempTitle"/>
+        </GuiElement>
+        <!-- HUD: odometer -->
+        <GuiElement profile="fs25_EVSettingsMultiTextOptionWrapper">
+          <BinaryOption profile="fs25_EVSettingsBinaryOption" id="HUDodoSetting">
+            <Text profile="fs25_EVSettingsMultiTextOptionTooltip" name="ignore" id="HUDodoTT"/>
+          </BinaryOption>
+          <Text profile="fs25_EVMultiTextTitle" id="HUDodoTitle"/>
+        </GuiElement>
+        <!-- HUD: misc -->
+        <GuiElement profile="fs25_EVSettingsMultiTextOptionWrapper">
+          <BinaryOption profile="fs25_EVSettingsBinaryOption" id="HUDmiscSetting">
+            <Text profile="fs25_EVSettingsMultiTextOptionTooltip" name="ignore" id="HUDmiscTT"/>
+          </BinaryOption>
+          <Text profile="fs25_EVMultiTextTitle" id="HUDmiscTitle"/>
+        </GuiElement>
+
+        <!-- global functions -->
+        <Text profile="fs25_settingsSectionHeader" id="sectionGlobalFunctions"/>
+        <!-- snap -->
+        <GuiElement profile="fs25_EVSettingsMultiTextOptionWrapper">
+          <BinaryOption profile="fs25_EVSettingsBinaryOption" id="snapSetting">
+            <Text profile="fs25_EVSettingsMultiTextOptionTooltip" name="ignore" id="snapTT"/>
+          </BinaryOption>
+          <Text profile="fs25_EVMultiTextTitle" id="snapTitle"/>
+        </GuiElement>
+        <!-- differential -->
+        <GuiElement profile="fs25_EVSettingsMultiTextOptionWrapper">
+          <BinaryOption profile="fs25_EVSettingsBinaryOption" id="diffSetting">
+            <Text profile="fs25_EVSettingsMultiTextOptionTooltip" name="ignore" id="diffTT"/>
+          </BinaryOption>
+          <Text profile="fs25_EVMultiTextTitle" id="diffTitle"/>
+        </GuiElement>
+        <!-- hydraulic -->
+        <GuiElement profile="fs25_EVSettingsMultiTextOptionWrapper">
+          <BinaryOption profile="fs25_EVSettingsBinaryOption" id="hydraulicSetting">
+            <Text profile="fs25_EVSettingsMultiTextOptionTooltip" name="ignore" id="hydraulicTT"/>
+          </BinaryOption>
+          <Text profile="fs25_EVMultiTextTitle" id="hydraulicTitle"/>
+        </GuiElement>
+        <!-- parking brake -->
+        <GuiElement profile="fs25_EVSettingsMultiTextOptionWrapper">
+          <BinaryOption profile="fs25_EVSettingsBinaryOption" id="parkingBrakeSetting">
+            <Text profile="fs25_EVSettingsMultiTextOptionTooltip" name="ignore" id="parkingBrakeTT"/>
+          </BinaryOption>
+          <Text profile="fs25_EVMultiTextTitle" id="parkingBrakeTitle"/>
+        </GuiElement>
+        <!-- odometer -->
+        <GuiElement profile="fs25_EVSettingsMultiTextOptionWrapper">
+          <BinaryOption profile="fs25_EVSettingsBinaryOption" id="odoMeterSetting">
+            <Text profile="fs25_EVSettingsMultiTextOptionTooltip" name="ignore" id="odoMeterTT"/>
+          </BinaryOption>
+          <Text profile="fs25_EVMultiTextTitle" id="odoMeterTitle"/>
+        </GuiElement>
+      </ScrollingLayout>
+
+      <Bitmap profile="fs25_settingsTooltipSeparator" height="680px" position="915px -110px"/>
     </GuiElement>
 
-    <GuiElement type="scrollingLayout" profile="ingameMenuSettingsLayout">
+    <!-- buttons -->
+    <BoxLayout profile="fs25_dialogButtonBox">
+      <Button profile="fs25_EVRedButton" onClick="onClickResetConfig" id="resetConfigButton"/>
+      <Bitmap profile="fs25_dialogButtonBoxSeparator"/>
 
-      <!-- headland settings -->
-      <GuiElement type="text" profile="dialogHeaderText"/>
-      <GuiElement type="text" profile="dialogHeaderText" id="sectionHeadlandSettings"/>
-      <GuiElement type="text" profile="dialogHeaderText"/>
+      <Button profile="buttonBlock" onClick="onClickReloadConfig" id="reloadConfigButton"/>
+      <Bitmap profile="fs25_dialogButtonBoxSeparator"/>
 
-      <!-- headland mode -->
-      <GuiElement type="multiTextOption" profile="multiTextOptionSettings" id="headlandModeSetting">
-        <GuiElement type="button" profile="multiTextOptionSettingsLeft"/>
-        <GuiElement type="button" profile="multiTextOptionSettingsRight"/>
-        <GuiElement type="text"   profile="multiTextOptionSettingsText"/>
-        <GuiElement type="text"   profile="multiTextOptionSettingsTitle" id="headlandModeTitle"/>
-        <GuiElement type="bitmap" profile="multiTextOptionSettingsBg"/>
-        <GuiElement type="text"   profile="multiTextOptionSettingsTooltip" id="headlandModeTT"/>
-      </GuiElement>
-
-      <!-- headland distance -->
-      <GuiElement type="multiTextOption" profile="multiTextOptionSettings" id="headlandDistanceSetting">
-        <GuiElement type="button" profile="multiTextOptionSettingsLeft"/>
-        <GuiElement type="button" profile="multiTextOptionSettingsRight"/>
-        <GuiElement type="text"   profile="multiTextOptionSettingsText"/>
-        <GuiElement type="text"   profile="multiTextOptionSettingsTitle" id="headlandDistanceTitle"/>
-        <GuiElement type="bitmap" profile="multiTextOptionSettingsBg"/>
-        <GuiElement type="text"   profile="multiTextOptionSettingsTooltip" id="headlandDistanceTT"/>
-      </GuiElement>
-
-      <!-- headland sound trigger distance -->
-      <GuiElement type="multiTextOption" profile="multiTextOptionSettings" id="headlandSoundTriggerDistanceSetting">
-        <GuiElement type="button" profile="multiTextOptionSettingsLeft"/>
-        <GuiElement type="button" profile="multiTextOptionSettingsRight"/>
-        <GuiElement type="text"   profile="multiTextOptionSettingsText"/>
-        <GuiElement type="text"   profile="multiTextOptionSettingsTitle" id="headlandSoundTriggerDistanceTitle"/>
-        <GuiElement type="bitmap" profile="multiTextOptionSettingsBg"/>
-        <GuiElement type="text"   profile="multiTextOptionSettingsTooltip" id="headlandSoundTriggerDistanceTT"/>
-      </GuiElement>
-
-      <!-- snap settings -->
-      <GuiElement type="text" profile="dialogHeaderText"/>
-      <GuiElement type="text" profile="dialogHeaderText" id="sectionSnapSettings"/>
-      <GuiElement type="text" profile="dialogHeaderText"/>
-
-      <!-- show lines -->
-      <GuiElement type="multiTextOption" profile="multiTextOptionSettings" id="showLinesSetting">
-        <GuiElement type="button" profile="multiTextOptionSettingsLeft"/>
-        <GuiElement type="button" profile="multiTextOptionSettingsRight"/>
-        <GuiElement type="text"   profile="multiTextOptionSettingsText"/>
-        <GuiElement type="text"   profile="multiTextOptionSettingsTitle" id="showLinesTitle"/>
-        <GuiElement type="bitmap" profile="multiTextOptionSettingsBg"/>
-        <GuiElement type="text"   profile="multiTextOptionSettingsTooltip" id="showLinesTT"/>
-      </GuiElement>
-
-      <!-- auto-hide lines -->
-      <GuiElement type="multiTextOption" profile="multiTextOptionSettings" id="hideLinesSetting">
-        <GuiElement type="button" profile="multiTextOptionSettingsLeft"/>
-        <GuiElement type="button" profile="multiTextOptionSettingsRight"/>
-        <GuiElement type="text"   profile="multiTextOptionSettingsText"/>
-        <GuiElement type="text"   profile="multiTextOptionSettingsTitle" id="hideLinesTitle"/>
-        <GuiElement type="bitmap" profile="multiTextOptionSettingsBg"/>
-        <GuiElement type="text"   profile="multiTextOptionSettingsTooltip" id="hideLinesTT"/>
-      </GuiElement>
-
-      <!-- auto-hide lines seconds -->
-      <GuiElement type="multiTextOption" profile="multiTextOptionSettings" id="hideLinesAfterSetting">
-        <GuiElement type="button" profile="multiTextOptionSettingsLeft"/>
-        <GuiElement type="button" profile="multiTextOptionSettingsRight"/>
-        <GuiElement type="text"   profile="multiTextOptionSettingsText"/>
-        <GuiElement type="text"   profile="multiTextOptionSettingsTitle" id="hideLinesAfterTitle"/>
-        <GuiElement type="bitmap" profile="multiTextOptionSettingsBg"/>
-        <GuiElement type="text"   profile="multiTextOptionSettingsTooltip" id="hideLinesAfterTT"/>
-      </GuiElement>
-
-      <!-- angle -->
-      <GuiElement type="empty" profile="ingameMenuGameSettingsTextInputWrapper">
-        <GuiElement type="textInput" profile="ingameMenuGameSettingsTextInput" id="snapSettingsAngleValue" imeKeyboardType="normal" maxCharacters="5" onTextChanged="onTextChanged_SnapAngle" />
-        <GuiElement type="text"      profile="multiTextOptionSettingsTitle"    id="snapSettingsAngleTitle"/>
-        <GuiElement type="text"      profile="multiTextOptionSettingsTooltip"  id="snapSettingsAngleTT"/>
-      </GuiElement>
-
-      <!-- number of visible tracks -->
-      <GuiElement type="multiTextOption" profile="multiTextOptionSettings" id="visibleTracksSetting">
-        <GuiElement type="button" profile="multiTextOptionSettingsLeft"/>
-        <GuiElement type="button" profile="multiTextOptionSettingsRight"/>
-        <GuiElement type="text"   profile="multiTextOptionSettingsText"/>
-        <GuiElement type="text"   profile="multiTextOptionSettingsTitle" id="visibleTracksTitle"/>
-        <GuiElement type="bitmap" profile="multiTextOptionSettingsBg"/>
-        <GuiElement type="text"   profile="multiTextOptionSettingsTooltip" id="visibleTracksTT"/>
-      </GuiElement>
-
-      <!-- hud -->
-      <GuiElement type="text" profile="dialogHeaderText"/>
-      <GuiElement type="text" profile="dialogHeaderText" id="sectionHUD"/>
-      <GuiElement type="text" profile="dialogHeaderText"/>
-
-      <!-- HUD: track -->
-      <GuiElement type="multiTextOption" profile="multiTextOptionSettings" id="HUDtrackSetting">
-        <GuiElement type="button" profile="multiTextOptionSettingsLeft"/>
-        <GuiElement type="button" profile="multiTextOptionSettingsRight"/>
-        <GuiElement type="text"   profile="multiTextOptionSettingsText"/>
-        <GuiElement type="text"   profile="multiTextOptionSettingsTitle" id="HUDtrackTitle"/>
-        <GuiElement type="bitmap" profile="multiTextOptionSettingsBg"/>
-        <GuiElement type="text"   profile="multiTextOptionSettingsTooltip" id="HUDtrackTT"/>
-      </GuiElement>
-      <!-- HUD: diff -->
-      <GuiElement type="multiTextOption" profile="multiTextOptionSettings" id="HUDdiffSetting">
-        <GuiElement type="button" profile="multiTextOptionSettingsLeft"/>
-        <GuiElement type="button" profile="multiTextOptionSettingsRight"/>
-        <GuiElement type="text"   profile="multiTextOptionSettingsText"/>
-        <GuiElement type="text"   profile="multiTextOptionSettingsTitle" id="HUDdiffTitle"/>
-        <GuiElement type="bitmap" profile="multiTextOptionSettingsBg"/>
-        <GuiElement type="text"   profile="multiTextOptionSettingsTooltip" id="HUDdiffTT"/>
-      </GuiElement>
-      <!-- HUD: park -->
-      <GuiElement type="multiTextOption" profile="multiTextOptionSettings" id="HUDparkSetting">
-        <GuiElement type="button" profile="multiTextOptionSettingsLeft"/>
-        <GuiElement type="button" profile="multiTextOptionSettingsRight"/>
-        <GuiElement type="text"   profile="multiTextOptionSettingsText"/>
-        <GuiElement type="text"   profile="multiTextOptionSettingsTitle" id="HUDparkTitle"/>
-        <GuiElement type="bitmap" profile="multiTextOptionSettingsBg"/>
-        <GuiElement type="text"   profile="multiTextOptionSettingsTooltip" id="HUDparkTT"/>
-      </GuiElement>
-      <!-- HUD: dmg -->
-      <GuiElement type="multiTextOption" profile="multiTextOptionSettings" id="HUDdmgSetting">
-        <GuiElement type="button" profile="multiTextOptionSettingsLeft"/>
-        <GuiElement type="button" profile="multiTextOptionSettingsRight"/>
-        <GuiElement type="text"   profile="multiTextOptionSettingsText"/>
-        <GuiElement type="text"   profile="multiTextOptionSettingsTitle" id="HUDdmgTitle"/>
-        <GuiElement type="bitmap" profile="multiTextOptionSettingsBg"/>
-        <GuiElement type="text"   profile="multiTextOptionSettingsTooltip" id="HUDdmgTT"/>
-      </GuiElement>
-      <GuiElement type="multiTextOption" profile="multiTextOptionSettings" id="HUDdmgAmountLeftSetting">
-        <GuiElement type="button" profile="multiTextOptionSettingsLeft"/>
-        <GuiElement type="button" profile="multiTextOptionSettingsRight"/>
-        <GuiElement type="text"   profile="multiTextOptionSettingsText"/>
-        <GuiElement type="text"   profile="multiTextOptionSettingsTitle" id="HUDdmgAmountLeftTitle"/>
-        <GuiElement type="bitmap" profile="multiTextOptionSettingsBg"/>
-        <GuiElement type="text"   profile="multiTextOptionSettingsTooltip" id="HUDdmgAmountLeftTT"/>
-      </GuiElement>
-      <!-- HUD: fuel -->
-      <GuiElement type="multiTextOption" profile="multiTextOptionSettings" id="HUDfuelSetting">
-        <GuiElement type="button" profile="multiTextOptionSettingsLeft"/>
-        <GuiElement type="button" profile="multiTextOptionSettingsRight"/>
-        <GuiElement type="text"   profile="multiTextOptionSettingsText"/>
-        <GuiElement type="text"   profile="multiTextOptionSettingsTitle" id="HUDfuelTitle"/>
-        <GuiElement type="bitmap" profile="multiTextOptionSettingsBg"/>
-        <GuiElement type="text"   profile="multiTextOptionSettingsTooltip" id="HUDfuelTT"/>
-      </GuiElement>
-      <!-- HUD: rpm -->
-      <GuiElement type="multiTextOption" profile="multiTextOptionSettings" id="HUDrpmSetting">
-        <GuiElement type="button" profile="multiTextOptionSettingsLeft"/>
-        <GuiElement type="button" profile="multiTextOptionSettingsRight"/>
-        <GuiElement type="text"   profile="multiTextOptionSettingsText"/>
-        <GuiElement type="text"   profile="multiTextOptionSettingsTitle" id="HUDrpmTitle"/>
-        <GuiElement type="bitmap" profile="multiTextOptionSettingsBg"/>
-        <GuiElement type="text"   profile="multiTextOptionSettingsTooltip" id="HUDrpmTT"/>
-      </GuiElement>
-      <!-- HUD: temp -->
-      <GuiElement type="multiTextOption" profile="multiTextOptionSettings" id="HUDtempSetting">
-        <GuiElement type="button" profile="multiTextOptionSettingsLeft"/>
-        <GuiElement type="button" profile="multiTextOptionSettingsRight"/>
-        <GuiElement type="text"   profile="multiTextOptionSettingsText"/>
-        <GuiElement type="text"   profile="multiTextOptionSettingsTitle" id="HUDtempTitle"/>
-        <GuiElement type="bitmap" profile="multiTextOptionSettingsBg"/>
-        <GuiElement type="text"   profile="multiTextOptionSettingsTooltip" id="HUDtempTT"/>
-      </GuiElement>
-      <!-- HUD: misc -->
-      <GuiElement type="multiTextOption" profile="multiTextOptionSettings" id="HUDmiscSetting">
-        <GuiElement type="button" profile="multiTextOptionSettingsLeft"/>
-        <GuiElement type="button" profile="multiTextOptionSettingsRight"/>
-        <GuiElement type="text"   profile="multiTextOptionSettingsText"/>
-        <GuiElement type="text"   profile="multiTextOptionSettingsTitle" id="HUDmiscTitle"/>
-        <GuiElement type="bitmap" profile="multiTextOptionSettingsBg"/>
-        <GuiElement type="text"   profile="multiTextOptionSettingsTooltip" id="HUDmiscTT"/>
-      </GuiElement>
-
-      <!-- global functions -->
-      <GuiElement type="text" profile="dialogHeaderText"/>
-      <GuiElement type="text" profile="dialogHeaderText" id="sectionGlobalFunctions"/>
-      <GuiElement type="text" profile="dialogHeaderText"/>
-
-      <!-- snap -->
-      <GuiElement type="multiTextOption" profile="multiTextOptionSettings" id="snapSetting">
-        <GuiElement type="button" profile="multiTextOptionSettingsLeft"/>
-        <GuiElement type="button" profile="multiTextOptionSettingsRight"/>
-        <GuiElement type="text"   profile="multiTextOptionSettingsText"/>
-        <GuiElement type="text"   profile="multiTextOptionSettingsTitle" id="snapTitle"/>
-        <GuiElement type="bitmap" profile="multiTextOptionSettingsBg"/>
-        <GuiElement type="text"   profile="multiTextOptionSettingsTooltip" id="snapTT"/>
-      </GuiElement>
-      <!-- differential -->
-      <GuiElement type="multiTextOption" profile="multiTextOptionSettings" id="diffSetting">
-        <GuiElement type="button" profile="multiTextOptionSettingsLeft"/>
-        <GuiElement type="button" profile="multiTextOptionSettingsRight"/>
-        <GuiElement type="text"   profile="multiTextOptionSettingsText"/>
-        <GuiElement type="text"   profile="multiTextOptionSettingsTitle" id="diffTitle"/>
-        <GuiElement type="bitmap" profile="multiTextOptionSettingsBg"/>
-        <GuiElement type="text"   profile="multiTextOptionSettingsTooltip" id="diffTT"/>
-      </GuiElement>
-      <!-- hydraulic -->
-      <GuiElement type="multiTextOption" profile="multiTextOptionSettings" id="hydraulicSetting">
-        <GuiElement type="button" profile="multiTextOptionSettingsLeft"/>
-        <GuiElement type="button" profile="multiTextOptionSettingsRight"/>
-        <GuiElement type="text"   profile="multiTextOptionSettingsText"/>
-        <GuiElement type="text"   profile="multiTextOptionSettingsTitle" id="hydraulicTitle"/>
-        <GuiElement type="bitmap" profile="multiTextOptionSettingsBg"/>
-        <GuiElement type="text"   profile="multiTextOptionSettingsTooltip" id="hydraulicTT"/>
-      </GuiElement>
-      <!-- parking brake -->
-      <GuiElement type="multiTextOption" profile="multiTextOptionSettings" id="parkingBrakeSetting">
-        <GuiElement type="button" profile="multiTextOptionSettingsLeft"/>
-        <GuiElement type="button" profile="multiTextOptionSettingsRight"/>
-        <GuiElement type="text"   profile="multiTextOptionSettingsText"/>
-        <GuiElement type="text"   profile="multiTextOptionSettingsTitle" id="parkingBrakeTitle"/>
-        <GuiElement type="bitmap" profile="multiTextOptionSettingsBg"/>
-        <GuiElement type="text"   profile="multiTextOptionSettingsTooltip" id="parkingBrakeTT"/>
-      </GuiElement>
-
-      <!-- reset/reload config -->
-      <GuiElement type="empty" profile="ingameMenuGameSettingsTextInputWrapper">
-        <GuiElement type="button" profile="ingameMenuSettingsPauseButton" onClick="onClickResetConfig" id="resetConfigButton" iconSize="0px 0px" margin="10px 5px 10px 5px" />
-        <GuiElement type="text"   profile="multiTextOptionSettingsTitle" id="resetConfigTitle"/>
-        <GuiElement type="text"   profile="EV_ToolTipTextRed"            id="resetConfigTT"/>
-      </GuiElement>
-      <GuiElement type="empty" profile="ingameMenuGameSettingsTextInputWrapper">
-        <GuiElement type="button" profile="ingameMenuSettingsPauseButton" onClick="onClickReloadConfig" id="reloadConfigButton" iconSize="0px 0px" margin="10px 5px 10px 5px" />
-        <GuiElement type="text"   profile="multiTextOptionSettingsTitle" id="reloadConfigTitle"/>
-        <GuiElement type="text"   profile="EV_ToolTipTextRed"            id="reloadConfigTT"/>
-      </GuiElement>
-
-    </GuiElement>
-
-    <!-- footer -->
-    <GuiElement type="flowLayout" profile="buttonBoxDialog" size="1400px 50px">
-      <GuiElement type="button" profile="buttonOK" id="yesButton" text="$l10n_button_ok" onClick="onClickOk"/>
-      <GuiElement type="button" profile="buttonBack" id="noButton" text="$l10n_button_back" onClick="onClickBack"/>
-<!--
-      <GuiElement type="button" profile="buttonCancel" id="resetConfigButton" onClick="onClickResetConfig"/>
-      <GuiElement type="button" profile="buttonActivate" id="reloadConfigButton" onClick="onClickReloadConfig"/>
--->
-    </GuiElement>
+      <Button profile="buttonBack" id="noButton" text="$l10n_button_back" onClick="onClickBack"/>
+      <Bitmap profile="fs25_dialogButtonBoxSeparator"/>
+      <Button profile="buttonOK" id="yesButton" text="$l10n_button_ok" onClick="onClickOk"/>
+    </BoxLayout>
   </GuiElement>
+
+  <!-- scrollbar right -->
+  <ThreePartBitmap profile="fs25_sliderDockedBg">
+    <ThreePartBitmap profile="fs25_sliderDockedBox">
+      <Slider profile="fs25_sliderDocked" dataElementId="boxLayout"/>
+    </ThreePartBitmap>
+  </ThreePartBitmap>
+
+  <GUIProfiles>
+    <Profile name="fs25_EVSettingsMultiTextOptionWrapper" extends="baseReference" with="anchorTopStretchingX">
+      <width  value="870px"/>
+      <height value="50px"/>
+    </Profile>
+    <Profile name="fs25_EVMultiTextTitle" extends="fs25_textDefault" with="anchorMiddleLeft">
+      <width    value="570px"/>
+      <textBold value="false"/>
+      <textSize value="18px"/>
+    </Profile>
+    <Profile name="fs25_EVSettingsMultiTextOption"         extends="fs25_settingsMultiTextOption" with="anchorMiddleRight"/>
+    <Profile name="fs25_EVSettingsBinaryOption"            extends="fs25_settingsBinaryOption"    with="anchorMiddleRight"/>
+    <Profile name="fs25_EVSettingsTextInput"               extends="fs25_settingsTextInput"       with="anchorMiddleRight"/>
+    <Profile name="fs25_EVSettingsMultiTextOptionTooltip"  extends="fs25_multiTextOptionTooltip"/>
+    <Profile name="fs25_EVRedButton"                       extends="buttonDelete">
+      <focusOnHighlight     value="true"/>
+      <textColor            value="$preset_colorDarkRed"/>
+      <textHighlightedColor value="$preset_colorRed"/>
+    </Profile>
+  </GUIProfiles>
 </GUI>
