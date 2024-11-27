@@ -127,7 +127,7 @@ License: https://creativecommons.org/licenses/by-nc-sa/4.0/
 | <kbd>R Shift</kbd>+<kbd>PageDown</kbd> | decrease snap/track direction by 90° |
 | <kbd>R Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>PageUp</kbd> | increase snap/track direction by 45° |
 | <kbd>R Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>PageDown</kbd> | decrease snap/track direction by 45° |
-| <kbd>R Ctrl</kbd>+<kbd>Num 5</kbd> | Switch between over kilometer counter or trip kilometer counter.<br/>Press and hold to reset trip kilometer counter to 0|
+| <kbd>R Ctrl</kbd>+<kbd>Num 5</kbd> | Switch between overall kilometer counter or trip kilometer counter.<br/>Press and hold to reset trip kilometer counter to 0|
 | <kbd>R Ctrl</kbd>+<kbd>Num 7</kbd> | enable/disable front axle differential lock |
 | <kbd>R Ctrl</kbd>+<kbd>Num 8</kbd> | enable/disable back axle differential lock |
 | <kbd>R Ctrl</kbd>+<kbd>Num 9</kbd> | switch wheel drive mode between 4WD (four wheel drive) or 2WD (two wheel drive) |
