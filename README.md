@@ -1,17 +1,5 @@
 # FS25_EnhancedVehicle
 
-> [!WARNING]
-> In dieser Version fehlt das Konfigurationsmenü.
-> Dafür fehlt mir leider die offizielle Skript-Dokumentation für die Spiel-Engine.
-> Bis dahin könnt ihr Konfigurationsänderungen nur direkt in der XML Datei vornehmen.
-> Editiere [..]\Documents\My Games\FarmingSimulator2025\modSettings\FS25_EnhancedVehicle\FS25_EnhancedVehicle_v1.xml und drücke anschließend im Spiel <kbd>R Strg</kbd>+<kbd>Num /</kbd> um die Änderungen zu übernehmen.
-
-> [!WARNING]
-> The configuration menu is missing in this version.
-> Therefore, I unfortunately don't have the official script documentation for the game engine yet.
-> Until then, you can make configuration changes directly in the XML file only.
-> Edit [..]\Documents\My Games\FarmingSimulator2025\modSettings\FS25_EnhancedVehicle\FS25_EnhancedVehicle_v1.xml and press <kbd>R Ctrl</kbd>+<kbd>Num /</kbd> afterwards in-game to activate changes.
-
 **Direkter Download / direct download: [FS25_EnhancedVehicle.zip](https://github.com/ZhooL/FS25_EnhancedVehicle/releases/latest/download/FS25_EnhancedVehicle.zip)**
 
 [Jump to english documentation](#english)
