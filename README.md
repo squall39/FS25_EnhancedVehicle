@@ -20,7 +20,7 @@ Lizenz: https://creativecommons.org/licenses/by-nc-sa/4.0/
 ## Standard Tastenbelegung
 | Taste | Aktion |
 | --  | --     |
-| <kbd>Strg</kbd>+<kbd>Num /</kbd> | öffnet das Konfigurationsmenü um diverse EV-Einstellungen vornehmen zu können |
+| <kbd>R Strg</kbd>+<kbd>Num /</kbd> | öffnet das Konfigurationsmenü um diverse EV-Einstellungen vornehmen zu können |
 | <kbd>Num Enter</kbd> | Feststellbreme aktivieren/lösen |
 | <kbd>R Strg</kbd>+<kbd>Ende</kbd> | in aktuelle Fahrtrichtung oder Fahrspur einrasten |
 | <kbd>R Strg</kbd>+<kbd>Pos1</kbd> | aktuelle Fahrtrichtung oder Fahrspur umkehren (um 180°) (= umdrehen) |
@@ -30,22 +30,14 @@ Lizenz: https://creativecommons.org/licenses/by-nc-sa/4.0/
 | <kbd>R Strg</kbd>+<kbd>Num 3</kbd> | Durch verschiedene Anzeigemodi für die Hilfslinien wechseln |
 | <kbd>R Strg</kbd>+<kbd>Num *</kbd> | Durch verschiedene Modi für automatisierte Aktionen am Feldende wechseln |
 | <kbd>R Shift</kbd>+<kbd>Num /</kbd><kbd>Num *</kbd> | Durch verschiedene Abstände zum Feldende wechseln |
-| <kbd>R Strg</kbd>+<kbd>Num 4</kbd> | Anzahl der zu überspringenden Fahrspuren beim Wenden verringern |
-| <kbd>R Strg</kbd>+<kbd>Num 6</kbd> | Anzahl der zu überspringenden Fahrspuren beim Wenden erhöhen |
-| <kbd>R Shift</kbd>+<kbd>Num 4</kbd> | Fahrspurlayout nach links verschieben |
-| <kbd>R Shift</kbd>+<kbd>Num 6</kbd> | Fahrspurlayout nach rechts verschieben |
-| <kbd>R Strg</kbd>+<kbd>Shift</kbd>+<kbd>Num -</kbd> | Offsetlinie innerhalb einer Fahrspur nach links verschieben |
-| <kbd>R Strg</kbd>+<kbd>Shift</kbd>+<kbd>Num +</kbd> | Offsetlinie innerhalb einer Fahrspur nach rechts verschieben |
-| <kbd>R Alt</kbd>+<kbd>Num -</kbd> | Fahrspurbreite verringern |
-| <kbd>R Alt</kbd>+<kbd>Num +</kbd> | Fahrspurbreite erhöhen |
-| <kbd>R Strg</kbd>+<kbd>Einfg</kbd> | Fahrzeug eine Fahrspur nach rechts bewegen (ohne zu wenden) |
-| <kbd>R Strg</kbd>+<kbd>Entf</kbd> | Fahrzeug eine Fahrspur nach links bewegen (ohne zu wenden) |
-| <kbd>R Strg</kbd>+<kbd>Bild-hoch</kbd> | Fahrzeug/Spurausrichtung um 1° erhöhen |
-| <kbd>R Strg</kbd>+<kbd>Bild-runter</kbd> | Fahrzeug/Spurausrichtung um 1° verringern |
-| <kbd>R Shift</kbd>+<kbd>Bild-hoch</kbd> | Fahrzeug/Spurausrichtung um 90° erhöhen |
-| <kbd>R Shift</kbd>+<kbd>Bild-runter</kbd> | Fahrzeug/Spurausrichtung um 90° verringern |
-| <kbd>R Strg</kbd>+<kbd>Shift</kbd>+<kbd>Bild-hoch</kbd> | Fahrzeug/Spurausrichtung um 45° erhöhen |
-| <kbd>R Strg</kbd>+<kbd>Shift</kbd>+<kbd>Bild-runter</kbd> | Fahrzeug/Spurausrichtung um 45° verringern |
+| <kbd>R Strg</kbd>+<kbd>Num 4</kbd><kbd>Num 6</kbd> | Anzahl der zu überspringenden Fahrspuren beim Wenden verringern/erhöhen |
+| <kbd>R Shift</kbd>+<kbd>Num 4</kbd><kbd>Num 6</kbd> | Fahrspurlayout nach links/rechts verschieben |
+| <kbd>R Strg</kbd>+<kbd>R Shift</kbd>+<kbd>Num -</kbd><kbd>Num +</kbd> | Offsetlinie innerhalb einer Fahrspur nach links/rechts verschieben |
+| <kbd>R Alt</kbd>+<kbd>Num -</kbd><kbd>Num +</kbd> | Fahrspurbreite verringern/erhöhen |
+| <kbd>R Strg</kbd>+<kbd>Einfg</kbd><kbd>Entf</kbd> | Fahrzeug eine Fahrspur nach rechts/links bewegen (ohne zu wenden) |
+| <kbd>R Strg</kbd>+<kbd>Bild-hoch</kbd><kbd>Bild-runter</kbd> | Fahrzeug/Spurausrichtung um 1° erhöhen/verringern |
+| <kbd>R Shift</kbd>+<kbd>Bild-hoch</kbd><kbd>Bild-runter</kbd> | Fahrzeug/Spurausrichtung um 90° erhöhen/verringern |
+| <kbd>R Strg</kbd>+<kbd>R Shift</kbd>+<kbd>Bild-hoch</kbd><kbd>Bild-runter</kbd> | Fahrzeug/Spurausrichtung um 45° erhöhen/verringern |
 | <kbd>R Strg</kbd>+<kbd>Num 5</kbd> | Zwischen Gesamtkilometeranzeige oder "Tageskilometerzähler" wechseln.<br/>Drücken und halten, um Tageskilometer auf 0 zu setzen |
 | <kbd>R Strg</kbd>+<kbd>Num 7</kbd> | Differential der Vorderachse sperren/entsperren |
 | <kbd>R Strg</kbd>+<kbd>Num 8</kbd> | Differential der Hinterachse sperren/entsperren |
@@ -101,7 +93,7 @@ License: https://creativecommons.org/licenses/by-nc-sa/4.0/
 ## Default Keybindings
 | Key | Action |
 | --  | --     |
-| <kbd>Ctrl</kbd>+<kbd>Num /</kbd> | opens the config dialog to adjust various settings |
+| <kbd>R Ctrl</kbd>+<kbd>Num /</kbd> | opens the config dialog to adjust various settings |
 | <kbd>Num Enter</kbd> | apply/release parking brake |
 | <kbd>R Ctrl</kbd>+<kbd>End</kbd> | snap to current driving direction or current track |
 | <kbd>R Ctrl</kbd>+<kbd>Home</kbd> | reverse snap/track direction (180°) (= turn around) |
@@ -111,22 +103,14 @@ License: https://creativecommons.org/licenses/by-nc-sa/4.0/
 | <kbd>R Ctrl</kbd>+<kbd>Num 3</kbd> | cycle through the different show lines modes |
 | <kbd>R Ctrl</kbd>+<kbd>Num *</kbd> | cycle through the different headland modes |
 | <kbd>R Shift</kbd>+<kbd>Num /</kbd><kbd>Num *</kbd> | cycle through headland distances |
-| <kbd>R Ctrl</kbd>+<kbd>Num 4</kbd> | decrease the number of turnover tracks |
-| <kbd>R Ctrl</kbd>+<kbd>Num 6</kbd> | increase the number of turnover tracks |
-| <kbd>R Shift</kbd>+<kbd>Num 4</kbd> | move track layout to the left |
-| <kbd>R Shift</kbd>+<kbd>Num 6</kbd> | move track layout to the right |
-| <kbd>R Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>Num -</kbd> | move track offset line to the left |
-| <kbd>R Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>Num +</kbd> | move track offset line to the right |
-| <kbd>R Alt</kbd>+<kbd>Num -</kbd> | decrease track width |
-| <kbd>R Alt</kbd>+<kbd>Num +</kbd> | increase track width |
-| <kbd>R Ctrl</kbd>+<kbd>Insert</kbd> | move vehicle one track to the right without turning around |
-| <kbd>R Ctrl</kbd>+<kbd>Delete</kbd> | move vehicle one track to the left without turning around |
-| <kbd>R Ctrl</kbd>+<kbd>PageUp</kbd> | increase snap/track direction by 1° |
-| <kbd>R Ctrl</kbd>+<kbd>PageDown</kbd> | decrease snap/track direction by 1° |
-| <kbd>R Shift</kbd>+<kbd>PageUp</kbd> | increase snap/track direction by 90° |
-| <kbd>R Shift</kbd>+<kbd>PageDown</kbd> | decrease snap/track direction by 90° |
-| <kbd>R Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>PageUp</kbd> | increase snap/track direction by 45° |
-| <kbd>R Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>PageDown</kbd> | decrease snap/track direction by 45° |
+| <kbd>R Ctrl</kbd>+<kbd>Num 4</kbd><kbd>Num 6</kbd> | decrease/increase the number of turnover tracks |
+| <kbd>R Shift</kbd>+<kbd>Num 4</kbd><kbd>Num 6</kbd> | move track layout to the left/right |
+| <kbd>R Ctrl</kbd>+<kbd>R Shift</kbd>+<kbd>Num -</kbd><kbd>Num +</kbd> | move track offset line to the left/right |
+| <kbd>R Alt</kbd>+<kbd>Num -</kbd><kbd>Num +</kbd> | decrease/increase track width |
+| <kbd>R Ctrl</kbd>+<kbd>Insert</kbd><kbd>Delete</kbd> | move vehicle one track to the right/left without turning around |
+| <kbd>R Ctrl</kbd>+<kbd>PageUp</kbd><kbd>PageDown</kbd> | increase/decrease snap/track direction by 1° |
+| <kbd>R Shift</kbd>+<kbd>PageUp</kbd><kbd>PageDown</kbd> | increase/decrease snap/track direction by 90° |
+| <kbd>R Ctrl</kbd>+<kbd>R Shift</kbd>+<kbd>PageUp</kbd><kbd>PageDown</kbd> | increase/decrease snap/track direction by 45° |
 | <kbd>R Ctrl</kbd>+<kbd>Num 5</kbd> | Switch between overall kilometer counter or trip kilometer counter.<br/>Press and hold to reset trip kilometer counter to 0|
 | <kbd>R Ctrl</kbd>+<kbd>Num 7</kbd> | enable/disable front axle differential lock |
 | <kbd>R Ctrl</kbd>+<kbd>Num 8</kbd> | enable/disable back axle differential lock |
