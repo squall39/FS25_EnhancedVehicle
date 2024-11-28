@@ -261,7 +261,7 @@ function FS25_EnhancedVehicle:functionStatus(name)
   if name == "park" then
     return(lC:getConfigValue("global.functions", "parkingBrakeIsEnabled"))
   end
-  if name == "odomoter" then
+  if name == "odometer" then
     return(lC:getConfigValue("global.functions", "odoMeterIsEnabled"))
   end
 
