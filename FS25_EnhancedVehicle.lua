@@ -3,7 +3,7 @@
 --
 -- Author: Majo76
 -- email: ls (at) majo76 (dot) de
--- @Date: 27.11.2024
+-- @Date: 28.11.2024
 -- @Version: 1.1.0.0
 
 --[[
@@ -11,6 +11,7 @@ CHANGELOG
 
 2024-11-26 - V1.1.0.0
 + the configuration menu is back. yay!
+* (finally) fixed too many EV key bindings are shown in help menu
 
 2024-11-24 - V1.0.1.0
 + added odometer / tripmeter (driven kilometer display) based on Giants modding tutorial
@@ -1336,24 +1337,32 @@ function FS25_EnhancedVehicle:onRegisterActionEvents(isSelected, isOnActiveVehic
          actionName == "FS25_EnhancedVehicle_SNAP_OPMODE" or
          actionName == "FS25_EnhancedVehicle_ODO_MODE"then
         _, eventName = g_inputBinding:registerActionEvent(actionName, self, FS25_EnhancedVehicle.onActionCall, false, true, true, true)
+        FS25_EnhancedVehicle:helpMenuPrio(actionName, eventName)
         _, eventName = g_inputBinding:registerActionEvent(actionName, self, FS25_EnhancedVehicle.onActionCallUp, true, false, false, true)
+        FS25_EnhancedVehicle:helpMenuPrio(actionName, eventName)
       else
         _, eventName = g_inputBinding:registerActionEvent(actionName, self, FS25_EnhancedVehicle.onActionCall, false, true, false, true)
+        FS25_EnhancedVehicle:helpMenuPrio(actionName, eventName)
       end
-      -- help menu priorization
-      if g_inputBinding ~= nil and g_inputBinding.events ~= nil and g_inputBinding.events[eventName] ~= nil then
-        if actionName == "FS25_EnhancedVehicle_MENU" or
-           actionName == "FS25_EnhancedVehicle_PARK" or
-           actionName == "FS25_EnhancedVehicle_SNAP_ONOFF" or
-           actionName == "FS25_EnhancedVehicle_SNAP_REVERSE" or
-           actionName == "FS25_EnhancedVehicle_SNAP_OPMODE" then
-          g_inputBinding:setActionEventTextVisibility(eventName, true)
-          g_inputBinding:setActionEventTextPriority(eventName, GS_PRIO_VERY_LOW)
-        else
-          g_inputBinding:setActionEventTextVisibility(eventName, false)
-          g_inputBinding:setActionEventTextPriority(eventName, GS_PRIO_VERY_LOW)
-        end
-      end
+    end
+  end
+end
+
+-- #############################################################################
+
+function FS25_EnhancedVehicle:helpMenuPrio(actionName, eventName)
+  -- help menu priorization
+  if g_inputBinding ~= nil and g_inputBinding.events ~= nil and g_inputBinding.events[eventName] ~= nil then
+    if actionName == "FS25_EnhancedVehicle_MENU" or
+       actionName == "FS25_EnhancedVehicle_PARK" or
+       actionName == "FS25_EnhancedVehicle_SNAP_ONOFF" or
+       actionName == "FS25_EnhancedVehicle_SNAP_REVERSE" or
+       actionName == "FS25_EnhancedVehicle_SNAP_OPMODE" then
+      g_inputBinding:setActionEventTextVisibility(eventName, true)
+      g_inputBinding:setActionEventTextPriority(eventName, GS_PRIO_VERY_LOW)
+    else
+      g_inputBinding:setActionEventTextVisibility(eventName, false)
+      g_inputBinding:setActionEventTextPriority(eventName, GS_PRIO_VERY_LOW)
     end
   end
 
