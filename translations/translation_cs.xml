@@ -54,10 +54,10 @@
     <text name="ui_FS25_EnhancedVehicle_sectionGlobalFunctions"  text="全局设置"/>
     <text name="ui_FS25_EnhancedVehicle_sectionHUD"              text="HUD 设置"/>
     <text name="ui_FS25_EnhancedVehicle_sectionSnapSettings"     text="轨迹辅助设置"/>
-    <text name="ui_FS25_EnhancedVehicle_sectionHeadlandSettings" text="地头 设置"/>
+    <text name="ui_FS25_EnhancedVehicle_sectionHeadlandSettings" text="地头设置"/>
 
     <text name="ui_FS25_EnhancedVehicle_resetConfigButton"  text="重置Mod配置 (注意!)"/>
-    <text name="ui_FS25_EnhancedVehicle_reloadConfigButton" text="重新加载 Mod 配置 (XML)"/>
+    <text name="ui_FS25_EnhancedVehicle_reloadConfigButton" text="重新加载Mod配置 (XML)"/>
 
     <text name="ui_FS25_EnhancedVehicle_snapTitle"         text="追踪助手"/>
     <text name="ui_FS25_EnhancedVehicle_snapTT"            text="打开/关闭 全局轨迹辅助功能"/>
@@ -68,7 +68,7 @@
     <text name="ui_FS25_EnhancedVehicle_parkingBrakeTitle" text="驻车制动"/>
     <text name="ui_FS25_EnhancedVehicle_parkingBrakeTT"    text="打开/关闭 全局驻车制动功能"/>
     <text name="ui_FS25_EnhancedVehicle_odoMeterTitle"     text="里程计数器"/>
-    <text name="ui_FS25_EnhancedVehicle_odoMeterTT"        text="打开/关闭  全局里程计数器功能"/>
+    <text name="ui_FS25_EnhancedVehicle_odoMeterTT"        text="打开/关闭 全局里程计数器功能"/>
 
     <text name="ui_FS25_EnhancedVehicle_HUDdiffTitle"   text="HUD: 差速锁"/>
     <text name="ui_FS25_EnhancedVehicle_HUDdiffTT"      text="打开/关闭 差速锁的 HUD 显示"/>
@@ -127,10 +127,10 @@
     <text name="ui_FS25_EnhancedVehicle_headlandSoundTriggerDistanceTitle" text="警报声距离"/>
     <text name="ui_FS25_EnhancedVehicle_headlandSoundTriggerDistanceTT"    text="指定在到达终点前多少米处播放警报声"/>
 
-    <text name="global_FS25_EnhancedVehicle_snapNotEnabled"   text="未启用轨迹助手."/>
-    <text name="global_FS25_EnhancedVehicle_snapNoImplement"  text="未找到工作宽度的设备.使用默认轨道布局."/>
-    <text name="global_FS25_EnhancedVehicle_workWidthUpdated" text="已重新计算工作宽度."/>
-    <text name="global_FS25_EnhancedVehicle_brakeBlocks"      text="请先松开驻车制动器."/>
+    <text name="global_FS25_EnhancedVehicle_snapNotEnabled"   text="未启用轨迹助手。"/>
+    <text name="global_FS25_EnhancedVehicle_snapNoImplement"  text="未找到工作宽度的设备。使用默认轨道布局。"/>
+    <text name="global_FS25_EnhancedVehicle_workWidthUpdated" text="已重新计算工作宽度。"/>
+    <text name="global_FS25_EnhancedVehicle_brakeBlocks"      text="请先松开驻车制动器。"/>
 
   </texts>
 </l10n>
