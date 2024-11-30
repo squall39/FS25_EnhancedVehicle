@@ -46,6 +46,8 @@ Lizenz: https://creativecommons.org/licenses/by-nc-sa/4.0/
 | <kbd>L Alt</kbd>+<kbd>2</kbd> | alle hinten angehängten Geräte an/aus |
 | <kbd>L Alt</kbd>+<kbd>3</kbd> | alle vorne angehängten Geräte hoch/runter |
 | <kbd>L Alt</kbd>+<kbd>4</kbd> | alle vorne angehängten Geräte an/aus |
+| <kbd>L Alt</kbd>+<kbd>5</kbd> | alle hinten angehängten Geräte aus/einklappen |
+| <kbd>L Alt</kbd>+<kbd>6</kbd> | alle vorne angehängten Geräte aus/einklappen |
 
 ## Was dieses Mod macht
 * Wenn das Spiel startet, werden alle „motorisierten“ und „steuerbaren“ Fahrzeuge auf der Karte auf die Standardeinstellungen umgestellt: Allradantrieb und Deaktivierung beider Differentiale.
@@ -115,10 +117,12 @@ License: https://creativecommons.org/licenses/by-nc-sa/4.0/
 | <kbd>R Ctrl</kbd>+<kbd>Num 7</kbd> | enable/disable front axle differential lock |
 | <kbd>R Ctrl</kbd>+<kbd>Num 8</kbd> | enable/disable back axle differential lock |
 | <kbd>R Ctrl</kbd>+<kbd>Num 9</kbd> | switch wheel drive mode between 4WD (four wheel drive) or 2WD (two wheel drive) |
-| <kbd>L Alt</kbd>+<kbd>1</kbd> | rear attached devices up/down |
-| <kbd>L Alt</kbd>+<kbd>2</kbd> | rear attached devices on/off |
-| <kbd>L Alt</kbd>+<kbd>3</kbd> | front attached devices up/down |
-| <kbd>L Alt</kbd>+<kbd>4</kbd> | front attached devices on/off |
+| <kbd>L Alt</kbd>+<kbd>1</kbd> | all rear attached devices up/down |
+| <kbd>L Alt</kbd>+<kbd>2</kbd> | all rear attached devices on/off |
+| <kbd>L Alt</kbd>+<kbd>3</kbd> | all front attached devices up/down |
+| <kbd>L Alt</kbd>+<kbd>4</kbd> | all front attached devices on/off |
+| <kbd>L Alt</kbd>+<kbd>5</kbd> | all rear attached devices unfold/fold |
+| <kbd>L Alt</kbd>+<kbd>6</kbd> | all front attached devices unfold/fold |
 
 ## What this mod does
 * When the game starts, it changes all "motorized" and "controllable" vehicles on the map to default settings: wheel drive mode to "all-wheel (4WD)" and deactivation of both differentials.
