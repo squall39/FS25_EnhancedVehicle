@@ -34,8 +34,10 @@
     <text name="input_FS25_EnhancedVehicle_DM"              text="EV: Zmień tryb napędu na koła"/>
     <text name="input_FS25_EnhancedVehicle_AJ_REAR_UPDOWN"  text="EV: Tylny hydrauliczny góra/dół"/>
     <text name="input_FS25_EnhancedVehicle_AJ_REAR_ONOFF"   text="EV: Tylny hydrauliczny wł/wył"/>
+    <text name="input_FS25_EnhancedVehicle_AJ_REAR_FOLD"    text="EV: rear hydraulic unfold/fold"/>
     <text name="input_FS25_EnhancedVehicle_AJ_FRONT_UPDOWN" text="EV: Przedni hydrauliczny góra/dół"/>
     <text name="input_FS25_EnhancedVehicle_AJ_FRONT_ONOFF"  text="EV: Przedni hydrauliczny wł/wył"/>
+    <text name="input_FS25_EnhancedVehicle_AJ_FRONT_FOLD"   text="EV: front hydraulic unfold/fold"/>
     <text name="input_FS25_EnhancedVehicle_MENU"            text="EV: Otwórz menu konfiguracyjne"/>
     <text name="input_FS25_EnhancedVehicle_PARK"            text="EV: Zaciągnij/zwolnij hamulec postojowy"/>
     <text name="input_FS25_EnhancedVehicle_ODO_MODE"        text="EV: Przełącz/resetuj tryb wyświetlania przebiegu"/>

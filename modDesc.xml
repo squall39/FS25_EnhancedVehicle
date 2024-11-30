@@ -2,7 +2,7 @@
 <modDesc descVersion="92">
   <author>Majo76</author>
 
-  <version>1.1.0.1</version>
+  <version>1.1.1.0</version>
 
   <title>
     <de>EnhancedVehicle</de>
@@ -45,8 +45,10 @@
     <action name="FS25_EnhancedVehicle_DM"              />
     <action name="FS25_EnhancedVehicle_AJ_REAR_UPDOWN"  />
     <action name="FS25_EnhancedVehicle_AJ_REAR_ONOFF"   />
+    <action name="FS25_EnhancedVehicle_AJ_REAR_FOLD"    />
     <action name="FS25_EnhancedVehicle_AJ_FRONT_UPDOWN" />
     <action name="FS25_EnhancedVehicle_AJ_FRONT_ONOFF"  />
+    <action name="FS25_EnhancedVehicle_AJ_FRONT_FOLD"   />
     <action name="FS25_EnhancedVehicle_ODO_MODE"        />
   </actions>
 
@@ -138,6 +140,12 @@
     </actionBinding>
     <actionBinding action="FS25_EnhancedVehicle_AJ_FRONT_ONOFF">
       <binding device="KB_MOUSE_DEFAULT" input="KEY_lalt KEY_4" axisComponent="+" inputComponent="+" index="1"/>
+    </actionBinding>
+    <actionBinding action="FS25_EnhancedVehicle_AJ_REAR_FOLD">
+      <binding device="KB_MOUSE_DEFAULT" input="KEY_lalt KEY_5" axisComponent="+" inputComponent="+" index="1"/>
+    </actionBinding>
+    <actionBinding action="FS25_EnhancedVehicle_AJ_FRONT_FOLD">
+      <binding device="KB_MOUSE_DEFAULT" input="KEY_lalt KEY_6" axisComponent="+" inputComponent="+" index="1"/>
     </actionBinding>
     <actionBinding action="FS25_EnhancedVehicle_ODO_MODE">
       <binding device="KB_MOUSE_DEFAULT" input="KEY_rctrl KEY_KP_5" axisComponent="+" inputComponent="+" index="1"/>

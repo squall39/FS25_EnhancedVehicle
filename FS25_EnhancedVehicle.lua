@@ -9,6 +9,10 @@
 --[[
 CHANGELOG
 
+2024-11-30 - V1.1.1.0
++ added new feature: front/rear hydraulic unfold/fold on keypress
++ added translations: ru, cs, pl
+
 2024-11-26 - V1.1.0.0
 + the configuration menu is back. yay!
 * (finally) fixed too many EV key bindings are shown in help menu
@@ -82,8 +86,10 @@ function FS25_EnhancedVehicle:new(mission, modDirectory, modName, i18n, gui, inp
                                              'FS25_EnhancedVehicle_DM' }
   FS25_EnhancedVehicle.actions.hydraulic = { 'FS25_EnhancedVehicle_AJ_REAR_UPDOWN',
                                              'FS25_EnhancedVehicle_AJ_REAR_ONOFF',
+                                             'FS25_EnhancedVehicle_AJ_REAR_FOLD',
                                              'FS25_EnhancedVehicle_AJ_FRONT_UPDOWN',
-                                             'FS25_EnhancedVehicle_AJ_FRONT_ONOFF' }
+                                             'FS25_EnhancedVehicle_AJ_FRONT_ONOFF',
+                                             'FS25_EnhancedVehicle_AJ_FRONT_FOLD' }
 
   -- for key press delay
   FS25_EnhancedVehicle.nextActionTime  = 0
@@ -1605,6 +1611,48 @@ function FS25_EnhancedVehicle:onActionCall(actionName, keyStatus, arg4, arg5, ar
         object.spec_turnOnVehicle.setIsTurnedOn(object, _onoff)
 
         if debug > 1 then print("--> front on/off: "..object.rootNode.."/"..tostring(_onoff)) end
+      end
+    end
+  elseif FS25_EnhancedVehicle.functionHydraulicIsEnabled and actionName == "FS25_EnhancedVehicle_AJ_FRONT_FOLD" then
+    -- front hydraulic fold/unfold
+    FS25_EnhancedVehicle:enumerateAttachments(self)
+
+    for _, object in pairs(implements_front) do
+      -- can it be folded?
+      if object.spec_foldable ~= nil then
+        if object.spec_foldable.isFoldAllowed then
+          local _newDirection = 0
+          if object.spec_foldable.foldMoveDirection == 0 then
+            -- if its not folding right now -> check if its lowered
+            _newDirection = object.spec_foldable:getIsUnfolded() and 1 or -1
+          else
+            -- if its folding right now -> reverse
+            _newDirection = object.spec_foldable.foldMoveDirection * -1
+          end
+          object.spec_foldable:setFoldState(_newDirection, false)
+          if debug > 1 then print("--> front fold: "..object.rootNode.."/"..tostring(_newDirection)) end
+        end
+      end
+    end
+  elseif FS25_EnhancedVehicle.functionHydraulicIsEnabled and actionName == "FS25_EnhancedVehicle_AJ_REAR_FOLD" then
+    -- rear hydraulic fold/unfold
+    FS25_EnhancedVehicle:enumerateAttachments(self)
+
+    for _, object in pairs(implements_back) do
+      -- can it be folded?
+      if object.spec_foldable ~= nil then
+        if object.spec_foldable.isFoldAllowed then
+          local _newDirection = 0
+          if object.spec_foldable.foldMoveDirection == 0 then
+            -- if its not folding right now -> check if its lowered
+            _newDirection = object.spec_foldable:getIsUnfolded() and 1 or -1
+          else
+            -- if its folding right now -> reverse
+            _newDirection = object.spec_foldable.foldMoveDirection * -1
+          end
+          object.spec_foldable:setFoldState(_newDirection, false)
+          if debug > 1 then print("--> rear fold: "..object.rootNode.."/"..tostring(_newDirection)) end
+        end
       end
     end
   elseif FS25_EnhancedVehicle.functionParkingBrakeIsEnabled and actionName == "FS25_EnhancedVehicle_PARK" then
