@@ -23,7 +23,7 @@ source(Utils.getFilename("ui/FS25_EnhancedVehicle_HUD.lua", directory))
 source(Utils.getFilename("libUtils.lua", g_currentModDirectory))
 
 -- our global libUtils instance
-lU = LibUtils:new(LibUtils.Logger:new(LibUtils.Logger.LEVEL.OFF))
+lU = LibUtils:new(LibUtils.Logger.LEVEL.OFF)
 
 -- our global logger
 EVLog = lU.Logger:new(LibUtils.Logger.LEVEL.INFO)
@@ -32,7 +32,7 @@ EVLog = lU.Logger:new(LibUtils.Logger.LEVEL.INFO)
 source(Utils.getFilename("libConfig.lua", g_currentModDirectory))
 
 -- our global libConfig instance
-lC = LibConfig:new("FS25_EnhancedVehicle", 1, 0, LibUtils.Logger:new(LibUtils.Logger.LEVEL.OFF))
+lC = LibConfig:new("FS25_EnhancedVehicle", 1, 0, LibUtils.Logger.LEVEL.OFF)
 
 local EnhancedVehicle
 
