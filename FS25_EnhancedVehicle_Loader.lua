@@ -8,7 +8,46 @@
 
 -- #############################################################################
 
-debug = 0 -- 0=0ff, 1=some, 2=everything, 3=madness
+-- #############################################################################
+-- ### Debug logger
+-- ### Examples:
+-- ### Log.info("Hello World") -> [INFO] Hello World
+-- ### Log.debug("Hello World", "key", "value") -> [DEBUG] Hello World, key=value
+Log = {
+  LEVEL = {
+    OFF   = {intValue = 0, name = "OFF"},
+    INFO  = {intValue = 1, name = "INFO"},
+    DEBUG = {intValue = 2, name = "DEBUG"},
+    TRACE = {intValue = 3, name = "TRACE"}
+  },
+
+  info = function(message, ...)
+    Log.log(Log.LEVEL.INFO, message, ...)
+  end,
+
+  debug = function(message, ...)
+    Log.log(Log.LEVEL.DEBUG, message, ...)
+  end,
+
+  trace = function(message, ...)
+    Log.log(Log.LEVEL.TRACE, message, ...)
+  end,
+
+  log = function(level, message, ...)
+    local args = {...}
+    local attributes = ""
+    for i = 1, #args, 2 do
+      attributes = attributes .. ", " .. tostring(args[i]) .. "=" .. tostring(args[i + 1])
+    end
+
+    if debug >= level.intValue then
+      print("[" .. level.name .. "] " .. message .. attributes)
+    end
+  end
+}
+
+-- Set the debug level
+debug = Log.LEVEL.OFF.intValue
 
 local directory = g_currentModDirectory
 local modName = g_currentModName
@@ -37,7 +76,7 @@ end
 -- #############################################################################
 
 function EV_init()
-  if debug > 1 then print("EV_init()") end
+  Log.info("EV_init()")
   
   -- hook into early load
   Mission00.load = Utils.prependedFunction(Mission00.load, EV_load)
@@ -54,7 +93,7 @@ end
 -- #############################################################################
 
 function EV_load(mission)
-  if debug > 1 then print("EV_load()") end
+  Log.info("EV_load()")
   
   -- create our EV class
   assert(g_EnhancedVehicle == nil)
@@ -69,7 +108,7 @@ end
 -- #############################################################################
 
 function EV_unload()
-  if debug > 1 then print("EV_unload()") end
+  Log.info("EV_unload()")
 
   if not isEnabled() then
     return
@@ -85,7 +124,7 @@ end
 -- #############################################################################
 
 function EV_loadedMission(mission)
-  if debug > 1 then print("EV_load()") end
+  Log.info("EV_load()")
 
   if not isEnabled() then
     return
@@ -101,7 +140,7 @@ end
 -- #############################################################################
 
 function EV_validateTypes(types)
-  if debug > 1 then print("EV_validateTypes()") end
+  Log.info("EV_validateTypes()")
     
   -- attach only to vehicles
   if (types.typeName == 'vehicle') then
