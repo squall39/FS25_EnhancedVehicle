@@ -1400,10 +1400,7 @@ function FS25_EnhancedVehicle:onActionCallUp(actionName, keyStatus, arg4, arg5, 
     if actionName == "FS25_EnhancedVehicle_ODO_MODE" then
       if g_currentMission.time < FS25_EnhancedVehicle.nextActionTime + 1000 then
         -- switch odo mode (odo <-> trip)
-        self.vData.want[16] = self.vData.want[16] + 1
-        if self.vData.want[16] > 1 then
-          self.vData.want[16] = 0
-        end
+        self.vData.want[16] = (self.vData.want[16] + 1) % 2
         if self.isClient and not self.isServer then
           self.vData.is[16] = self.vData.want[16]
         end

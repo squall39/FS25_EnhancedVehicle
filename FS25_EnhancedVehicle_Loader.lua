@@ -8,46 +8,8 @@
 
 -- #############################################################################
 
--- #############################################################################
--- ### Debug logger
--- ### Examples:
--- ### Log.info("Hello World") -> [INFO] Hello World
--- ### Log.debug("Hello World", "key", "value") -> [DEBUG] Hello World, key=value
-Log = {
-  LEVEL = {
-    OFF   = {intValue = 0, name = "OFF"},
-    INFO  = {intValue = 1, name = "INFO"},
-    DEBUG = {intValue = 2, name = "DEBUG"},
-    TRACE = {intValue = 3, name = "TRACE"}
-  },
-
-  info = function(message, ...)
-    Log.log(Log.LEVEL.INFO, message, ...)
-  end,
-
-  debug = function(message, ...)
-    Log.log(Log.LEVEL.DEBUG, message, ...)
-  end,
-
-  trace = function(message, ...)
-    Log.log(Log.LEVEL.TRACE, message, ...)
-  end,
-
-  log = function(level, message, ...)
-    local args = {...}
-    local attributes = ""
-    for i = 1, #args, 2 do
-      attributes = attributes .. ", " .. tostring(args[i]) .. "=" .. tostring(args[i + 1])
-    end
-
-    if debug >= level.intValue then
-      print("[" .. level.name .. "] " .. message .. attributes)
-    end
-  end
-}
-
--- Set the debug level
-debug = Log.LEVEL.OFF.intValue
+-- TODO: remove this after migration to EVLog
+debug = 1
 
 local directory = g_currentModDirectory
 local modName = g_currentModName
@@ -59,13 +21,18 @@ source(Utils.getFilename("ui/FS25_EnhancedVehicle_HUD.lua", directory))
 
 -- include our libUtils
 source(Utils.getFilename("libUtils.lua", g_currentModDirectory))
-lU = libUtils()
-lU:setDebug(0)
+
+-- our global libUtils instance
+lU = LibUtils:new(LibUtils.Logger:new(LibUtils.Logger.LEVEL.OFF))
+
+-- our global logger
+EVLog = lU.Logger:new(LibUtils.Logger.LEVEL.INFO)
 
 -- include our new libConfig XML management
 source(Utils.getFilename("libConfig.lua", g_currentModDirectory))
-lC = libConfig("FS25_EnhancedVehicle", 1, 0)
-lC:setDebug(0)
+
+-- our global libConfig instance
+lC = LibConfig:new("FS25_EnhancedVehicle", 1, 0, LibUtils.Logger:new(LibUtils.Logger.LEVEL.OFF))
 
 local EnhancedVehicle
 
@@ -76,7 +43,7 @@ end
 -- #############################################################################
 
 function EV_init()
-  Log.info("EV_init()")
+  EVLog.info("EV_init()")
   
   -- hook into early load
   Mission00.load = Utils.prependedFunction(Mission00.load, EV_load)
@@ -93,7 +60,7 @@ end
 -- #############################################################################
 
 function EV_load(mission)
-  Log.info("EV_load()")
+  EVLog.info("EV_load()")
   
   -- create our EV class
   assert(g_EnhancedVehicle == nil)
@@ -108,7 +75,7 @@ end
 -- #############################################################################
 
 function EV_unload()
-  Log.info("EV_unload()")
+  EVLog.info("EV_unload()")
 
   if not isEnabled() then
     return
@@ -124,7 +91,7 @@ end
 -- #############################################################################
 
 function EV_loadedMission(mission)
-  Log.info("EV_load()")
+  EVLog.info("EV_load()")
 
   if not isEnabled() then
     return
@@ -140,8 +107,8 @@ end
 -- #############################################################################
 
 function EV_validateTypes(types)
-  Log.info("EV_validateTypes()")
-    
+  EVLog.info("EV_validateTypes()")
+
   -- attach only to vehicles
   if (types.typeName == 'vehicle') then
     FS25_EnhancedVehicle.installSpecializations(g_vehicleTypeManager, g_specializationManager, directory, modName)
